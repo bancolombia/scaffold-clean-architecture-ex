@@ -1,0 +1,15 @@
+import Config
+
+config :{application_name_atom}, timezone: "America/Bogota"
+
+config :{application_name_atom},
+       http_port: 8083,
+       enable_server: true,
+       secret_name: "",
+       region: "",
+       version: "0.0.1",
+       in_test: false,
+       custom_metrics_prefix_name: "{application_name_atom}_local"
+
+config :logger,
+       level: :debug

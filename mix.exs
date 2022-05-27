@@ -6,7 +6,7 @@ defmodule ElixirStructureManager.MixProject do
       app: :elixir_structure_manager,
       version: "0.1.0",
       elixir: "~> 1.12",
-      build_embedded: Mix.env == :prod,
+      build_embedded: Mix.env() == :prod,
       start_permanent: Mix.env() == :prod,
       description: description(),
       package: package(),

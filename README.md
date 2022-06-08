@@ -12,7 +12,7 @@ $ mix archive
 First you need to install the dependency locally
 
 ```bash
-$ mix archive.install hex elixir_structure_manager-0.1.0
+$ mix archive.install hex elixir_structure_manager x.x.x
 ```
 
 To verify that the dependency was installed successfully, run
@@ -21,14 +21,15 @@ To verify that the dependency was installed successfully, run
 $ mix help
 ```
 
-And you must see a task:
+And you must see the following tasks:
 ```
-mix create_structure
+$ mix ca.new.strcuture
+$ mix ca.new.model
 ```
 
 if you have an old version, please uninstall it with
 ```
-$ mix archive.uninstall
+$ mix archive.uninstall elixir_structure_manager x.x.x
 ```
 
 If [available in Hex](https://hex.pm/docs/publish), the package can be installed

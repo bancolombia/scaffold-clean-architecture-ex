@@ -23,7 +23,7 @@ $ mix archive.install elixir_structure_manager-x.x.x.ez
 
 ## Installation
 
-To verify what dependencies do you have, please run
+Verify what dependencies do you have, please run
 ```bash
 $ mix archive
 ```
@@ -34,7 +34,7 @@ First you need to install the dependency locally
 $ mix archive.install hex elixir_structure_manager x.x.x
 ```
 
-To verify that the dependency was installed successfully, run
+Verify that the dependency was installed successfully, run
 
 ```bash
 $ mix help
@@ -46,11 +46,6 @@ $ mix ca.new.strcuture
 $ mix ca.new.model
 ```
 
-if you have an old version, please uninstall it with
-```bash
-$ mix archive.uninstall elixir_structure_manager x.x.x
-```
-
 If [available in Hex](https://hex.pm/docs/publish), the package can be installed
 by adding `elixir_structure_manager` to your list of dependencies in `mix.exs`:
 
@@ -60,6 +55,18 @@ def deps do
     {:elixir_structure_manager, "~> 0.1.0"}
   ]
 end
+```
+
+## Uninstall
+Verify what dependencies do you have, please run
+```bash
+$ mix archive
+```
+
+If you need to uninstall local packages or if you have an old version, please uninstall it with
+
+```bash
+$ mix archive.uninstall elixir_structure_manager x.x.x
 ```
 
 Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)

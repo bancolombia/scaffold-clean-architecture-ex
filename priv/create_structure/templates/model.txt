@@ -1,0 +1,15 @@
+defmodule {application_name}.Domain.Model.{model_name} do
+
+  @moduledoc """
+  TODO Updates module description
+  """
+    
+  defstruct [
+  ]
+
+  def new() do
+    %__MODULE__{}
+  end
+   
+
+end

@@ -10,20 +10,11 @@ defmodule Mix.Tasks.Ca.New.Model do
   @version Mix.Project.config()[:version]
 
   def run([]) do
-    IO.puts("Empty values")
     Mix.Tasks.Help.run(["ca.new.model"])
-
-    application_name =
-      Mix.Project.config()
-      |> Keyword.fetch!(:app)
-      |> to_string()
-      |> Macro.camelize()
-
-    IO.puts(application_name)
   end
 
   def run([version]) when version in ~w(-v --version) do
-    Mix.shell().info("Scaffold version v#{@version}")
+    Mix.shell().info [:reset, "Scaffold version ", :green, "v#{@version}"]
   end
 
   @shortdoc "Creates a new model with empty properties"
@@ -38,15 +29,5 @@ defmodule Mix.Tasks.Ca.New.Model do
                       |> ApplyModelTemplate.create_model(model_name)      
     end
 
-    """
-    try do
-      Mix.Project.config() |> Keyword.fetch!(:app)
-    catch
-      error_type, error_value ->
-        IO.inspect(error_type)
-        IO.inspect(error_value)
-    end
-    """
-    
   end
 end

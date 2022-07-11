@@ -1,8 +1,8 @@
 defmodule ElixirStructureManager.Core.ApplyModelTemplate do
 
-  @model_path "/priv/create_structure/templates/model.txt"
+  @model_template_path "/priv/create_structure/templates/model.txt"
   
-  def format_name(name) do
+  defp format_name(name) do
     case String.match?(name, ~r/^([a-zA-Z0-9]+_[a-zA-Z0-9]+){1,}$/) do
       true ->
         {
@@ -17,33 +17,31 @@ defmodule ElixirStructureManager.Core.ApplyModelTemplate do
   end
   
   def create_model(app_name, model_name) do
-    Mix.shell().info [:green, "* Creating model ", :reset, model_name]
     with {:ok, _app_snake_name, app_camel_name} <- format_name(app_name),
          {:ok, model_snake_name, model_camel_name} <- format_name(model_name)
     do
-      project_path = "lib/domain/model/" <> model_snake_name <> ".ex" 
-      content = create_file() |> replace_variables(app_camel_name, model_camel_name)
+      project_model_path = "lib/domain/model/" <> model_snake_name <> ".ex" 
 
-      File.write!(project_path, content)
-
-      Mix.shell().info [:green, "* Model ", :reset, model_name, :green, " created"]
+      create_file(app_camel_name, model_camel_name, project_model_path)
     else
-      {:error, :invalid_name, name} -> Mix.shell().error [:red, "Invalid name ", :reset, name]    
+      #{:error, :invalid_name, name} -> Mix.shell().error [:red, "Invalid name ", :reset, name]
+      err -> Mix.raise("Invalid name indicated: " <> elem(err, 2))    
     end
   
   end
 
-  def create_file() do
+  defp create_file(app_name, model_name, project_model_path) do
     app_path = Application.app_dir(:elixir_structure_manager)
-    with {:ok, file_content} <- File.read(app_path <> @model_path) do
-        file_content
+    with {:ok, model_template} <- File.read(app_path <> @model_template_path) do
+        file_content = replace_variables(model_template, app_name, model_name)
+        File.write!(project_model_path, file_content)
       else
         err -> IO.inspect(err)
       end
   end
 
   def replace_variables(content, app_name, model_name) do
-    String.replace(content, "{application_name}", app_name)
-    |> String.replace("{model_name}", model_name)
+    String.replace(content, "{module_name}", app_name)
+                  |> String.replace("{model_name}", model_name)
   end
 end

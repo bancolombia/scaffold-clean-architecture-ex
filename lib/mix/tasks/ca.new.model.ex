@@ -19,14 +19,14 @@ defmodule Mix.Tasks.Ca.New.Model do
 
   @shortdoc "Creates a new model with empty properties"
   def run([model_name]) do
-    IO.inspect(model_name)
+    Mix.shell().info [:green, "* Creating model ", :reset, model_name]
+    app_name_getted = Mix.Project.config() |> Keyword.fetch(:app)
 
-    app_name = Mix.Project.config() |> Keyword.fetch(:app)
-
-    case app_name do
+    case app_name_getted do
       :error -> Mix.shell().error("It is not a elixir project")
-      {:ok, name} -> to_string(name) 
+      {:ok, app_name} -> to_string(app_name) 
                       |> ApplyModelTemplate.create_model(model_name)      
+      Mix.shell().info [:green, "* Model ", :reset, model_name, :green, " created"]
     end
 
   end

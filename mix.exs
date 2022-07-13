@@ -23,7 +23,7 @@ defmodule ElixirStructureManager.MixProject do
   defp package() do
     [
       organization: "bancolombia",
-      files: ["lib", "priv", "mix.exs", "README*", "LICENSE*"],
+      files: ["lib", "priv", "mix.exs", "README*", "LICENSE*", "CHANGELOG*"],
       maintainers: ["Juan Esteban, Santiago Calle", "Juan Carlos Galvis"],
       licenses: ["MIT"],
       links: %{"GitHub" => "https://github.com/bancolombia/scaffold-clean-architecture-ex"}

@@ -6,7 +6,7 @@ defmodule Mix.Tasks.Ca.New.Structure do
       $ mix create_structure [application_name]
   """
 
-  alias ElixirStructureManager.Core.ApplyTemplates
+  alias ElixirStructureManager.Core.ApplyTemplate
   require Logger
 
   use Mix.Task
@@ -32,10 +32,10 @@ defmodule Mix.Tasks.Ca.New.Structure do
   @shortdoc "Creates a new clean architecture application."
   def run([application_name]) do
     structure_path = Application.app_dir(:elixir_structure_manager) <> @structure_path
-    with {:ok, atom_name, module_name} <- ApplyTemplates.manage_application_name(application_name),
-         template <- ApplyTemplates.load_template_file(structure_path),
-         {:ok, variable_list} <- ApplyTemplates.create_variables_list(atom_name, module_name) do
-      ApplyTemplates.create_folder(template, atom_name, variable_list)
+    with {:ok, atom_name, module_name} <- ApplyTemplate.manage_application_name(application_name),
+         template <- ApplyTemplate.load_template_file(structure_path),
+         {:ok, variable_list} <- ApplyTemplate.create_variables_list(atom_name, module_name) do
+      ApplyTemplate.create_folder(template, atom_name, variable_list)
     else
       error -> Logger.error("Ocurrio un error creando la estructura: #{inspect(error)}")
     end

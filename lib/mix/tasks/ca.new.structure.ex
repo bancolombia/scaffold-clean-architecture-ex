@@ -22,7 +22,7 @@ defmodule Mix.Tasks.Ca.New.Structure do
              prefix: :string, mailer: :boolean]
 
   def run ([]) do
-    Mix.Tasks.Help.run(["ca.new.Structure"])
+    Mix.Tasks.Help.run(["ca.new.structure"])
   end
 
   def run([version]) when version in ~w(-v --version) do
@@ -50,7 +50,7 @@ defmodule Mix.Tasks.Ca.New.Structure do
 
     case opts do
       {_opts, []} ->
-        Mix.Tasks.Help.run(["create_structure"])
+        Mix.Tasks.Help.run(["ca.new.structure"])
 
       {opts, [base_path | _]} ->
         IO.inspect(opts)

@@ -6,7 +6,7 @@ defmodule ElixirStructureManager.MixProject do
       app: :elixir_structure_manager,
       version: "0.1.0",
       elixir: "~> 1.12",
-      build_embedded: Mix.env == :prod,
+      build_embedded: Mix.env() == :prod,
       start_permanent: Mix.env() == :prod,
       description: description(),
       package: package(),
@@ -22,10 +22,11 @@ defmodule ElixirStructureManager.MixProject do
 
   defp package() do
     [
+      organization: "bancolombia",
       files: ["lib", "priv", "mix.exs", "README*", "LICENSE*"],
-      maintainers: ["Juan Esteban"],
+      maintainers: ["Juan Esteban, Santiago Calle", "Juan Carlos Galvis"],
       licenses: ["MIT"],
-      links: %{"GitHub" => "https://github.com/juanes1a/elixir_structure_manager"}
+      links: %{"GitHub" => "https://github.com/bancolombia/scaffold-clean-architecture-ex"}
     ]
   end
 

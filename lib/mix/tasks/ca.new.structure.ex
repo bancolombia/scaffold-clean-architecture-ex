@@ -1,4 +1,4 @@
-defmodule Mix.Tasks.CreateStructure do
+defmodule Mix.Tasks.Ca.New.Structure do
 
   @moduledoc """
   Creates a new Clean architecture scaffold
@@ -6,7 +6,7 @@ defmodule Mix.Tasks.CreateStructure do
       $ mix create_structure [application_name]
   """
 
-  alias ElixirStructureManager.Core.ApplyTemplates
+  alias ElixirStructureManager.Core.ApplyTemplate
   require Logger
 
   use Mix.Task
@@ -22,7 +22,7 @@ defmodule Mix.Tasks.CreateStructure do
              prefix: :string, mailer: :boolean]
 
   def run ([]) do
-    Mix.Tasks.Help.run(["create_structure"])
+    Mix.Tasks.Help.run(["ca.new.structure"])
   end
 
   def run([version]) when version in ~w(-v --version) do
@@ -32,16 +32,17 @@ defmodule Mix.Tasks.CreateStructure do
   @shortdoc "Creates a new clean architecture application."
   def run([application_name]) do
     structure_path = Application.app_dir(:elixir_structure_manager) <> @structure_path
-    with {:ok, atom_name, module_name} <- ApplyTemplates.manage_application_name(application_name),
-         template <- ApplyTemplates.load_template_file(structure_path),
-         {:ok, variable_list} <- ApplyTemplates.create_variables_list(atom_name, module_name) do
-      ApplyTemplates.create_folder(template, atom_name, variable_list)
+    with {:ok, atom_name, module_name} <- ApplyTemplate.manage_application_name(application_name),
+         template <- ApplyTemplate.load_template_file(structure_path),
+         {:ok, variable_list} <- ApplyTemplate.create_variables_list(atom_name, module_name) do
+      ApplyTemplate.create_folder(template, atom_name, variable_list)
     else
       error -> Logger.error("Ocurrio un error creando la estructura: #{inspect(error)}")
     end
   end
 
   def run(argv) do
+    IO.puts "Sending arguments"
     IO.inspect(argv)
 
     opts = parse_opts(argv)
@@ -49,7 +50,7 @@ defmodule Mix.Tasks.CreateStructure do
 
     case opts do
       {_opts, []} ->
-        Mix.Tasks.Help.run(["create_structure"])
+        Mix.Tasks.Help.run(["ca.new.structure"])
 
       {opts, [base_path | _]} ->
         IO.inspect(opts)

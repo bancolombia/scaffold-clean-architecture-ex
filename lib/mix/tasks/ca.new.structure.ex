@@ -7,6 +7,7 @@ defmodule Mix.Tasks.Ca.New.Structure do
   """
 
   alias ElixirStructureManager.Core.ApplyTemplate
+  alias ElixirStructureManager.Utils.DataTypeUtils
   require Logger
 
   use Mix.Task
@@ -45,7 +46,7 @@ defmodule Mix.Tasks.Ca.New.Structure do
     IO.puts "Sending arguments"
     IO.inspect(argv)
 
-    opts = parse_opts(argv)
+    opts = DataTypeUtils.parse_opts(argv, @switches)
     IO.inspect(opts)
 
     case opts do
@@ -58,15 +59,4 @@ defmodule Mix.Tasks.Ca.New.Structure do
     end
   end
 
-  defp parse_opts(argv) do
-    case OptionParser.parse(argv, strict: @switches) do
-      {opts, argv, []} ->
-        {opts, argv}
-      {_opts, _argv, [switch | _]} ->
-        Mix.raise "Invalid option: " <> switch_to_string(switch)
-    end
-  end
-
-  defp switch_to_string({name, nil}), do: name
-  defp switch_to_string({name, val}), do: name <> "=" <> val
 end

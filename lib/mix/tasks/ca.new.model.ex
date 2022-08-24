@@ -1,4 +1,5 @@
 defmodule Mix.Tasks.Ca.New.Model do
+
   @moduledoc """
   Creates a new model for the clean architecture project
       $ mix ca.new.model [model_name]
@@ -11,7 +12,9 @@ defmodule Mix.Tasks.Ca.New.Model do
       $ mix ca.new.model [model name] --behaviour --behaviour-name [behaviour_name]
       $ mix ca.new.model [model name] --bh --bh-name [behaviour_name]
   """
+
   alias ElixirStructureManager.Core.ApplyModelTemplate
+  alias ElixirStructureManager.Utils.DataTypeUtils
   use Mix.Task
 
   @behaviour_string "behaviour"
@@ -30,7 +33,7 @@ defmodule Mix.Tasks.Ca.New.Model do
   @shortdoc "Creates a new model with empty properties"
   def run(argv) do
 
-    case parse_opts(argv) do
+    case DataTypeUtils.parse_opts(argv, @switches) do
       {_opts, []} ->
         Mix.Tasks.Help.run(["ca.new.model"])
 
@@ -68,18 +71,5 @@ defmodule Mix.Tasks.Ca.New.Model do
 
     Mix.shell().info([:green, "* Behaviour ", :reset, behavior_name, :green, " created"])
   end
-
-  defp parse_opts(argv) do
-    case OptionParser.parse(argv, strict: @switches) do
-      {opts, argv, []} ->
-        {opts, argv}
-
-      {_opts, _argv, [switch | _]} ->
-        IO.inspect(switch)
-        Mix.raise("Invalid option: " <> switch_to_string(switch))
-    end
-  end
-
-  defp switch_to_string({name, nil}), do: name
-  defp switch_to_string({name, val}), do: name <> "=" <> val
+  
 end

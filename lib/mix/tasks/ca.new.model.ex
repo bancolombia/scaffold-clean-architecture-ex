@@ -39,14 +39,13 @@ defmodule Mix.Tasks.Ca.New.Model do
 
       {opts, [model_name | _]} ->
         app_name_getted = Mix.Project.config() |> Keyword.fetch(:app)
-
         case app_name_getted do
-          :error -> Mix.shell().error("It is not a elixir project")
+          :error -> Mix.shell().error("It is not an elixir project")
           {:ok, app_name} ->
             project_app_name = to_string(app_name)
             create_model(project_app_name, model_name)
             if opts[:behaviour] || opts[:bh],
-              do: create_behavior(opts, project_app_name, model_name)
+              do: create_behaviour(opts, project_app_name, model_name)
         end
     end
   end
@@ -59,14 +58,13 @@ defmodule Mix.Tasks.Ca.New.Model do
     Mix.shell().info([:green, "* Model ", :reset, model_name, :green, " created"])
   end
 
-  defp create_behavior(opts, project_app_name, module_name) do
+  defp create_behaviour(opts, project_app_name, module_name) do
     behavior_name = if opts[:behavior_name] != nil || opts[:bh_name] != nil do
       (opts[:behavior_name] || opts[:bh_name])
     else
       "#{module_name}_#{@behaviour_string}"
     end
-    Mix.shell().info([:green, "* Creating behavior ", :reset, behavior_name])
-
+    Mix.shell().info([:green, "* Creating behaviour ", :reset, behavior_name])
     ApplyModelTemplate.create_behaviour(project_app_name, behavior_name)
 
     Mix.shell().info([:green, "* Behaviour ", :reset, behavior_name, :green, " created"])

@@ -24,7 +24,7 @@ defmodule DataTypeUtilsTest do
     json_map = %{name: "name test", last_name: "last name test", company: "Bancolombia"}
     list_test = [1, "string test", :an_atom]
 
-    model = new("santi", "calle", "bancolombia")
+    model = new("John", "Doe", "bancolombia")
 
     {:ok, decoded} = Poison.decode(json)
     res = DataTypeUtils.normalize(decoded)
@@ -58,12 +58,6 @@ defmodule DataTypeUtilsTest do
     assert_raise Mix.Error, ~r/Invalid option:\s+/,
       fn -> DataTypeUtils.parse_opts(["--types", "secrets"], switches) 
       end
-
-    # assert values == {[type: "secrets", name: "test"], []}
     
-    #values_without_flag = DataTypeUtils.parse_opts(
-    #  ["username", "--names", "test"], switches)
-    
-    # assert values_without_flag == {[name: "test"], ["username"]}
   end
 end

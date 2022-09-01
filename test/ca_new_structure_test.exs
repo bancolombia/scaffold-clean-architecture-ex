@@ -1,8 +1,6 @@
 defmodule Ca.New.StructureTest do
   use ExUnit.Case
   
-  import Mock
-  
   alias Mix.Tasks.Ca.New.Structure
 
   test "should shows helper information" do

@@ -1,6 +1,6 @@
 defmodule DataTypeUtilsTest do
   use ExUnit.Case
-  alias ElixirStructureManager.Core.DataTypeUtils
+  alias ElixirStructureManager.Utils.DataTypeUtils
 
   defstruct [
     name: "",
@@ -24,7 +24,7 @@ defmodule DataTypeUtilsTest do
     json_map = %{name: "name test", last_name: "last name test", company: "Bancolombia"}
     list_test = [1, "string test", :an_atom]
 
-    model = new("santi", "calle", "bancolombia")
+    model = new("John", "Doe", "bancolombia")
 
     {:ok, decoded} = Poison.decode(json)
     res = DataTypeUtils.normalize(decoded)
@@ -37,4 +37,27 @@ defmodule DataTypeUtilsTest do
     assert model == res_structure
   end
 
+  test "should return arguments values" do
+
+    switches = [type: :string, name: :string]
+
+    values = DataTypeUtils.parse_opts(
+      ["--type", "secrets", "--name", "test"], switches)  
+    assert values == {[type: "secrets", name: "test"], []}
+    
+    values_without_flag = DataTypeUtils.parse_opts(
+      ["username", "--name", "test"], switches)
+    
+    assert values_without_flag == {[name: "test"], ["username"]}
+  end
+  
+  test "should raise a message when args are invalid" do
+
+    switches = [type: :string, name: :string]
+
+    assert_raise Mix.Error, ~r/Invalid option:\s+/,
+      fn -> DataTypeUtils.parse_opts(["--types", "secrets"], switches) 
+      end
+    
+  end
 end

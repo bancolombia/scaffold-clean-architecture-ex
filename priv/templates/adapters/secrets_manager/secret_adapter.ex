@@ -1,7 +1,7 @@
-defmodule {module_name}.Adapters.Secrets.SecretManagerAdapter do
+defmodule {app}.Adapters.Secrets.SecretManagerAdapter do
   use GenServer
-  alias {module_name}.Config.ConfigHolder
-  alias {module_name}.Utils.DataTypeUtils
+  alias {app}.Config.ConfigHolder
+  alias {app}.Utils.DataTypeUtils
   @compile if Mix.env == :test, do: :export_all
 
   @moduledoc """

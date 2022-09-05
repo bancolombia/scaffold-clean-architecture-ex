@@ -1,5 +1,5 @@
-defmodule {module_name}.Adapters.MessageRuntimeConfig do
-  alias {module_name}.Config.{ConfigHolder, AppConfig}
+defmodule {app}.Adapters.MessageRuntimeConfig do
+  alias {app}.Config.{ConfigHolder, AppConfig}
   use Supervisor
 
   def start_link(args) do

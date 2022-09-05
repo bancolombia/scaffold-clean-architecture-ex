@@ -1,4 +1,4 @@
-defmodule {module_name}.Domain.Behaviour.{behaviour_name} do
+defmodule {app}.Domain.Behaviours.{name} do
 
   @moduledoc """
   TODO Updates description and add new functions 

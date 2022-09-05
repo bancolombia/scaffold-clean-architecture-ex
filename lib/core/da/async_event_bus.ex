@@ -1,6 +1,6 @@
 defmodule DA.AsyncEventBus do
   @moduledoc false
-  @base "/priv/create_structure/templates/adapters/async_event_bus/"
+  @base "/priv/templates/adapters/async_event_bus/"
 
   def actions() do
     %{
@@ -32,7 +32,7 @@ defmodule DA.AsyncEventBus do
         {
           :insert_after,
           "lib/application.ex",
-          {~r{Application(\s)+do(\s)+}, "alias {module_name}.Adapters.MessageRuntimeConfig\n  "} # TODO: fix variables
+          {~r{Application(\s)+do(\s)+}, "alias {app}.Adapters.MessageRuntimeConfig\n  "} # TODO: fix variables
         }
       ]
     }

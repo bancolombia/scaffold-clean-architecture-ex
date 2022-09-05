@@ -1,11 +1,11 @@
 defmodule DA.SecretsManager do
   @moduledoc false
-  @base "/priv/create_structure/templates/secrets_manager/"
+  @base "/priv/templates/adapters/secrets_manager/"
 
   def actions() do
     %{
       create: %{
-        "lib/driven_adapters/secrets/secrets_manager.ex" => @base <> "secret_adapter.txt"
+        "lib/driven_adapters/secrets/secrets_manager.ex" => @base <> "secret_adapter.ex"
       },
       transformations: [
         {:inject_dependency, ~s|{:ex_aws_secretsmanager, "~> 2.0"}|},

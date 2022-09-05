@@ -2,15 +2,24 @@ defmodule ElixirStructureManager.Utils.FileGenerator do
   alias ElixirStructureManager.Utils.StringContent
   alias ElixirStructureManager.Utils.Injector
 
-  def execute_actions(%{create: to_create, transformations: trs}, tokens) do
+  def execute_actions(%{create: to_create, transformations: trs} = args, tokens) do
+    IO.inspect args
+    create_dirs(args)
     Enum.each(to_create, &create_file(&1, tokens))
     Enum.each(trs, &transformation(&1, tokens))
   end
 
+  defp create_dirs(%{folders: folders}) when is_list(folders) do
+    Enum.each(folders, &File.mkdir_p!/1)
+  end
+
+  defp create_dirs(_), do: :nothing
+
   defp create_file({file, template}, tokens) when is_list(tokens) do
     with content <- resolve_content(template, tokens),
-         :ok <- ensure_dir(file) do
-      File.write!(file, content)
+         resolved_file <- IO.inspect(resolve_content(file, tokens)),
+         :ok <- ensure_dir(resolved_file) do
+      File.write!(resolved_file, content)
     else
       err -> IO.inspect(err)
     end
@@ -76,6 +85,10 @@ defmodule ElixirStructureManager.Utils.FileGenerator do
 
   defp read(file), do: File.read!(file)
 
-  defp persist({:ok, content}, file), do: File.write!(file, content)
+  defp persist({:ok, content}, file) do
+    Mix.shell().info([:green, "File ", :reset, file, :green, " saved"])
+    File.write!(file, content)
+  end
+
   defp persist(other, file), do: raise("Error processing file #{file} #{inspect(other)}")
 end

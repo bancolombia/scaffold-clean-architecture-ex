@@ -1,4 +1,4 @@
-defmodule {module_name}.Utils.DataTypeUtils do
+defmodule {app}.Utils.DataTypeUtils do
   require Logger
 
   @moduledoc """

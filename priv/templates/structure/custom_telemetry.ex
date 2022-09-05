@@ -1,17 +1,17 @@
-defmodule {module_name}.Utils.CustomTelemetry do
-  alias {module_name}.Utils.DataTypeUtils
+defmodule {app}.Utils.CustomTelemetry do
+  alias {app}.Utils.DataTypeUtils
   import Telemetry.Metrics
 
-  @service_name Application.compile_env!(:{application_name_atom}, :custom_metrics_prefix_name)
+  @service_name Application.compile_env!(:{app_snake}, :custom_metrics_prefix_name)
 
   @moduledoc """
   Provides functions for custom telemetry events
   """
 
   def custom_telemetry_events() do
-    :telemetry.attach("{application_name_atom}-plug-stop", [:{application_name_atom}, :plug, :stop], &handle_custom_event/4, nil)
-    :telemetry.attach("{application_name_atom}-redis-stop", [:redix, :pipeline, :stop], &handle_custom_event/4, nil)
-    :telemetry.attach("{application_name_atom}-vm-memory", [:vm, :memory], &handle_custom_event/4, nil)
+    :telemetry.attach("{app_snake}-plug-stop", [:{app_snake}, :plug, :stop], &handle_custom_event/4, nil)
+    :telemetry.attach("{app_snake}-redis-stop", [:redix, :pipeline, :stop], &handle_custom_event/4, nil)
+    :telemetry.attach("{app_snake}-vm-memory", [:vm, :memory], &handle_custom_event/4, nil)
     :telemetry.attach("vm-total_run_queue_lengths", [:vm, :total_run_queue_lengths], &handle_custom_event/4, nil)
     :telemetry.attach("rcommons-success", [:async, :message, :completed], &handle_custom_event/4, nil)
     :telemetry.attach("rcommons-event-failure", [:async, :event, :failure], &handle_custom_event/4, nil)
@@ -27,7 +27,7 @@ defmodule {module_name}.Utils.CustomTelemetry do
     execute_custom_event([metric], value, metadata)
   end
 
-  def handle_custom_event([:{application_name_atom}, :plug, :stop], measures, metadata, _) do
+  def handle_custom_event([:{app_snake}, :plug, :stop], measures, metadata, _) do
     :telemetry.execute(
       [:elixir, :http_request_duration_milliseconds],
       %{duration: DataTypeUtils.monotonic_time_to_milliseconds(measures.duration)},

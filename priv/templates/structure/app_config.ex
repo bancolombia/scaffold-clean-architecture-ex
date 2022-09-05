@@ -1,4 +1,4 @@
-defmodule {module_name}.Config.AppConfig do
+defmodule {app}.Config.AppConfig do
 
   @moduledoc """
    Provides strcut for app-config
@@ -16,5 +16,5 @@ defmodule {module_name}.Config.AppConfig do
      }
    end
 
-   defp load(property_name), do: Application.fetch_env!(:{application_name_atom}, property_name)
+   defp load(property_name), do: Application.fetch_env!(:{app_snake}, property_name)
  end

@@ -1,4 +1,4 @@
-defmodule {module_name}.Domain.Model.{model_name} do
+defmodule {app}.Domain.Model.{name} do
 
   @moduledoc """
   TODO Updates module description

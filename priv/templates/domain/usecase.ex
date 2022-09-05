@@ -1,4 +1,4 @@
-defmodule {module_name}.Domain.UseCase.{usecase_name} do
+defmodule {app}.Domain.UseCase.{name} do
 
   @moduledoc """
   TODO Updates usecase description

@@ -1,7 +1,7 @@
 defmodule Mix.Tasks.Ca.New.Da do
   @moduledoc """
   Creates a new driven adapter for the clean architecture project
-      $ mix ca.new.da --type driven_adapter_name
+  mix ca.new.da --type driven_adapter_name
 
   Type param options:
 
@@ -13,7 +13,7 @@ defmodule Mix.Tasks.Ca.New.Da do
 
   """
 
-  alias ElixirStructureManager.Core.ApplyDrivenAdapterTemplate
+  alias ElixirStructureManager.Core.ApplyTemplate
   alias ElixirStructureManager.Utils.DataTypeUtils
   use Mix.Task
 
@@ -34,7 +34,7 @@ defmodule Mix.Tasks.Ca.New.Da do
       {opts, []} ->
         Mix.shell().info([:green, "* Creating driven adapter ", :reset, opts[:type]])
 
-        ApplyDrivenAdapterTemplate.create_driven_adapter(
+        ApplyTemplate.apply(
           String.to_atom(opts[:type]),
           opts[:name] || "valid_name"
         )

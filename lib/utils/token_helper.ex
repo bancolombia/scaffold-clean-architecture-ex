@@ -39,8 +39,14 @@ defmodule ElixirStructureManager.Utils.TokenHelper do
     end
   end
 
+  def initial_tokens(app_name) do
+    app_name
+    |> StringContent.format_name()
+    |> to_token_list()
+  end
+
   defp to_token_list({:ok, app_snake_name, app_camel_name}) do
-    [{"{module_name}", app_camel_name}, {"{application_name_atom}", app_snake_name}]
+    [{"{app}", app_camel_name}, {"{app_snake}", app_snake_name}]
   end
 
   defp to_token_list({:ok, app_snake_name, app_camel_name}, key) do

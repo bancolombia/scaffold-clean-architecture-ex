@@ -1,9 +1,9 @@
-defmodule {module_name}.Application do
+defmodule {app}.Application do
 
-  alias {module_name}.EntryPoint.ApiRest
-  alias {module_name}.Config.{AppConfig, ConfigHolder}
-  alias {module_name}.Utils.CustomTelemetry
-  alias {module_name}.Utils.CertificatesAdmin
+  alias {app}.EntryPoint.ApiRest
+  alias {app}.Config.{AppConfig, ConfigHolder}
+  alias {app}.Utils.CustomTelemetry
+  alias {app}.Utils.CertificatesAdmin
 
   use Application
   require Logger
@@ -17,7 +17,7 @@ defmodule {module_name}.Application do
     children = with_plug_server(config) ++ application_children(in_test?)
 
     CustomTelemetry.custom_telemetry_events()
-    opts = [strategy: :one_for_one, name: {module_name}.Supervisor]
+    opts = [strategy: :one_for_one, name: {app}.Supervisor]
     Supervisor.start_link(children, opts)
   end
 

@@ -1,4 +1,4 @@
-defmodule {module_name}.Utils.CertificatesAdmin do
+defmodule {app}.Utils.CertificatesAdmin do
   @moduledoc false
   require Logger
 

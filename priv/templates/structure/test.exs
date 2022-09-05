@@ -1,15 +1,15 @@
 import Config
 
-config :{application_name_atom}, timezone: "America/Bogota"
+config :{app_snake}, timezone: "America/Bogota"
 
-config :{application_name_atom},
+config :{app_snake},
        http_port: 8083,
        enable_server: true,
        secret_name: "",
        region: "",
        version: "0.0.1",
        in_test: true,
-       custom_metrics_prefix_name: "{application_name_atom}_local"
+       custom_metrics_prefix_name: "{app_snake}_local"
 
 config :logger,
        level: :debug

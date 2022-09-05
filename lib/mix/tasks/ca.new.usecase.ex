@@ -4,7 +4,7 @@ defmodule Mix.Tasks.Ca.New.Usecase do
       $ mix ca.new.usecase [name_usecase]
   """
 
-  alias ElixirStructureManager.Core.ApplyUseCaseTemplate
+  alias ElixirStructureManager.Core.ApplyTemplate
   use Mix.Task
 
   @version Mix.Project.config()[:version]
@@ -18,15 +18,7 @@ defmodule Mix.Tasks.Ca.New.Usecase do
   end
 
   @shortdoc "Creates a new usecase"
-  def run([usecase_name]) do
-    case Mix.Project.config() |> Keyword.fetch(:app) do
-      :error ->
-        Mix.shell().error("It is not a elixir project")
-
-      {:ok, app_name} ->
-        Mix.shell().info([:green, "* Creating usecase ", :reset, usecase_name])
-        ApplyUseCaseTemplate.create_usecase(to_string(app_name), usecase_name)
-        Mix.shell().info([:green, "* Usecase ", :reset, usecase_name, :green, " created"])
-    end
+  def run([use_case_name]) do
+    ApplyTemplate.apply(:usecase, use_case_name)
   end
 end

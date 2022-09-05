@@ -42,7 +42,7 @@ $ mix help
 
 And you must see the following tasks:
 ```bash
-$ mix ca.new.strcuture
+$ mix ca.new.structure
 $ mix ca.new.model
 ```
 

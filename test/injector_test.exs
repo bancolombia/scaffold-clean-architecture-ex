@@ -1,62 +1,41 @@
-defmodule InjecterTest do
+defmodule InjectorTest do
   use ExUnit.Case
   alias ElixirStructureManager.Utils.Injector
 
   import Mock
   import ExUnit.Assertions
-  
-  def file_content() do
+
+  defp file_content() do
     """
     defmodule HelloWorld.MixProject do
-    defp deps do
-      [
-        {:plug_cowboy, "~> 2.2"},
-        {:poison, "~> 4.0"},
-        {:cors_plug, "~> 2.0"}
-      ]
+      defp deps do
+        [
+          {:plug_cowboy, "~> 2.2"},
+          {:poison, "~> 4.0"},
+          {:cors_plug, "~> 2.0"}
+        ]
       end
     end
     """
   end
-  
-  test "should inject dependecy in file mix.exs when file content is given" do
 
-    with_mocks([
-      {File, [], [write!: fn(_path, _content) -> :ok end]}
-    ]) do
-    
-      assert :ok === Injector.inject_dependency(file_content(), "lib/mock.exs", ~s|{:some_dependency, "~> 1.0"}|)
+  defp file_content_injected() do
+    """
+    defmodule HelloWorld.MixProject do
+      defp deps do
+        [
+          {:some_dependency, "~> 1.0"},
+          {:plug_cowboy, "~> 2.2"},
+          {:poison, "~> 4.0"},
+          {:cors_plug, "~> 2.0"}
+        ]
+      end
     end
-
-  end
-  
-  test "should inject dependecy in file mix.exs when file path is given" do
-
-    with_mocks([
-      {File, [], [read!: fn(_path_file) -> file_content() end]},
-      {File, [], [write!: fn(_path, _content) -> :ok end]}
-    ]) do
-    
-      assert :ok === Injector.inject_dependency("mix.exs", ~s|{:some_dependency, "~> 1.0"}|)
-    end
-
+    """
   end
 
-  test "should return already_injected atom when dependency to inject already exists" do
-
-    with_mocks([
-      {File, [], [read!: fn(_path_file) -> file_content() end]}
-    ]) do
-    
-      assert :already_injected === Injector.inject_dependency("mix.exs", ~s|{:poison, "~> 4.0"}|)
-    end
-
-    assert :already_injected === Injector.inject_dependency(file_content(), "lib/mock.exs", ~s|{:poison, "~> 4.0"}|)
-  end
-  
-  test "should return unable_to_inject atom when mix.exs file is corrupt" do
-    
-    corrupt_content = """
+  defp file_corrupt_content() do
+    """
     defmodule HelloWorld.MixProject do
     defp notfound do
       [
@@ -67,14 +46,49 @@ defmodule InjecterTest do
       end
     end
     """
+  end
 
-    with_mocks([
-      {File, [], [read!: fn(_path_file) -> corrupt_content end]}
-    ]) do
-    
-      assert {:error, :unable_to_inject} === Injector.inject_dependency("mix.exs", ~s|{:some_dependency, "~> 1.0"}|)
-    end
+  test "should inject dependency in file mix.exs when file content is given" do
+    content = file_content()
+    expected = file_content_injected()
 
-    assert {:error, :unable_to_inject} === Injector.inject_dependency(corrupt_content, "lib/mock.exs", ~s|{:some_dependency, "~> 1.0"}|)
+    {:ok, res} = Injector.inject_dependency(content, ~s|{:some_dependency, "~> 1.0"}|)
+
+    assert expected === res
+  end
+
+  test "should return already_injected atom when dependency to inject already exists" do
+    content = file_content_injected()
+
+    {:ok, res} = Injector.inject_dependency(content, ~s|{:poison, "~> 4.0"}|)
+
+    assert content === res
+  end
+
+  test "should return unable_to_inject atom when mix.exs file is corrupt" do
+    corrupt_content = file_corrupt_content()
+
+    {:error, {reason, _, _}} =
+      Injector.inject_dependency(corrupt_content, ~s|{:some_dependency, "~> 1.0"}|)
+
+    assert :no_match === reason
+  end
+
+  test "should inject before" do
+    content = "start-.end"
+    expected = "start-here.end"
+
+    {:ok, res} = Injector.insert_before(content, "here", ~r|\.|)
+
+    assert expected === res
+  end
+
+  test "should append end" do
+    content = "start"
+    expected = "start-end"
+
+    {:ok, res} = Injector.append_end(content, "-end")
+
+    assert expected === res
   end
 end

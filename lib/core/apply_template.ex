@@ -15,9 +15,12 @@ defmodule ElixirStructureManager.Core.ApplyTemplate do
   defp resolve_behaviour(:model), do: Domain.Model
   defp resolve_behaviour(:behaviour), do: Domain.Behaviour
   defp resolve_behaviour(:usecase), do: Domain.UseCase
+
   defp resolve_behaviour(:secretsmanager), do: DA.SecretsManager
   defp resolve_behaviour(:asynceventbus), do: DA.AsyncEventBus
   defp resolve_behaviour(:generic), do: DA.Generic
+
+  defp resolve_behaviour(:asynceventhandler), do: EP.AsyncEventHandlers
 
   defp resolve_behaviour(_other),
     do:

@@ -1,11 +1,11 @@
-defmodule DA.AsyncEventBus do
+defmodule EP.AsyncEventHandlers do
   @moduledoc false
-  @base "/priv/templates/adapters/async_event_bus/"
+  @base "/priv/templates/entries/async_event_handlers/"
 
   def actions() do
     %{
       create: %{
-        "lib/driven_adapters/async_messages/async_messages.ex" => @base <> "async_messages.ex",
+        "lib/entry_points/async_messages/async_message_handlers.ex" => @base <> "async_message_handlers.ex",
         "lib/config/message_runtime_config.ex" => @base <> "message_runtime_config.ex"
       },
       transformations: [

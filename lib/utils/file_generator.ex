@@ -16,6 +16,7 @@ defmodule ElixirStructureManager.Utils.FileGenerator do
     folder 
     |> resolve_content(tokens)
     |> File.mkdir_p!()
+    Mix.shell().info([:green, "Folder ", :reset, folder, :green, " created"])
   end
 
   defp create_dirs(_, _), do: :nothing
@@ -25,6 +26,7 @@ defmodule ElixirStructureManager.Utils.FileGenerator do
          resolved_file <- resolve_content(file, tokens),
          :ok <- ensure_dir(resolved_file) do
       File.write!(resolved_file, content)
+      Mix.shell().info([:green, "File ", :reset, resolved_file, :green, " created"])
     else
       err -> IO.inspect(err)
     end
@@ -91,7 +93,7 @@ defmodule ElixirStructureManager.Utils.FileGenerator do
   defp read(file), do: File.read!(file)
 
   defp persist({:ok, content}, file) do
-    Mix.shell().info([:green, "File ", :reset, file, :green, " saved"])
+    Mix.shell().info([:green, "File ", :reset, file, :green, " updated"])
     File.write!(file, content)
   end
 

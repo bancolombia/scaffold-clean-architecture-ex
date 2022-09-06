@@ -23,7 +23,7 @@ defmodule DA.SecretsManager do
     }
   end
 
-  def tokens do
+  def tokens(_opts) do
     []
   end
 end

@@ -1,12 +1,12 @@
 defmodule ElixirStructureManager.Core.ApplyTemplate do
   alias ElixirStructureManager.Utils.{FileGenerator, TokenHelper}
 
-  def apply(type, name) do
+  def apply(type, name, opts \\ nil) do
     module = resolve_behaviour(type)
 
     tokens =
       TokenHelper.add("name", name)
-      |> TokenHelper.add(module.tokens())
+      |> TokenHelper.add(module.tokens(opts))
 
     module.actions()
     |> FileGenerator.execute_actions(tokens)
@@ -17,8 +17,9 @@ defmodule ElixirStructureManager.Core.ApplyTemplate do
   defp resolve_behaviour(:usecase), do: Domain.UseCase
   defp resolve_behaviour(:secretsmanager), do: DA.SecretsManager
   defp resolve_behaviour(:asynceventbus), do: DA.AsyncEventBus
+  defp resolve_behaviour(:generic), do: DA.Generic
 
-  defp resolve_behaviour(other),
+  defp resolve_behaviour(_other),
     do:
       Mix.raise(
         "Invalid driven adapter parameter. Please verify de documentation to see the different domain module types"

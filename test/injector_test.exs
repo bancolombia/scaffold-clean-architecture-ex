@@ -1,8 +1,6 @@
 defmodule InjectorTest do
   use ExUnit.Case
   alias ElixirStructureManager.Utils.Injector
-
-  import Mock
   import ExUnit.Assertions
 
   defp file_content() do
@@ -52,7 +50,7 @@ defmodule InjectorTest do
     content = file_content()
     expected = file_content_injected()
 
-    {:ok, res} = Injector.inject_dependency(content, ~s|{:some_dependency, "~> 1.0"}|)
+    {:ok, res} = Injector.inject_dependency(content, ~s|{:some_dependency, "~> 1.0"}|, nil)
 
     assert expected === res
   end
@@ -60,7 +58,7 @@ defmodule InjectorTest do
   test "should return already_injected atom when dependency to inject already exists" do
     content = file_content_injected()
 
-    {:ok, res} = Injector.inject_dependency(content, ~s|{:poison, "~> 4.0"}|)
+    {:ok, res} = Injector.inject_dependency(content, ~s|{:poison, "~> 4.0"}|, nil)
 
     assert content === res
   end
@@ -69,7 +67,7 @@ defmodule InjectorTest do
     corrupt_content = file_corrupt_content()
 
     {:error, {reason, _, _}} =
-      Injector.inject_dependency(corrupt_content, ~s|{:some_dependency, "~> 1.0"}|)
+      Injector.inject_dependency(corrupt_content, ~s|{:some_dependency, "~> 1.0"}|, nil)
 
     assert :no_match === reason
   end
@@ -78,7 +76,7 @@ defmodule InjectorTest do
     content = "start-.end"
     expected = "start-here.end"
 
-    {:ok, res} = Injector.insert_before(content, "here", ~r|\.|)
+    {:ok, res} = Injector.insert_before(content, "here", regex: ~r|\.|)
 
     assert expected === res
   end
@@ -87,7 +85,7 @@ defmodule InjectorTest do
     content = "start"
     expected = "start-end"
 
-    {:ok, res} = Injector.append_end(content, "-end")
+    {:ok, res} = Injector.append_end(content, "-end", nil)
 
     assert expected === res
   end

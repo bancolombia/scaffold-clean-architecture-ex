@@ -12,12 +12,14 @@ defmodule DA.SecretsManager do
         {
           :insert_after,
           "lib/config/app_config.ex",
-          {~r{defstruct(\s)+\[}, "\n\s\s\s\s\s:secret_name,"}
+          "\n\s\s\s\s\s:secret_name,",
+          regex: ~r{defstruct(\s)+\[}
         },
         {
           :insert_after,
           "lib/config/app_config.ex",
-          {~r{%__MODULE__{}, "\n\s\s\s\s\s\s\ssecret_name: load(:secret_name),"}
+          "\n\s\s\s\s\s\s\ssecret_name: load(:secret_name),",
+          regex: ~r{%__MODULE__{}
         }
       ]
     }

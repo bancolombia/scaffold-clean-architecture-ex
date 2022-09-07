@@ -16,23 +16,26 @@ defmodule DA.AsyncEventBus do
         {
           :insert_after,
           "lib/config/app_config.ex",
-          {~r{defstruct(\s)+\[}, "\n\s\s\s\s\s:exchange,"}
+          "\n\s\s\s\s\s:exchange,",
+          regex: ~r{defstruct(\s)+\[}
         },
         {
           :insert_after,
           "lib/config/app_config.ex",
-          {~r{%__MODULE__{}, "\n\s\s\s\s\s\s\sexchange: load(:exchange),"}
+          "\n\s\s\s\s\s\s\sexchange: load(:exchange),",
+          regex: ~r{%__MODULE__{}
         },
         {
           :insert_after,
           "lib/application.ex",
-          {~r/_other_env\)(\s)+do(\s)+\[(\s)+{ConfigHolder,(\s)+AppConfig.load_config\(\)},/,
-           "\n\t\t\tMessageRuntimeConfig,"}
+          "\n\t\t\tMessageRuntimeConfig,",
+          regex: ~r/_other_env\)(\s)+do(\s)+\[(\s)+{ConfigHolder,(\s)+AppConfig.load_config\(\)},/
         },
         {
           :insert_after,
           "lib/application.ex",
-          {~r{Application(\s)+do(\s)+}, "alias {app}.Config.MessageRuntimeConfig\n  "}
+          "alias {app}.Config.MessageRuntimeConfig\n  ",
+          regex: ~r{Application(\s)+do(\s)+}
         }
       ]
     }

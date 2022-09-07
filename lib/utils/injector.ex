@@ -1,19 +1,19 @@
 defmodule ElixirStructureManager.Utils.Injector do
-  @spec inject_dependency(String.t(), String.t()) ::
+  @spec inject_dependency(String.t(), String.t(), term) ::
           {:ok, String.t()} | {:error, reason :: term}
-  def inject_dependency(content, dependency) do
-    insert_after(content, "\n      #{dependency},", ~r{defp deps do(\s)+\[})
+  def inject_dependency(content, dependency, _opts) do
+    insert_after(content, "\n      #{dependency},", regex: ~r{defp deps do(\s)+\[})
   end
 
-  def insert_before(content, insertable, regex) do
-    transform_content(content, insertable, &insert_on_match(&1, regex, insertable, :before))
+  def insert_before(content, insertable, opts) do
+    transform_content(content, insertable, &insert_on_match(&1, opts[:regex], insertable, :before))
   end
 
-  def insert_after(content, insertable, regex) do
-    transform_content(content, insertable, &insert_on_match(&1, regex, insertable, :after))
+  def insert_after(content, insertable, opts) do
+    transform_content(content, insertable, &insert_on_match(&1, opts[:regex], insertable, :after))
   end
 
-  def append_end(content, appendable) do
+  def append_end(content, appendable, _opts) do
     transform_content(content, appendable, &{:ok, &1 <> appendable})
   end
 

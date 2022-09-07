@@ -14,35 +14,23 @@ defmodule Mix.Tasks.Ca.New.Da do
   """
 
   alias ElixirStructureManager.Core.ApplyTemplate
-  alias ElixirStructureManager.Utils.DataTypeUtils
-  use Mix.Task
+  alias Mix.Tasks.Ca.BaseTask
 
-  @version Mix.Project.config()[:version]
-  @switches [type: :string, name: :string]
+  use BaseTask,
+    name: "ca.new.da",
+    description: "Creates a new driven adapter",
+    switches: [type: :string, name: :string]
 
-  def run([]) do
-    Mix.Tasks.Help.run(["ca.new.da"])
+  def execute({opts, []}) do
+    Mix.shell().info([:green, "* Creating driven adapter ", :reset, opts[:type]])
+
+    ApplyTemplate.apply(
+      String.to_atom(opts[:type]),
+      opts[:name] || "valid_name"
+    )
+
+    Mix.shell().info([:green, "* Driven Adapter created"])
   end
 
-  def run([version]) when version in ~w(-v --version) do
-    Mix.shell().info([:reset, "Scaffold version ", :green, "v#{@version}"])
-  end
-
-  @shortdoc "Creates a new driven adapter"
-  def run(args) do
-    case DataTypeUtils.parse_opts(args, @switches) do
-      {opts, []} ->
-        Mix.shell().info([:green, "* Creating driven adapter ", :reset, opts[:type]])
-
-        ApplyTemplate.apply(
-          String.to_atom(opts[:type]),
-          opts[:name] || "valid_name"
-        )
-
-        Mix.shell().info([:green, "* Driven Adapter created"])
-
-      {_opts, [_ | _]} ->
-        Mix.Tasks.Help.run(["ca.new.model"])
-    end
-  end
+  def execute(_any), do: run([])
 end

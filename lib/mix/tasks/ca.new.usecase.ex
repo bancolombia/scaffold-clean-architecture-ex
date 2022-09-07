@@ -5,20 +5,16 @@ defmodule Mix.Tasks.Ca.New.Usecase do
   """
 
   alias ElixirStructureManager.Core.ApplyTemplate
-  use Mix.Task
+  alias Mix.Tasks.Ca.BaseTask
 
-  @version Mix.Project.config()[:version]
+  use BaseTask,
+    name: "ca.new.usecase",
+    description: "Creates a new usecase",
+    switches: []
 
-  def run([]) do
-    Mix.Tasks.Help.run(["ca.new.usecase"])
+  def execute({[], [name]}) do
+    ApplyTemplate.apply(:usecase, name)
   end
 
-  def run([version]) when version in ~w(-v --version) do
-    Mix.shell().info([:reset, "Scaffold version ", :green, "v#{@version}"])
-  end
-
-  @shortdoc "Creates a new usecase"
-  def run([use_case_name]) do
-    ApplyTemplate.apply(:usecase, use_case_name)
-  end
+  def execute(_any), do: run([])
 end

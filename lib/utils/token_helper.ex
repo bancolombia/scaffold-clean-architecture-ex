@@ -29,8 +29,8 @@ defmodule ElixirStructureManager.Utils.TokenHelper do
   def default_tokens() do
     case Mix.Project.config() |> Keyword.fetch(:app) do
       :error ->
-        Mix.shell().error("It is not a elixir project")
-        {:error, :project_name_not_found}
+        Mix.shell().error("It is not an elixir project")
+        raise "It is not an elixir project"
 
       {:ok, app_name} ->
         to_string(app_name)

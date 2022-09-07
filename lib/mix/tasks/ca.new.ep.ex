@@ -14,35 +14,23 @@ defmodule Mix.Tasks.Ca.New.Ep do
   """
 
   alias ElixirStructureManager.Core.ApplyTemplate
-  alias ElixirStructureManager.Utils.DataTypeUtils
-  use Mix.Task
+  alias Mix.Tasks.Ca.BaseTask
 
-  @version Mix.Project.config()[:version]
-  @switches [type: :string, name: :string]
+  use BaseTask,
+    name: "ca.new.ep",
+    description: "Creates a new entry point",
+    switches: [type: :string, name: :string]
 
-  def run([]) do
-    Mix.Tasks.Help.run(["ca.new.ep"])
+  def execute({opts, []}) do
+    Mix.shell().info([:green, "* Creating entry point ", :reset, opts[:type]])
+
+    ApplyTemplate.apply(
+      String.to_atom(opts[:type]),
+      opts[:name] || "valid_name"
+    )
+
+    Mix.shell().info([:green, "* Entry Point created"])
   end
 
-  def run([version]) when version in ~w(-v --version) do
-    Mix.shell().info([:reset, "Scaffold version ", :green, "v#{@version}"])
-  end
-
-  @shortdoc "Creates a new entry point"
-  def run(args) do
-    case DataTypeUtils.parse_opts(args, @switches) do
-      {opts, []} ->
-        Mix.shell().info([:green, "* Creating entry point ", :reset, opts[:type]])
-
-        ApplyTemplate.apply(
-          String.to_atom(opts[:type]),
-          opts[:name] || "valid_name"
-        )
-
-        Mix.shell().info([:green, "* Entry Point created"])
-
-      {_opts, [_ | _]} ->
-        Mix.Tasks.Help.run(["ca.new.ep"])
-    end
-  end
+  def execute(_any), do: run([])
 end

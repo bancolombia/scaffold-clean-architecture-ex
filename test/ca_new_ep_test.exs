@@ -1,17 +1,17 @@
-defmodule Ca.New.DaTest do
+defmodule Ca.New.EpTest do
   use ExUnit.Case
   import Mock
-  alias Mix.Tasks.Ca.New.Da, as: Task
+  alias Mix.Tasks.Ca.New.Ep, as: Task
   alias ElixirStructureManager.Core.ApplyTemplate
 
   test "should shows helper information when invalid args" do
     assert :ok === Task.run(["invalid", "args"])
   end
 
-  test "should create a da" do
+  test "should create an ep" do
     with_mocks([{ApplyTemplate, [], [apply: fn _type, _name -> :ok end]}]) do
-      Task.run(["--type", "secretsmanager"])
-      assert called(ApplyTemplate.apply(:secretsmanager, "valid_name"))
+      Task.run(["--type", "asynceventbus"])
+      assert called(ApplyTemplate.apply(:asynceventbus, "valid_name"))
     end
   end
 end

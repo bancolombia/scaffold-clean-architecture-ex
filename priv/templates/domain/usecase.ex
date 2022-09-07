@@ -4,6 +4,6 @@ defmodule {app}.Domain.UseCase.{name} do
   TODO Updates usecase description
   """
    
-  ## TODO Add functions to buisness logic app 
+  ## TODO Add functions to business logic app
 
 end

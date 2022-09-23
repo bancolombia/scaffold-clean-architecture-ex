@@ -10,7 +10,7 @@ defmodule ElixirStructureManager.Utils.DataTypeUtils do
 
   def normalize(value) when is_list(value), do: Enum.map(value, &normalize/1)
   def normalize(value), do: value
-  
+
   def parse_opts(argv, switches) do
     case OptionParser.parse(argv, strict: switches) do
       {opts, argv, []} ->

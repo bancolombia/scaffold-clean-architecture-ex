@@ -1,3 +1,3 @@
 # rabbitmq
-config :sample_ca,
+config :{app_snake},
   exchange: %{application_name: "clean-ex"}

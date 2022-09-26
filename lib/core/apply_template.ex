@@ -22,6 +22,9 @@ defmodule ElixirStructureManager.Core.ApplyTemplate do
 
   defp resolve_behaviour(:asynceventhandler), do: EP.AsyncEventHandlers
 
+  defp resolve_behaviour(:metrics), do: Config.Metrics
+  defp resolve_behaviour(:distillery), do: Config.Distillery
+
   defp resolve_behaviour(_other) do
     Mix.raise(
       "Invalid driven adapter parameter. Please verify de documentation to see the different domain module types"

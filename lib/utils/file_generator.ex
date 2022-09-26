@@ -2,24 +2,19 @@ defmodule ElixirStructureManager.Utils.FileGenerator do
   alias ElixirStructureManager.Utils.StringContent
   alias ElixirStructureManager.Utils.Injector
 
-  def execute_actions(%{create: to_create, transformations: trs} = args, tokens) do
-    create_dirs(args, tokens)
-    Enum.each(to_create, &create_file(&1, tokens))
-    Enum.each(trs, &transformation(&1, tokens))
-  end
-
-  defp create_dirs(%{folders: folders}, tokens) when is_list(folders) do
-    Enum.each(folders, &create_dir(&1, tokens))
+  def execute_actions(%{} = args, tokens) do
+    Enum.each(Map.get(args, :folders, []), &create_dir(&1, tokens))
+    Enum.each(Map.get(args, :create, %{}), &create_file(&1, tokens))
+    Enum.each(Map.get(args, :transformations, []), &transformation(&1, tokens))
   end
 
   defp create_dirs(_, _), do: :nothing
 
   defp create_dir(folder, tokens) do
-    folder
-    |> resolve_content(tokens)
-    |> File.mkdir_p!()
+    resolved = resolve_content(folder, tokens)
+    File.mkdir_p!(resolved)
 
-    Mix.shell().info([:green, "Folder ", :reset, folder, :green, " created"])
+    Mix.shell().info([:green, "Folder ", :reset, resolved, :green, " created"])
   end
 
   defp create_file({file, template}, tokens) when is_list(tokens) do

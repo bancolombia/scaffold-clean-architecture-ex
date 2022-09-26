@@ -9,12 +9,11 @@ defmodule Mix.Tasks.Ca.New.Usecase do
 
   use BaseTask,
     name: "ca.new.usecase",
-    description: "Creates a new usecase",
-    switches: []
+    description: "Creates a new usecase"
 
   def execute({[], [name]}) do
     ApplyTemplate.apply(:usecase, name)
   end
 
-  def execute(_any), do: run([])
+  def execute(_any), do: run(["-h"])
 end

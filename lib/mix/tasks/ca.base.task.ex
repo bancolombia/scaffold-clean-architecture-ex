@@ -7,10 +7,11 @@ defmodule Mix.Tasks.Ca.BaseTask do
       use Mix.Task
 
       @version Mix.Project.config()[:version]
-      @switches unquote(opts[:switches])
+      @switches unquote(opts[:switches] || [])
+      @aliases unquote(opts[:aliases] || [])
       @name unquote(opts[:name])
 
-      def run([]) do
+      def run([help]) when help in ~w(-h --help) do
         Mix.Tasks.Help.run([@name])
       end
 
@@ -20,7 +21,7 @@ defmodule Mix.Tasks.Ca.BaseTask do
 
       @shortdoc unquote(opts[:description])
       def run(argv) do
-        DataTypeUtils.parse_opts(argv, @switches)
+        DataTypeUtils.parse_opts(argv, @switches, @aliases)
         |> execute()
       end
     end

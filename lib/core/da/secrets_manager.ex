@@ -20,7 +20,20 @@ defmodule DA.SecretsManager do
           "lib/config/app_config.ex",
           "\n\s\s\s\s\s\s\ssecret_name: load(:secret_name),",
           regex: ~r{%__MODULE__{}
-        }
+        },
+        {
+          :insert_after,
+          "lib/application.ex",
+          "\n\s\salias {app}.Adapters.Secrets.SecretManagerAdapter",
+          regex: ~r{\w.Application+\s(do)\s}
+        },
+        {
+          :insert_after,
+          "lib/application.ex",
+          "\n\t\t\t{SecretManagerAdapter, []},",
+          regex: ~r/_other_env\)(\s)+do(\s)+\[(\s)+{ConfigHolder,(\s)+AppConfig.load_config\(\)},/
+        },
+
       ]
     }
   end

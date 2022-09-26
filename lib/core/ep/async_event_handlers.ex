@@ -30,7 +30,7 @@ defmodule EP.AsyncEventHandlers do
           :insert_after,
           "lib/application.ex",
           "\n\t\t\tMessageRuntimeConfig,",
-          regex: ~r/_other_env\)(\s)+do(\s)+\[(\s)+{ConfigHolder,(\s)+AppConfig.load_config\(\)},/
+          regex: ~r/_other_env\)(\s)+do(\s)+\[/
         },
         {
           :insert_after,

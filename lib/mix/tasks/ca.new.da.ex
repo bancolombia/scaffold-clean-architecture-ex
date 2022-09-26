@@ -5,6 +5,7 @@ defmodule Mix.Tasks.Ca.New.Da do
 
   Type param options:
 
+  * generic
   * secrestsmanager
 
   Examples:

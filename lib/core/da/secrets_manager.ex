@@ -24,14 +24,14 @@ defmodule DA.SecretsManager do
         {
           :insert_after,
           "lib/application.ex",
-          "\n\s\salias {app}.Adapters.Secrets.SecretManagerAdapter",
+          "\n\s\salias {app}.Adapters.Secrets.SecretManagerAdapter\n",
           regex: ~r{\w.Application+\s(do)\s}
         },
         {
           :insert_after,
           "lib/application.ex",
-          "\n\t\t\t{SecretManagerAdapter, []},",
-          regex: ~r/_other_env\)(\s)+do(\s)+\[(\s)+{ConfigHolder,(\s)+AppConfig.load_config\(\)},/
+          "\n\t\t\t{SecretManagerAdapter, []},\n",
+          regex: ~r/_other_env\)(\s)+do(\s)+\[/
         },
 
       ]

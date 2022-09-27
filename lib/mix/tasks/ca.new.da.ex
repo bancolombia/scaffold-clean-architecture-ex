@@ -6,6 +6,8 @@ defmodule Mix.Tasks.Ca.New.Da do
   Type param options:
 
   * generic
+  * redis
+  * asynceventbus
   * secrestsmanager
 
   Examples:

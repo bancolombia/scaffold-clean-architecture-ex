@@ -6,47 +6,7 @@ defmodule DA.Redis do
 
   def actions() do
 
-    redis_default_values = {
-      :insert_after,
-      "lib/application.ex",
-      "\n\t\t\t{RedisAdapter, []},"
-    }
-
-    redis_child = if File.exists?(@secrets_manager_file)  do
-
-      content = File.read!("lib/application.ex")
-
-      redis_child_app = cond do
-        String.contains?(content, "SecretManagerAdapter, []") ->
-          {
-            :insert_after,
-            "lib/application.ex",
-            ",\n\t\t\t{RedisAdapter, []}",
-            regex: ~r/(\s)+{SecretManagerAdapter, \[\]}/
-          }
-
-        true -> Tuple.append(redis_default_values, regex: @regex)
-      end
-
-      [
-        {
-          :insert_after,
-          @secrets_manager_file,
-          "\n\t\t\t## TODO: Uncomment to use redis with secrets\n\t\t\t# handle_redis_secrets(secret)",
-          regex: ~r/, \{:secret, secret\}\)/
-        },
-        {
-          :insert_before,
-          @secrets_manager_file,
-          @base <> "secrets_manager/handle_redis_secrets.ex",
-          regex: ~r/  defp get_secret_value/
-        },
-        redis_child_app
-      ]
-
-    else
-      [Tuple.append(redis_default_values, regex: @regex)]
-    end
+    redis_child = get_redis_child_configuration()
 
     %{
       create: %{
@@ -93,5 +53,49 @@ defmodule DA.Redis do
 
   def tokens(_opts) do
     []
+  end
+
+  defp get_redis_child_configuration do
+    redis_default_values = {
+      :insert_after,
+      "lib/application.ex",
+      "\n\t\t\t{RedisAdapter, []},"
+    }
+
+    if File.exists?(@secrets_manager_file)  do
+
+      content = File.read!("lib/application.ex")
+
+      redis_child_app = cond do
+        String.contains?(content, "SecretManagerAdapter, []") ->
+          {
+            :insert_after,
+            "lib/application.ex",
+            ",\n\t\t\t{RedisAdapter, []}",
+            regex: ~r/(\s)+{SecretManagerAdapter, \[\]}/
+          }
+
+        true -> Tuple.append(redis_default_values, regex: @regex)
+      end
+
+      [
+        {
+          :insert_after,
+          @secrets_manager_file,
+          "\n\t\t\t## TODO: Uncomment to use redis with secrets\n\t\t\t# handle_redis_secrets(secret)",
+          regex: ~r/, \{:secret, secret\}\)/
+        },
+        {
+          :insert_before,
+          @secrets_manager_file,
+          @base <> "secrets_manager/handle_redis_secrets.ex",
+          regex: ~r/  defp get_secret_value/
+        },
+        redis_child_app
+      ]
+
+    else
+      [Tuple.append(redis_default_values, regex: @regex)]
+    end
   end
 end

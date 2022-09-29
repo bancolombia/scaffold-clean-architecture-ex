@@ -21,11 +21,11 @@ defmodule {app}.EntryPoint.ApiRest do
   plug(Plug.Telemetry, event_prefix: [:{app_snake}, :plug])
   plug(:dispatch)
 
-  get "/{app_snake}/api/health" do
-    %{
-      status: "UP"
-    } |> build_response(conn)
-  end
+  forward(
+    "/{app_snake}/api/health",
+    to: PlugCheckup,
+    init_opts: PlugCheckup.Options.new(json_encoder: Jason, checks: {app}.EntryPoint.HealthCheck.checks)
+  )
 
   get "/{app_snake}/api/hello/" do
     build_response("Hello World", conn)

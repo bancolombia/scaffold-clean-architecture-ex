@@ -15,6 +15,7 @@ defmodule ApplyTemplatesTest do
           :secretsmanager,
           :asynceventbus,
           :generic,
+          :redis,
           :asynceventhandler
         ],
         fn template ->

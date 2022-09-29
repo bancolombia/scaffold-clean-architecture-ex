@@ -27,6 +27,8 @@ defmodule {app}.MixProject do
       # {:dep_from_git, git: "https://github.com/elixir-lang/my_dep.git", tag: "0.1.0"}
       {:castore, "~> 0.1.0"},
       {:plug_cowboy, "~> 2.2"},
+      {:jason, "~> 1.0"},
+      {:plug_checkup, "~> 0.6.0"},
       {:poison, "~> 4.0"},
       {:cors_plug, "~> 2.0"},
       {:timex, "~> 3.0"},

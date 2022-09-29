@@ -33,6 +33,18 @@ defmodule DA.Redis do
           regex: ~r{Application(\s)+do(\s)+}
         },
         {
+          :insert_after,
+          "lib/entry_points/health_check.ex",
+          "\n\s\salias {app}.Adapters.Redis.RedisAdapter",
+          regex: ~r{EntryPoint.HealthCheck do}
+        },
+        {
+          :insert_after,
+          "lib/entry_points/health_check.ex",
+          "\n\s\s\s\s\s\s%PlugCheckup.Check{name: \"redis\", module: {app}.Adapters.Redis.RedisAdapter, function: :health},",
+          regex: ~r{def checks do(\s)+\[}
+        },
+        {
           :append_end,
           "config/dev.exs",
           @base <> "redis/config_to_append_dev.ex"

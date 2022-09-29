@@ -41,14 +41,8 @@ defmodule DA.Redis do
         {
           :insert_after,
           "lib/entry_points/health_check.ex",
-          "\n\s\s\s\s\s\s%PlugCheckup.Check{name: \"redis\", module: __MODULE__, function: :check_redis},",
+          "\n\s\s\s\s\s\s%PlugCheckup.Check{name: \"redis\", module: {app}.Adapters.Redis.RedisAdapter, function: :health},",
           regex: ~r{def checks do(\s)+\[}
-        },
-        {
-          :insert_after,
-          "lib/entry_points/health_check.ex",
-          @base <> "redis/check_redis.ex",
-          regex: ~r{:ok(\s)+end}
         },
         {
           :append_end,

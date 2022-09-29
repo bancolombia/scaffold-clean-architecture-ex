@@ -23,7 +23,7 @@ defmodule {app}.Adapters.Redis.RedisAdapter do
 
   def health() do
     case Redix.command!(:redix, ["PING"]) do
-      "PONG" -> {:ok, true}
+      "PONG" -> :ok
       error -> {:error, error}
     end
   end

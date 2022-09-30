@@ -4,7 +4,7 @@ defmodule ElixirStructureManager.MixProject do
   def project do
     [
       app: :elixir_structure_manager,
-      version: "0.1.0",
+      version: "0.1.1",
       elixir: "~> 1.12",
       build_embedded: Mix.env() == :prod,
       start_permanent: Mix.env() == :prod,
@@ -22,7 +22,6 @@ defmodule ElixirStructureManager.MixProject do
 
   defp package() do
     [
-      organization: "bancolombia",
       files: ["lib", "priv", "mix.exs", "README*", "LICENSE*"],
       maintainers: ["Juan Esteban", "Santiago Calle", "Juan Carlos Galvis"],
       licenses: ["MIT"],

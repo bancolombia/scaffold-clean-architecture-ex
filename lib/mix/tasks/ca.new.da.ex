@@ -13,6 +13,7 @@ defmodule Mix.Tasks.Ca.New.Da do
   Examples:
       $ mix ca.new.da --type driven_adapter_name --name my_adapter
       $ mix ca.new.da -t driven_adapter_name -n my_adapter
+
       $ mix ca.new.da --type secrestsmanager
       $ mix ca.new.da -t secrestsmanager
 
@@ -28,7 +29,7 @@ defmodule Mix.Tasks.Ca.New.Da do
     switches: [type: :string, name: :string],
     aliases: [t: :type, n: :name]
 
-  def execute({opts, []}) do
+  def execute({opts, []}) when opts != nil and length(opts) > 0 do
     Mix.shell().info([:green, "* Creating driven adapter ", :reset, opts[:type]])
 
     ApplyTemplate.apply(

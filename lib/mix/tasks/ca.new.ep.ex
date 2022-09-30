@@ -10,8 +10,9 @@ defmodule Mix.Tasks.Ca.New.Ep do
   Examples:
       $ mix ca.new.ep --type entry_point_name --name my_adapter
       $ mix ca.new.ep -t entry_point_name -n my_adapter
-      $ mix ca.new.da --type asynceventhandler
-      $ mix ca.new.da -t asynceventhandler
+
+      $ mix ca.new.ep --type asynceventhandler
+      $ mix ca.new.ep -t asynceventhandler
 
   """
 
@@ -25,7 +26,7 @@ defmodule Mix.Tasks.Ca.New.Ep do
     switches: [type: :string, name: :string],
     aliases: [t: :type, n: :name]
 
-  def execute({opts, []}) do
+  def execute({opts, []}) when opts != nil and length(opts) > 0 do
     Mix.shell().info([:green, "* Creating entry point ", :reset, opts[:type]])
 
     ApplyTemplate.apply(

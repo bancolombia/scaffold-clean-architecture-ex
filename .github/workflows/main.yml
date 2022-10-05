@@ -16,12 +16,12 @@ jobs:
     steps:
       - uses: actions/checkout@d171c3b028d844f2bf14e9fdec0c58114451e4bf
       - name: Set up Elixir
-        uses: erlef/setup-elixir@885971a72ed1f9240973bd92ab57af8c1aa68f24
+        uses: erlef/setup-elixir@988e02bfe678367a02564f65ca2e37726dc0268f
         with:
           elixir-version: '1.13.4' # Define the elixir version [required]
           otp-version: '24' # Define the OTP version [required]
       - name: Restore dependencies cache
-        uses: actions/cache@661fd3eb7f2f20d8c7c84bc2b0509efd7a826628
+        uses: actions/cache@v3
         with:
           path: deps
           key: ${{ runner.os }}-mix-${{ hashFiles('**/mix.lock') }}

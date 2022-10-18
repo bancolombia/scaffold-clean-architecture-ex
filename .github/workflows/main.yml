@@ -48,7 +48,7 @@ jobs:
       #     name: Release Bot
       #     email: release-bot@bancolombia.com.co
       - name: Publish
-        # if: github.event_name == 'release'
+        if: github.event_name == 'release'
         run: mix hex.publish --replace --yes
         env:
           HEX_API_KEY: ${{ secrets.HEX_API_KEY }}

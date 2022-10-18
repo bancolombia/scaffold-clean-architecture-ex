@@ -16,6 +16,7 @@ defmodule ApplyTemplatesTest do
           :asynceventbus,
           :generic,
           :redis,
+          :repository,
           :asynceventhandler
         ],
         fn template ->

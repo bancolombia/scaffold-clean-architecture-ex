@@ -9,6 +9,7 @@ defmodule Mix.Tasks.Ca.New.Da do
   * redis
   * asynceventbus
   * secrestsmanager
+  * repository
 
   Examples:
       $ mix ca.new.da --type driven_adapter_name --name my_adapter

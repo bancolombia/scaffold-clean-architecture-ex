@@ -21,6 +21,7 @@ defmodule ElixirStructureManager.Core.ApplyTemplate do
   defp resolve_behaviour(:generic), do: DA.Generic
   defp resolve_behaviour(:redis), do: DA.Redis
   defp resolve_behaviour(:dynamo), do: DA.Dynamo
+  defp resolve_behaviour(:repository), do: DA.Repository
 
   defp resolve_behaviour(:asynceventhandler), do: EP.AsyncEventHandlers
 

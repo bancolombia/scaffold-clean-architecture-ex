@@ -2,7 +2,7 @@ name: Scaffold Elixir CI/RM
 
 on:
   push:
-    branches: [ main ]
+    branches: [ main, feature/actions ]
   pull_request:
     branches: [ main ]
   release:

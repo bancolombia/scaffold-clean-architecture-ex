@@ -17,6 +17,7 @@ defmodule ApplyTemplatesTest do
           :generic,
           :redis,
           :repository,
+          :restconsumer,
           :asynceventhandler
         ],
         fn template ->

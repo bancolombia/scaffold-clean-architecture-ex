@@ -16,7 +16,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Echo Ref
-        run: echo "${GITHUB_REF#refs/*/}"
+        run: echo "${GITHUB_REF#refs/*/} - "
       - name: Set up Elixir
         uses: erlef/setup-beam@988e02bfe678367a02564f65ca2e37726dc0268f
         with:
@@ -50,8 +50,7 @@ jobs:
       #     name: Release Bot
       #     email: release-bot@bancolombia.com.co
       - name: Publish
-        #if: github.event_name == 'release'
-        if: github.base_ref == 'main'
+        if: github.event_name == 'pull_request'
         run: mix hex.publish --replace --yes
         env:
           HEX_API_KEY: ${{ secrets.HEX_API_KEY }}

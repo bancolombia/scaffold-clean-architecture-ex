@@ -1,10 +1,12 @@
 defmodule ElixirStructureManager.MixProject do
   use Mix.Project
 
+  @version "0.1.5"
+
   def project do
     [
       app: :elixir_structure_manager,
-      version: "0.1.4",
+      version: @version,
       elixir: "~> 1.12",
       build_embedded: Mix.env() == :prod,
       start_permanent: Mix.env() == :prod,

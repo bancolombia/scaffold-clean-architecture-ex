@@ -6,9 +6,9 @@ defmodule DA.Repository do
 
     %{
       create: %{
-        "lib/driven_adapters/repository/repo.ex" => @base <> "repo.ex",
-        "lib/driven_adapters/repository/{name_snake}/data/{name_snake}_data.ex" => @base <> "data.ex",
-        "lib/driven_adapters/repository/{name_snake}/{name_snake}_data_repository.ex" => @base <> "data_repository.ex",
+        "lib/infrastructure/driven_adapters/repository/repo.ex" => @base <> "repo.ex",
+        "lib/infrastructure/driven_adapters/repository/{name_snake}/data/{name_snake}_data.ex" => @base <> "data.ex",
+        "lib/infrastructure/driven_adapters/repository/{name_snake}/{name_snake}_data_repository.ex" => @base <> "data_repository.ex",
       },
       transformations: [
         {:inject_dependency, ~s|{:ecto_sql, "~> 3.9"}|},
@@ -18,7 +18,7 @@ defmodule DA.Repository do
         {
           :insert_after,
           "lib/application.ex",
-          "\n\t\t\t{{app}.Adapters.Repository.Repo, []},",
+          "\n\t\t\t{{app}.Infrastructure.Adapters.Repository.Repo, []},",
           regex: ~r/_other_env\)(\s)+do(\s)+\[/
         }
       ]

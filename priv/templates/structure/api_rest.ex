@@ -1,10 +1,10 @@
-defmodule {app}.EntryPoint.ApiRest do
+defmodule {app}.Infrastructure.EntryPoint.ApiRest do
 
   @moduledoc """
   Access point to the rest exposed services
   """
   alias {app}.Utils.DataTypeUtils
-  alias {app}.EntryPoint.ErrorHandler
+  alias {app}.Infrastructure.EntryPoint.ErrorHandler
   require Logger
   use Plug.Router
   use Timex
@@ -24,7 +24,7 @@ defmodule {app}.EntryPoint.ApiRest do
   forward(
     "/{app_snake}/api/health",
     to: PlugCheckup,
-    init_opts: PlugCheckup.Options.new(json_encoder: Jason, checks: {app}.EntryPoint.HealthCheck.checks)
+    init_opts: PlugCheckup.Options.new(json_encoder: Jason, checks: {app}.Infrastructure.EntryPoint.HealthCheck.checks)
   )
 
   get "/{app_snake}/api/hello/" do

@@ -1,4 +1,4 @@
-defmodule {app}.Adapters.DynamoAdapter do
+defmodule {app}.Infrastructure.Adapters.DynamoAdapter do
   defmacro __using__(mod_opts) do
     quote do
       alias ExAws.Dynamo

@@ -1,4 +1,4 @@
-defmodule {app}.Adapters.Repository.{name}.Data.{name}Data do
+defmodule {app}.Infrastructure.Adapters.Repository.{name}.Data.{name}Data do
   use Ecto.Schema
 
   ## TODO: Add schema definition

@@ -5,7 +5,7 @@ defmodule EP.AsyncEventHandlers do
   def actions() do
     %{
       create: %{
-        "lib/entry_points/async_messages/async_message_handlers.ex" =>
+        "lib/infrastructure/entry_points/async_messages/async_message_handlers.ex" =>
           @base <> "async_message_handlers.ex",
         "lib/config/message_runtime_config.ex" => @base <> "message_runtime_config.ex"
       },

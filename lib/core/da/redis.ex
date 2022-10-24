@@ -1,7 +1,7 @@
 defmodule DA.Redis do
   @moduledoc false
   @regex ~r/_other_env\)(\s)+do(\s)+\[/
-  @secrets_manager_file "lib/driven_adapters/secrets/secrets_manager.ex"
+  @secrets_manager_file "lib/infrastructure/driven_adapters/secrets/secrets_manager.ex"
   @base "/priv/templates/adapters/"
 
   def actions() do
@@ -10,7 +10,7 @@ defmodule DA.Redis do
 
     %{
       create: %{
-        "lib/driven_adapters/redis/redis_adapter.ex" => @base <> "redis/redis.ex"
+        "lib/infrastructure/driven_adapters/redis/redis_adapter.ex" => @base <> "redis/redis.ex"
       },
       transformations: [
         {:inject_dependency, ~s|{:redix, "~> 1.0"}|},
@@ -29,19 +29,19 @@ defmodule DA.Redis do
         {
           :insert_after,
           "lib/application.ex",
-          "alias {app}.Adapters.Redis.RedisAdapter\n  ",
+          "alias {app}.Infrastructure.Adapters.Redis.RedisAdapter\n  ",
           regex: ~r{Application(\s)+do(\s)+}
         },
         {
           :insert_after,
-          "lib/entry_points/health_check.ex",
-          "\n\s\salias {app}.Adapters.Redis.RedisAdapter",
+          "lib/infrastructure/entry_points/health_check.ex",
+          "\n\s\salias {app}.Infrastructure.Adapters.Redis.RedisAdapter",
           regex: ~r{EntryPoint.HealthCheck do}
         },
         {
           :insert_after,
-          "lib/entry_points/health_check.ex",
-          "\n\s\s\s\s\s\s%PlugCheckup.Check{name: \"redis\", module: {app}.Adapters.Redis.RedisAdapter, function: :health},",
+          "lib/infrastructure/entry_points/health_check.ex",
+          "\n\s\s\s\s\s\s%PlugCheckup.Check{name: \"redis\", module: {app}.Infrastructure.Adapters.Redis.RedisAdapter, function: :health},",
           regex: ~r{def checks do(\s)+\[}
         },
         {

@@ -1,4 +1,4 @@
-defmodule {app}.Adapters.Redis.RedisAdapter do
+defmodule {app}.Infrastructure.Adapters.Redis.RedisAdapter do
 
   alias {app}.Config.ConfigHolder
 

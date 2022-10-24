@@ -5,7 +5,7 @@ defmodule DA.SecretsManager do
   def actions() do
     %{
       create: %{
-        "lib/driven_adapters/secrets/secrets_manager.ex" => @base <> "secret_adapter.ex"
+        "lib/infrastructure/driven_adapters/secrets/secrets_manager.ex" => @base <> "secret_adapter.ex"
       },
       transformations: [
         {:inject_dependency, ~s|{:ex_aws_secretsmanager, "~> 2.0"}|},
@@ -24,7 +24,7 @@ defmodule DA.SecretsManager do
         {
           :insert_after,
           "lib/application.ex",
-          "alias {app}.Adapters.Secrets.SecretManagerAdapter\n  ",
+          "alias {app}.Infrastructure.Adapters.Secrets.SecretManagerAdapter\n  ",
           regex: ~r{Application(\s)+do(\s)+}
         },
         {

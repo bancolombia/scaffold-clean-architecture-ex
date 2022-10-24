@@ -1,5 +1,5 @@
 
-config :{app_snake}, {app}.Adapters.Repository.Repo,
+config :{app_snake}, {app}.Infrastructure.Adapters.Repository.Repo,
 database: "",
 username: "",
 password: "",

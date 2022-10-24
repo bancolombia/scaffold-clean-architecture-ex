@@ -1,4 +1,4 @@
-defmodule {app}.EntryPoint.HealthCheck do
+defmodule {app}.Infrastructure.EntryPoint.HealthCheck do
 
   def checks do
     [

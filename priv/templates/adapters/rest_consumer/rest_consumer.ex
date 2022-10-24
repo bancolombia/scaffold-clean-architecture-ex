@@ -1,7 +1,7 @@
-defmodule {app}.Adapters.RestConsumer.{name}.{name}Adapter do
+defmodule {app}.Infrastructure.Adapters.RestConsumer.{name}.{name}Adapter do
   alias {app}.Config.ConfigHolder
   #alias {app}.Domain.Model.{name}
-  #alias {app}.Adapters.RestConsumer.{name}.Data.{name}Request
+  #alias {app}.Infrastructure.Adapters.RestConsumer.{name}.Data.{name}Request
 
   def get() do
     %{{name_snake}_url: url} = ConfigHolder.conf()

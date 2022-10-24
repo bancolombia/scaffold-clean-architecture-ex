@@ -3,10 +3,10 @@ defmodule DA.Generic do
   @base "/priv/templates/adapters/generic/"
 
   def actions() do
-    
+
     %{
       create: %{
-        "lib/driven_adapters/{name_snake}/{name_snake}.ex" => @base <> "generic.ex"
+        "lib/infrastructure/driven_adapters/{name_snake}/{name_snake}.ex" => @base <> "generic.ex"
       },
       transformations: []
     }

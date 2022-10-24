@@ -1,6 +1,6 @@
 defmodule {app}.Config.MessageRuntimeConfig do
   alias {app}.Config.{ConfigHolder, AppConfig}
-  alias {app}.Entries.AsyncMessageHandlers
+  alias {app}.Infrastructure.EntryPoint.AsyncMessageHandlers
   use ReactiveCommonsSetup
 
   defp config() do

@@ -1,4 +1,4 @@
-defmodule {app}.Adapters.Secrets.SecretManagerAdapter do
+defmodule {app}.Infrastructure.Adapters.Secrets.SecretManagerAdapter do
   use GenServer
   alias {app}.Config.ConfigHolder
   alias {app}.Utils.DataTypeUtils

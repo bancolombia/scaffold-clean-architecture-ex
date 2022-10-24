@@ -10,8 +10,8 @@ defmodule Structure.Root do
         "{app_snake}/config/dev.exs" => @base <> "dev.exs",
         "{app_snake}/config/test.exs" => @base <> "test.exs",
         "{app_snake}/config/prod.exs" => @base <> "prod.exs",
-        "{app_snake}/lib/entry_points/api_rest.ex" => @base <> "api_rest.ex",
-        "{app_snake}/lib/entry_points/health_check.ex" => @base <> "health_check.ex",
+        "{app_snake}/lib/infrastructure/entry_points/api_rest.ex" => @base <> "api_rest.ex",
+        "{app_snake}/lib/infrastructure/entry_points/health_check.ex" => @base <> "health_check.ex",
         "{app_snake}/lib/config/config_holder.ex" => @base <> "config_holder.ex",
         "{app_snake}/lib/config/app_config.ex" => @base <> "app_config.ex",
         "{app_snake}/lib/utils/certificates_admin.ex" => @base <> "certificates_admin.ex",
@@ -21,7 +21,7 @@ defmodule Structure.Root do
         "{app_snake}/.formatter.exs" => @base <> "formatter.exs"
       },
       folders: [
-        "{app_snake}/lib/driven_adapters/",
+        "{app_snake}/lib/infrastructure/driven_adapters/",
         "{app_snake}/lib/domain/model/",
         "{app_snake}/lib/domain/use_cases/",
         "{app_snake}/lib/domain/behaviours/"

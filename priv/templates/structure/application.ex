@@ -1,5 +1,5 @@
 defmodule {app}.Application do
-  alias {app}.EntryPoint.ApiRest
+  alias {app}.Infrastructure.EntryPoint.ApiRest
   alias {app}.Config.{AppConfig, ConfigHolder}
   alias {app}.Utils.CertificatesAdmin
 

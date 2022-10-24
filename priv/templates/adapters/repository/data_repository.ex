@@ -1,6 +1,6 @@
-defmodule {app}.Adapters.Repository.{name}.{name}DataRepository do
-  alias {app}.Adapters.Repository.Repo
-  alias {app}.Adapters.Repository.{name}.Data.{name}Data
+defmodule {app}.Infrastructure.Adapters.Repository.{name}.{name}DataRepository do
+  alias {app}.Infrastructure.Adapters.Repository.Repo
+  alias {app}.Infrastructure.Adapters.Repository.{name}.Data.{name}Data
   # alias {app}.Domain.Model.{name}
 
   ## TODO: Update behaviour

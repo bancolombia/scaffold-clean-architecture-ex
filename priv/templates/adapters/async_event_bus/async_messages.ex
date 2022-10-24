@@ -1,4 +1,4 @@
-defmodule {app}.Adapters.AsyncMessages do
+defmodule {app}.Infrastructure.Adapters.AsyncMessages do
   @moduledoc false
   # @behaviour Your.Own.Behaviour
   @target "external-service-name"

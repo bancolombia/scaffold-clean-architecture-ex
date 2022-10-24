@@ -1,4 +1,4 @@
-defmodule {app}.Entries.AsyncMessageHandlers do
+defmodule {app}.Infrastructure.EntryPoint.AsyncMessageHandlers do
   @moduledoc false
 
   def setup()  do

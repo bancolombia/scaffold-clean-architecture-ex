@@ -5,7 +5,7 @@ defmodule DA.AsyncEventBus do
   def actions() do
     %{
       create: %{
-        "lib/driven_adapters/async_messages/async_messages.ex" => @base <> "async_messages.ex",
+        "lib/infrastructure/driven_adapters/async_messages/async_messages.ex" => @base <> "async_messages.ex",
         "lib/config/message_runtime_config.ex" => @base <> "message_runtime_config.ex"
       },
       transformations: [

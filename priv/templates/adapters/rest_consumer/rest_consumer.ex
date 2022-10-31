@@ -3,6 +3,9 @@ defmodule {app}.Infrastructure.Adapters.RestConsumer.{name}.{name}Adapter do
   #alias {app}.Domain.Model.{name}
   #alias {app}.Infrastructure.Adapters.RestConsumer.{name}.Data.{name}Request
 
+  ## TODO: Update behaviour
+  # @behaviour {app}.Domain.Behaviours.{name}Behaviour
+
   def get() do
     %{{name_snake}_url: url} = ConfigHolder.conf()
 

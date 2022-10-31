@@ -1,73 +1,186 @@
-# ElixirStructureManager
+# Elixir Structure Manager
 
-Elixir plugin to create an elixir application based on Clean Architecture following our best practices!
+Elixir plugin to create an elixir application based on Clean Architecture following our best practices.
 
-## Test locally
+## Install
 
-Run the following command to build an artifact.
-
-```bash
-$ mix archive.build
-```
-
-It generates a file with name like:
-
-```
-elixir_structure_manager-x.x.x.ez
-```
-
-Install package:
-```bash
-$ mix archive.install elixir_structure_manager-x.x.x.ez
-``` 
-
-## Installation
-
-Verify what dependencies do you have, please run
-```bash
-$ mix archive
-```
-
-First you need to install the dependency locally
+[HexDocs](https://hex.pm/packages/elixir_structure_manager)
 
 ```bash
-$ mix archive.install hex elixir_structure_manager x.x.x
+mix archive.install hex elixir_structure_manager <version>
 ```
 
-Verify that the dependency was installed successfully, run
+## Tasks
+
+```shell
+mix help | grep "mix ca."
+```
+
+| Task                     | Description                                      |
+| ------------------------ | -------------------------------------------------|
+| mix ca.config.distillery | Creates distillery configuration                 |
+| mix ca.config.metrics    | Adds telemetry configuration                     |
+| mix ca.new.da            | Creates a new driven adapter                     |
+| mix ca.new.ep            | Creates a new entry point                        |
+| mix ca.new.model         | Creates a new model with empty properties        |
+| mix ca.new.structure     | Creates a new clean architecture application.    |
+| mix ca.new.usecase       | Creates a new usecase                            |
+
+#### Task detail
 
 ```bash
-$ mix help
+mix <task> -h
 ```
 
-And you must see the following tasks:
+Example
+
 ```bash
-$ mix ca.new.structure
-$ mix ca.new.model
+mix ca.new.structure -h
 ```
 
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed
-by adding `elixir_structure_manager` to your list of dependencies in `mix.exs`:
-
-```elixir
-def deps do
-  [
-    {:elixir_structure_manager, "~> 0.1.0"}
-  ]
-end
 ```
+Creates a new Clean architecture scaffold
+
+    $ mix ca.new.structure [application_name]
+    $ mix ca.new.structure [application_name] --metrics --distillery
+    $ mix ca.new.structure [application_name] -m -d
+```
+
+### Generate Project
+
+The `ca.new.structure` task will generate a clean architecture structure in your project.
+
+```bash
+mix ca.new.structure <project-name>
+
+mix ca.new.structure <project-name> --metrics --distillery
+
+mix ca.new.structure <project-name> -m -d
+```
+
+**_The structure will look like this_**
+
+```
+app
+├── config
+│   ├── config.exs
+│   ├── dev.exs
+│   ├── prod.exs
+│   └── test.exs
+├── lib
+│   ├── application.ex
+│   ├── config
+│   │   ├── app_config.ex
+│   │   └── config_holder.ex
+│   ├── domain
+│   │   ├── behaviours
+│   │   ├── model
+│   │   └── use_cases
+│   ├── infrastructure
+│   │   ├── driven_adapters
+│   │   └── entry_points
+│   │       ├── api_rest.ex
+│   │       └── health_check.ex
+│   └── utils
+│       ├── certificates_admin.ex
+│       ├── custom_telemetry.ex
+│       └── data_type_utils.ex
+├── mix.exs
+├── mix.lock
+└── rel
+    ├── config.exs
+    ├── plugins
+    └── vm.args
+```
+
+### Generate Model
+
+Creates a new model for the clean architecture project
+
+```bash
+mix ca.new.model <model_name>
+```
+
+### Generate Use Case
+
+Creates a new usecase for the clean architecture project
+
+```bash
+mix ca.new.usecase <name_usecase>
+```
+
+### Generate Driven Adapter
+
+Creates a new driven adapter for the clean architecture project.
+
+```bash
+mix ca.new.da --type <driven_adapter_name>
+```
+
+Type param options:
+
+- generic
+- redis
+- asynceventbus
+- secrestsmanager
+- repository
+- restconsumer
+
+
+```bash
+mix ca.new.da --type <driven_adapter_name> --name <my_adapter>
+
+mix ca.new.da -t driven_adapter_name -n <my_adapter>
+```
+
+### Generate Entry Point
+
+Creates a new driven adapter for the clean architecture project 
+
+```bash
+mix ca.new.ep --type <entry_point_name>
+```
+
+Type param options:
+
+- secrestsmanager
+
+```bash
+mix ca.new.ep --type <entry_point_name> --name <my_entry_point>
+
+mix ca.new.ep -t entry_point_name -n <my_entry_point>
+```
+
+### Generate Metrics
+
+Creates distillery configuration for the clean architecture project
+
+```bash
+ mix ca.config.metrics
+```
+
+### Distillery
+
+Creates distillery configuration for the clean architecture project
+
+```bash
+mix ca.config.distillery
+```
+
+---
 
 ## Uninstall
-Verify what dependencies do you have, please run
-```bash
-$ mix archive
+
+Get version
+
+```shell
+mix archive
 ```
 
-If you need to uninstall local packages or if you have an old version, please uninstall it with
-
-```bash
-$ mix archive.uninstall elixir_structure_manager x.x.x
+```shell
+mix archive.uninstall elixir_structure_manager-<version>
 ```
+
 
 Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
 and published on [HexDocs](https://hexdocs.pm). Once published, the docs can

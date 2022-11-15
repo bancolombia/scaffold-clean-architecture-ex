@@ -18,13 +18,14 @@ mix help | grep "mix ca."
 
 | Task                     | Description                                      |
 | ------------------------ | -------------------------------------------------|
-| mix ca.config.distillery | Creates distillery configuration                 |
-| mix ca.config.metrics    | Adds telemetry configuration                     |
+| mix ca.new.structure     | Creates a new clean architecture application.    |
+| mix ca.new.model         | Creates a new model with empty properties        |
+| mix ca.new.usecase       | Creates a new usecase                            |
 | mix ca.new.da            | Creates a new driven adapter                     |
 | mix ca.new.ep            | Creates a new entry point                        |
-| mix ca.new.model         | Creates a new model with empty properties        |
-| mix ca.new.structure     | Creates a new clean architecture application.    |
-| mix ca.new.usecase       | Creates a new usecase                            |
+| mix ca.config.distillery | Creates distillery configuration                 |
+| mix ca.config.metrics    | Adds telemetry configuration                     |
+
 
 #### Task detail
 
@@ -99,6 +100,21 @@ Creates a new model for the clean architecture project
 
 ```bash
 mix ca.new.model <model_name>
+mix ca.new.model <model_name> --behaviour
+mix ca.new.model <model_name> -b
+
+mix ca.new.model <model_name> --behaviour-name <behaviour_name>
+mix ca.new.model <model name> -n <behaviour_name>
+```
+
+**_This task will generate something like that:_**
+
+```
+domain
+├── behaviours
+│   └── model_behaviour.ex
+└── model
+    └── model.ex
 ```
 
 ### Generate Use Case
@@ -107,6 +123,14 @@ Creates a new usecase for the clean architecture project
 
 ```bash
 mix ca.new.usecase <name_usecase>
+```
+
+**_This task will generate something like that:_**
+
+```
+domain
+└── use_cases
+    └── use_case.ex
 ```
 
 ### Generate Driven Adapter
@@ -133,6 +157,19 @@ mix ca.new.da --type <driven_adapter_name> --name <my_adapter>
 mix ca.new.da -t driven_adapter_name -n <my_adapter>
 ```
 
+**_This task will generate something like that:_**
+
+```
+infrastructure
+└── driven_adapters
+  └── rest_consumer
+      └── <name>
+          ├── data
+          │ ├── <name>_request.ex
+          │ └── <name>_response.ex
+          └── <name>_adapter.ex
+```
+
 ### Generate Entry Point
 
 Creates a new driven adapter for the clean architecture project 
@@ -143,12 +180,21 @@ mix ca.new.ep --type <entry_point_name>
 
 Type param options:
 
-- secrestsmanager
+- asynceventhandler
 
 ```bash
 mix ca.new.ep --type <entry_point_name> --name <my_entry_point>
 
 mix ca.new.ep -t entry_point_name -n <my_entry_point>
+```
+
+**_This task will generate something like that:_**
+
+```
+infrastructure
+└── entry_points
+    └── async_messages
+        └── async_message_handlers.ex
 ```
 
 ### Generate Metrics

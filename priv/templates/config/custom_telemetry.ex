@@ -1,5 +1,6 @@
 defmodule {app}.Utils.CustomTelemetry do
   alias {app}.Utils.DataTypeUtils
+  alias {app}.Utils.CustomTelemetry
   import Telemetry.Metrics
 
   @service_name Application.compile_env!(:{app_snake}, :custom_metrics_prefix_name)
@@ -9,14 +10,14 @@ defmodule {app}.Utils.CustomTelemetry do
   """
 
   def custom_telemetry_events() do
-    :telemetry.attach("{app_snake}-plug-stop", [:{app_snake}, :plug, :stop], &handle_custom_event/4, nil)
-    :telemetry.attach("{app_snake}-redis-stop", [:redix, :pipeline, :stop], &handle_custom_event/4, nil)
-    :telemetry.attach("{app_snake}-vm-memory", [:vm, :memory], &handle_custom_event/4, nil)
-    :telemetry.attach("vm-total_run_queue_lengths", [:vm, :total_run_queue_lengths], &handle_custom_event/4, nil)
-    :telemetry.attach("rcommons-success", [:async, :message, :completed], &handle_custom_event/4, nil)
-    :telemetry.attach("rcommons-event-failure", [:async, :event, :failure], &handle_custom_event/4, nil)
-    :telemetry.attach("rcommons-command-failure", [:async, :command, :failure], &handle_custom_event/4, nil)
-    :telemetry.attach("rcommons-query-failure", [:async, :query, :failure], &handle_custom_event/4, nil)
+    :telemetry.attach("{app_snake}-plug-stop", [:{app_snake}, :plug, :stop], &CustomTelemetry.handle_custom_event/4, nil)
+    :telemetry.attach("{app_snake}-redis-stop", [:redix, :pipeline, :stop], &CustomTelemetry.handle_custom_event/4, nil)
+    :telemetry.attach("{app_snake}-vm-memory", [:vm, :memory], &CustomTelemetry.handle_custom_event/4, nil)
+    :telemetry.attach("vm-total_run_queue_lengths", [:vm, :total_run_queue_lengths], &CustomTelemetry.handle_custom_event/4, nil)
+    :telemetry.attach("rcommons-success", [:async, :message, :completed], &CustomTelemetry.handle_custom_event/4, nil)
+    :telemetry.attach("rcommons-event-failure", [:async, :event, :failure], &CustomTelemetry.handle_custom_event/4, nil)
+    :telemetry.attach("rcommons-command-failure", [:async, :command, :failure], &CustomTelemetry.handle_custom_event/4, nil)
+    :telemetry.attach("rcommons-query-failure", [:async, :query, :failure], &CustomTelemetry.handle_custom_event/4, nil)
   end
 
   def execute_custom_event(metric, value, metadata \\ %{}) when is_list(metric) do

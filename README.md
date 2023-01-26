@@ -16,15 +16,15 @@ mix archive.install hex elixir_structure_manager <version>
 mix help | grep "mix ca."
 ```
 
-| Task                     | Description                                      |
-| ------------------------ | -------------------------------------------------|
-| mix ca.new.structure     | Creates a new clean architecture application.    |
-| mix ca.new.model         | Creates a new model with empty properties        |
-| mix ca.new.usecase       | Creates a new usecase                            |
-| mix ca.new.da            | Creates a new driven adapter                     |
-| mix ca.new.ep            | Creates a new entry point                        |
-| mix ca.config.distillery | Creates distillery configuration                 |
-| mix ca.config.metrics    | Adds telemetry configuration                     |
+| Task                     | Description                                   |
+|--------------------------|-----------------------------------------------|
+| mix ca.new.structure     | Creates a new clean architecture application. |
+| mix ca.new.model         | Creates a new model with empty properties     |
+| mix ca.new.usecase       | Creates a new usecase                         |
+| mix ca.new.da            | Creates a new driven adapter                  |
+| mix ca.new.ep            | Creates a new entry point                     |
+| mix ca.config.distillery | Creates distillery configuration              |
+| mix ca.config.metrics    | Adds telemetry configuration                  |
 
 
 #### Task detail
@@ -204,6 +204,24 @@ Creates distillery configuration for the clean architecture project
 ```bash
  mix ca.config.metrics
 ```
+
+This task will instrument the application and their supporter adapters and entry points
+When the project is instrumented by passing the flag `-m` or by running this task every new adapter will be generated
+with instrumentation by default if supported.
+
+The curren status of instrumentation
+
+| Adapter            | Metrics | Traces |
+|--------------------|---------|--------|
+| api_rest (default) | ✔       | ✔      |
+| asynceventhandler  | ✘       | ✘      |
+| redis              | ✔       | ✔      |
+| asynceventbus      | ✘       | ✘      |
+| secrestsmanager    | ✘       | ✘      |
+| repository         | ✔       | ✔      |
+| restconsumer       | ✘       | ✘      |
+
+
 
 ### Distillery
 

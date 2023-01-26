@@ -14,6 +14,10 @@ defmodule ElixirStructureManager.Utils.TokenHelper do
     |> add(tokens)
   end
 
+  def add_boolean(tokens, key, value) when is_binary(key) do
+    add(tokens, {key, to_string(value || false)})
+  end
+
   def add(token) when is_tuple(token) do
     add(default_tokens(), token)
   end

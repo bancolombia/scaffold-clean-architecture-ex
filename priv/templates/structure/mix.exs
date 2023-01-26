@@ -8,7 +8,8 @@ defmodule {app}.MixProject do
       elixir: "~> 1.13",
       start_permanent: Mix.env() == :prod,
       deps: deps(),
-      test_coverage: [tool: ExCoveralls]
+      test_coverage: [tool: ExCoveralls],
+      metrics: {metrics}
     ]
   end
 
@@ -25,14 +26,14 @@ defmodule {app}.MixProject do
     [
       # {:dep_from_hexpm, "~> 0.3.0"},
       # {:dep_from_git, git: "https://github.com/elixir-lang/my_dep.git", tag: "0.1.0"}
-      {:castore, "~> 0.1.0"},
-      {:plug_cowboy, "~> 2.2"},
-      {:jason, "~> 1.0"},
+      {:castore, "~> 1.0", override: true},
+      {:plug_cowboy, "~> 2.0"},
+      {:jason, "~> 1.4"},
       {:plug_checkup, "~> 0.6.0"},
-      {:poison, "~> 4.0"},
-      {:cors_plug, "~> 2.0"},
+      {:poison, "~> 5.0"},
+      {:cors_plug, "~> 3.0"},
       {:timex, "~> 3.0"},
-      {:excoveralls, "~> 0.10", only: :test},
+      {:excoveralls, "~> 0.15", only: :test},
       {:ex_unit_sonarqube, "~> 0.1", only: :test},
     ]
   end

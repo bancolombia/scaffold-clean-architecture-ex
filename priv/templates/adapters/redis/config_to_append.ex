@@ -1,3 +1,3 @@
 
 config :{app_snake},
-       redis_props: %{port: "", host: ""}
+  redis_props: %{port: "", host: ""}

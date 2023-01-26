@@ -34,7 +34,7 @@ defmodule Config.Metrics do
           {:append_end, "config/test.exs", @base <> "metrics/dev.ex"},
           {:append_end, "config/prod.exs", @base <> "metrics/prod.ex"},
           {:replace, "mix.exs", "metrics: true", regex: ~r|metrics\: false|}
-        ] ++ with_check(:redix) ++ with_check(:reactive_commons)
+        ] ++ with_check(:redix) ++ with_check(:reactive_commons) ++ with_check(:postgrex)
     }
   end
 
@@ -59,6 +59,7 @@ defmodule Config.Metrics do
   defp resolve(:redis), do: :redix
   defp resolve(:asynceventbus), do: :reactive_commons
   defp resolve(:asynceventhandler), do: :reactive_commons
+  defp resolve(:repository), do: :postgrex
   defp resolve(_other), do: nil
 
   defp with_check(key) do
@@ -72,7 +73,7 @@ defmodule Config.Metrics do
     attachment = """
 
         # Redis
-        :telemetry.attach(\"{app_snake}-redis-stop\", [:redix, :pipeline, :stop], &CustomTelemetry.handle_custom_event/4, nil)
+        :telemetry.attach(\"{app_snake}-redis-stop\", [:redix, :pipeline, :stop], &__MODULE__.handle_custom_event/4, nil)
     """
 
     handler = """
@@ -107,14 +108,59 @@ defmodule Config.Metrics do
     ]
   end
 
+  defp transformations(:postgrex) do
+#    attachment = """
+#
+#        # Ecto
+#        #:telemetry.attach(\"{app_snake}-redis-stop\", [:redix, :pipeline, :stop], &CustomTelemetry.handle_custom_event/4, nil)
+#    """
+
+    handler = """
+    # Only for Ecto
+      def query_metadata(%{source: source, result: {_, %{command: command}}}) do
+        %{source: source, command: command}
+      end
+
+    """
+
+    metrics = """
+
+          #Ecto
+          counter("elixir.repo.query.count",
+            tag_values: &__MODULE__.query_metadata/1,
+            tags: [:source, :command]
+          ),
+          distribution("elixir.repo.query.total_time",
+            tag_values: &__MODULE__.query_metadata/1,
+            unit: {:native, :millisecond},
+            tags: [:source, :command],
+            reporter_options: [
+              buckets: [100, 200, 500]
+            ]
+          ),
+    """
+
+    [
+#      {:insert_after, @custom_telemetry, attachment,
+#       regex: ~r|def(\s)+custom_telemetry_events\(\)()(\s)+do|},
+      {:insert_before, @custom_telemetry, handler, regex: ~r|def metrics do|},
+      {:insert_after, @custom_telemetry, metrics, regex: ~r|def metrics do(\s)+\[|},
+      # Traces
+      {:inject_dependency, ~s|{:opentelemetry_ecto, "~> 1.0"}|},
+      #{:insert_after, "mix.exs", ", :opentelemetry_redix", regex: ~r|\[\:logger|},
+      {:insert_before, "lib/application.ex", "OpentelemetryEcto.setup([:elixir, :repo])\n    ",
+        regex: ~r{opts = \[}},
+    ]
+  end
+
   defp transformations(:reactive_commons) do
     attachment = """
 
         # Reactive Commons
-        :telemetry.attach("rcommons-success", [:async, :message, :completed], &CustomTelemetry.handle_custom_event/4, nil)
-        :telemetry.attach("rcommons-event-failure", [:async, :event, :failure], &CustomTelemetry.handle_custom_event/4, nil)
-        :telemetry.attach("rcommons-command-failure", [:async, :command, :failure], &CustomTelemetry.handle_custom_event/4, nil)
-        :telemetry.attach("rcommons-query-failure", [:async, :query, :failure], &CustomTelemetry.handle_custom_event/4, nil)
+        :telemetry.attach("rcommons-success", [:async, :message, :completed], &__MODULE__.handle_custom_event/4, nil)
+        :telemetry.attach("rcommons-event-failure", [:async, :event, :failure], &__MODULE__.handle_custom_event/4, nil)
+        :telemetry.attach("rcommons-command-failure", [:async, :command, :failure], &__MODULE__.handle_custom_event/4, nil)
+        :telemetry.attach("rcommons-query-failure", [:async, :query, :failure], &__MODULE__.handle_custom_event/4, nil)
     """
 
     metrics = """

@@ -211,15 +211,15 @@ with instrumentation by default if supported.
 
 The curren status of instrumentation
 
-| Adapter            | Metrics | Traces |
-|--------------------|---------|--------|
-| api_rest (default) | ✔       | ✔      |
-| asynceventhandler  | ✘       | ✘      |
-| redis              | ✔       | ✔      |
-| asynceventbus      | ✘       | ✘      |
-| secrestsmanager    | ✘       | ✘      |
-| repository         | ✔       | ✔      |
-| restconsumer       | ✘       | ✘      |
+| Adapter               | Metrics | Traces |
+|-----------------------|---------|--------|
+| api_rest (*default*)  | ✔       | ✔      |
+| asynceventhandler     | ✔       | ✘      |
+| redis                 | ✔       | ✔      |
+| asynceventbus         | ✔       | ✘      |
+| x aws (*any request*) | ✔       | ✔      |
+| repository            | ✔       | ✔      |
+| restconsumer          | ✔       | ✔      |
 
 
 

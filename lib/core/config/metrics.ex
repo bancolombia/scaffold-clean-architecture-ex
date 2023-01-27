@@ -35,6 +35,7 @@ defmodule Config.Metrics do
           {:append_end, "config/prod.exs", @base <> "metrics/prod.ex"},
           {:replace, "mix.exs", "metrics: true", regex: ~r|metrics\: false|}
         ] ++ with_check(:redix) ++ with_check(:reactive_commons) ++ with_check(:postgrex) ++ with_check(:finch)
+        ++ with_check(:ex_aws)
     }
   end
 
@@ -62,6 +63,7 @@ defmodule Config.Metrics do
   defp resolve(:asynceventhandler), do: :reactive_commons
   defp resolve(:repository), do: :postgrex
   defp resolve(:restconsumer), do: :finch
+  defp resolve(:secretsmanager), do: :ex_aws
   defp resolve(_other), do: nil
 
   defp with_check(key) do
@@ -79,7 +81,7 @@ defmodule Config.Metrics do
     """
 
     handler = """
-    # Only for Redis
+    # Redis
       def handle_custom_event([:redix, :pipeline, :stop], measures, metadata, _) do
         :telemetry.execute(
           [:elixir, :redis_request],
@@ -218,6 +220,54 @@ defmodule Config.Metrics do
       {:insert_after, @custom_telemetry, attachment,
        regex: ~r|def(\s)+custom_telemetry_events\(\)()(\s)+do|},
       {:insert_after, @custom_telemetry, metrics, regex: ~r|def metrics do(\s)+\[|}
+    ]
+  end
+
+  defp transformations(:ex_aws) do
+    attachment = """
+
+        # AWS
+        :telemetry.attach(\"{app_snake}-aws\", [:ex_aws, :request, :stop], &__MODULE__.handle_custom_event_ex_aws/4, nil)
+    """
+
+    handler = """
+    # AWS
+      def handle_custom_event_ex_aws(_, measures, %{service: svc, attempt: atm, result: rs} = meta, _) do
+        # Traces
+        attributes = %{"aws.service" => svc, "aws.attempt" => atm, "aws.result" => rs}
+
+        sp =
+          OpenTelemetry.Tracer.start_span("AWS \#{svc}", %{
+            start_time: :opentelemetry.timestamp() - measures.duration,
+            attributes: attributes,
+            kind: :client
+          })
+
+        if rs == :error do
+          OpenTelemetry.Span.set_status(sp, OpenTelemetry.status(:error, "Error attempt \#{atm}"))
+        end
+
+        OpenTelemetry.Span.end_span(sp)
+        # Metrics
+        new_meta = Map.put(meta, :service, @service_name) |> Map.put(:aws_service, svc)
+        :telemetry.execute([:elixir, :ex_aws, :request], measures, new_meta)
+      end
+
+    """
+
+    metrics = """
+
+          # AWS
+          counter("elixir.ex_aws.request.count", tags: [:result, :service, :aws_service]),
+          sum("elixir.ex_aws.request.duration", tags: [:result, :service, :aws_service]),
+    """
+
+    [
+      {:insert_after, @custom_telemetry, attachment,
+        regex: ~r|def(\s)+custom_telemetry_events\(\)()(\s)+do|},
+      {:insert_before, @custom_telemetry, handler, regex: ~r|def handle_custom_event\(metric|},
+      {:insert_after, @custom_telemetry, metrics, regex: ~r|def metrics do(\s)+\[|},
+      {:insert_after, @custom_telemetry, "\n  require OpenTelemetry.Tracer", regex: ~r|Telemetry\.Metrics|},
     ]
   end
 

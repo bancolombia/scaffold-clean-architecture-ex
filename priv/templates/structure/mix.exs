@@ -29,7 +29,7 @@ defmodule {app}.MixProject do
       {:castore, "~> 1.0", override: true},
       {:plug_cowboy, "~> 2.0"},
       {:jason, "~> 1.4"},
-      {:plug_checkup, "~> 0.6.0"},
+      {:plug_checkup, "~> 0.6"},
       {:poison, "~> 5.0"},
       {:cors_plug, "~> 3.0"},
       {:timex, "~> 3.0"},

@@ -11,8 +11,8 @@ defmodule DA.RestConsumer do
         "lib/infrastructure/driven_adapters/rest_consumer/{name_snake}/data/{name_snake}_response.ex" => @base <> "data_response.ex"
       },
       transformations: [
-        {:inject_dependency, ~s|{:finch, "~> 0.13"}|},
-        {:inject_dependency, ~s|{:poison, "~> 4.0"}|},
+        {:inject_dependency, ~s|{:finch, "~> 0.14"}|},
+        {:inject_dependency, ~s|{:poison, "~> 5.0"}|},
         {:append_end, "config/dev.exs", @base <> "config_to_append.ex"},
         {:append_end, "config/test.exs", @base <> "config_to_append.ex"},
         {:append_end, "config/prod.exs", @base <> "config_to_append.ex"},

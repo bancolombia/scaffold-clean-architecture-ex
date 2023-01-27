@@ -48,10 +48,6 @@ defmodule {app}.Utils.CustomTelemetry do
       sum("elixir.vm.total_run_queue_lengths.total", tags: [:service]),
       sum("elixir.vm.total_run_queue_lengths.cpu", tags: [:service]),
       sum("elixir.vm.total_run_queue_lengths.io", tags: [:service]),
-
-      #Http # TODO: Should be added dynamically
-      counter("elixir.http_outgoing_request.count", tags: [:service, :request_path, :status]),
-      sum("elixir.http_outgoing_request.duration", tags: [:service, :request_path, :status]),
     ]
   end
 

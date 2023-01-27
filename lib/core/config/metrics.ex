@@ -34,7 +34,7 @@ defmodule Config.Metrics do
           {:append_end, "config/test.exs", @base <> "metrics/dev.ex"},
           {:append_end, "config/prod.exs", @base <> "metrics/prod.ex"},
           {:replace, "mix.exs", "metrics: true", regex: ~r|metrics\: false|}
-        ] ++ with_check(:redix) ++ with_check(:reactive_commons) ++ with_check(:postgrex)
+        ] ++ with_check(:redix) ++ with_check(:reactive_commons) ++ with_check(:postgrex) ++ with_check(:finch)
     }
   end
 
@@ -56,10 +56,12 @@ defmodule Config.Metrics do
     Map.put(base_actions, :transformations, base_trs ++ new_trs)
   end
 
+  # This function should map from adapter name to specific library name
   defp resolve(:redis), do: :redix
   defp resolve(:asynceventbus), do: :reactive_commons
   defp resolve(:asynceventhandler), do: :reactive_commons
   defp resolve(:repository), do: :postgrex
+  defp resolve(:restconsumer), do: :finch
   defp resolve(_other), do: nil
 
   defp with_check(key) do
@@ -104,21 +106,15 @@ defmodule Config.Metrics do
       {:inject_dependency, ~s|{:opentelemetry_redix, "~> 0.1"}|},
       {:insert_after, "mix.exs", ", :opentelemetry_redix", regex: ~r|\[\:logger|},
       {:insert_before, "lib/application.ex", "OpentelemetryRedix.setup()\n    ",
-        regex: ~r{opts = \[}},
+       regex: ~r{opts = \[}}
     ]
   end
 
   defp transformations(:postgrex) do
-#    attachment = """
-#
-#        # Ecto
-#        #:telemetry.attach(\"{app_snake}-redis-stop\", [:redix, :pipeline, :stop], &CustomTelemetry.handle_custom_event/4, nil)
-#    """
-
     handler = """
-    # Only for Ecto
-      def query_metadata(%{source: source, result: {_, %{command: command}}}) do
-        %{source: source, command: command}
+    # Ecto
+      def extract_metadata(%{source: source, result: {_, %{command: command}}}) do
+        %{source: source, command: command, service: @service_name}
       end
 
     """
@@ -127,13 +123,13 @@ defmodule Config.Metrics do
 
           #Ecto
           counter("elixir.repo.query.count",
-            tag_values: &__MODULE__.query_metadata/1,
-            tags: [:source, :command]
+            tag_values: &__MODULE__.extract_metadata/1,
+            tags: [:source, :command, :service]
           ),
           distribution("elixir.repo.query.total_time",
-            tag_values: &__MODULE__.query_metadata/1,
+            tag_values: &__MODULE__.extract_metadata/1,
             unit: {:native, :millisecond},
-            tags: [:source, :command],
+            tags: [:source, :command, :service],
             reporter_options: [
               buckets: [100, 200, 500]
             ]
@@ -141,15 +137,57 @@ defmodule Config.Metrics do
     """
 
     [
-#      {:insert_after, @custom_telemetry, attachment,
-#       regex: ~r|def(\s)+custom_telemetry_events\(\)()(\s)+do|},
       {:insert_before, @custom_telemetry, handler, regex: ~r|def metrics do|},
       {:insert_after, @custom_telemetry, metrics, regex: ~r|def metrics do(\s)+\[|},
       # Traces
       {:inject_dependency, ~s|{:opentelemetry_ecto, "~> 1.0"}|},
-      #{:insert_after, "mix.exs", ", :opentelemetry_redix", regex: ~r|\[\:logger|},
       {:insert_before, "lib/application.ex", "OpentelemetryEcto.setup([:elixir, :repo])\n    ",
-        regex: ~r{opts = \[}},
+       regex: ~r{opts = \[}}
+    ]
+  end
+
+  defp transformations(:finch) do
+    handler = """
+    # Finch
+      def extract_metadata(%{
+            name: HttpFinch,
+            request: %{method: method, scheme: scheme, host: host, port: port, path: path},
+            result: {_, %{status: status}}
+          }) do
+        %{
+          request_path: "\#{method} \#{scheme}://\#{host}:\#{port}\#{path}",
+          status: "\#{status}",
+          service: @service_name
+        }
+      end
+
+    """
+
+    metrics = """
+
+          # Http Outgoing Requests
+          counter("elixir.http_outgoing_request.count",
+            event_name: [:finch, :request, :stop],
+            tag_values: &__MODULE__.extract_metadata/1,
+            tags: [:service, :request_path, :status]
+          ),
+          sum(
+            "elixir.http_outgoing_request.duration",
+            event_name: [:finch, :request, :stop],
+            measurement: :duration,
+            unit: {:native, :nanosecond},
+            tag_values: &__MODULE__.extract_metadata/1,
+            tags: [:service, :request_path, :status]
+          ),
+    """
+
+    [
+      {:insert_before, @custom_telemetry, handler, regex: ~r|def metrics do|},
+      {:insert_after, @custom_telemetry, metrics, regex: ~r|def metrics do(\s)+\[|},
+      # Traces
+      {:inject_dependency, ~s|{:opentelemetry_finch, "~> 0.1"}|},
+      {:insert_before, "lib/application.ex", "OpentelemetryFinch.setup()\n    ",
+       regex: ~r{opts = \[}}
     ]
   end
 

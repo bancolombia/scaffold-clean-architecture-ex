@@ -16,15 +16,14 @@ mix archive.install hex elixir_structure_manager <version>
 mix help | grep "mix ca."
 ```
 
-| Task                     | Description                                   |
-|--------------------------|-----------------------------------------------|
-| mix ca.new.structure     | Creates a new clean architecture application. |
-| mix ca.new.model         | Creates a new model with empty properties     |
-| mix ca.new.usecase       | Creates a new usecase                         |
-| mix ca.new.da            | Creates a new driven adapter                  |
-| mix ca.new.ep            | Creates a new entry point                     |
-| mix ca.config.distillery | Creates distillery configuration              |
-| mix ca.config.metrics    | Adds telemetry configuration                  |
+| Task                  | Description                                   |
+|-----------------------|-----------------------------------------------|
+| mix ca.new.structure  | Creates a new clean architecture application. |
+| mix ca.new.model      | Creates a new model with empty properties     |
+| mix ca.new.usecase    | Creates a new usecase                         |
+| mix ca.new.da         | Creates a new driven adapter                  |
+| mix ca.new.ep         | Creates a new entry point                     |
+| mix ca.apply.config   | Applies some project configuration            |
 
 
 #### Task detail
@@ -198,15 +197,22 @@ infrastructure
         └── async_message_handlers.ex
 ```
 
-### Generate Metrics
+### Apply a Project Configuration
 
-Creates distillery configuration for the clean architecture project
+Applies a configuration for the clean architecture project
 
 ```bash
- mix ca.config.metrics
+ mix ca.apply.config -t <config_type>
 ```
 
-This task will instrument the application and their supporter adapters and entry points
+Type param options:
+
+- metrics
+- distillery
+
+#### Metrics
+
+This configuration type will instrument the application and their supporter adapters and entry points
 When the project is instrumented by passing the flag `-m` or by running this task every new adapter will be generated
 with instrumentation by default if supported.
 
@@ -223,13 +229,23 @@ The curren status of instrumentation
 | restconsumer          | ✔       | ✔      |
 
 
+#### Distillery
 
-### Distillery
+Creates distillery configuration for the clean architecture project.
 
-Creates distillery configuration for the clean architecture project
+It generates the next project files:
 
-```bash
-mix ca.config.distillery
+```
+rel
+├── plugins
+|   └── .gitignore
+└── config.exs
+```
+
+It also injects the *rel/config.exs* file with the next config_providers for prod env
+
+```elixir
+set config_providers: [{Distillery.Releases.Config.Providers.Elixir, ["${RELEASE_ROOT_DIR}/etc/config.exs"]}] # Use config file at runtime
 ```
 
 ---

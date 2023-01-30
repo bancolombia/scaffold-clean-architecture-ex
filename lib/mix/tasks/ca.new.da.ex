@@ -9,6 +9,7 @@ defmodule Mix.Tasks.Ca.New.Da do
   * redis
   * asynceventbus
   * secrestsmanager
+  * dynamo
   * repository
   * restconsumer
 

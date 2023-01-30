@@ -64,6 +64,7 @@ defmodule Config.Metrics do
   defp resolve(:repository), do: :postgrex
   defp resolve(:restconsumer), do: :finch
   defp resolve(:secretsmanager), do: :ex_aws
+  defp resolve(:dynamo), do: :ex_aws
   defp resolve(_other), do: nil
 
   defp with_check(key) do

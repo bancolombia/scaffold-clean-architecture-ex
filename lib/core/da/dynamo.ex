@@ -11,9 +11,7 @@ defmodule DA.Dynamo do
       },
       transformations: [
         {:inject_dependency, ~s|{:ex_aws_dynamo, "~> 4.0"}|},
-        {:append_end, "config/dev.exs", @base <> "config_to_append.ex"},
-        {:append_end, "config/test.exs", @base <> "config_to_append_test.ex"},
-        {:append_end, "config/prod.exs", @base <> "config_to_append_prod.ex"}
+        {:append_end, "config/dev.exs", @base <> "config_to_append.ex"}
       ]
     }
     |> Config.Aws.join_with()

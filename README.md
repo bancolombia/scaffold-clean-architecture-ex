@@ -143,12 +143,13 @@ mix ca.new.da --type <driven_adapter_name>
 
 Type param options:
 
+- asynceventbus
+- dynamo
 - generic
 - redis
-- asynceventbus
-- secrestsmanager
 - repository
 - restconsumer
+- secrestsmanager
 
 
 ```bash

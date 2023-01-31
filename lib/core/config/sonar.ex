@@ -3,10 +3,6 @@ defmodule Config.Sonar do
   @base "/priv/templates/config/sonar/"
 
   def actions() do
-    provider = """
-      set config_providers: [{Distillery.Releases.Config.Providers.Elixir, ["${RELEASE_ROOT_DIR}/etc/config.exs"]}] # Use config file at runtime
-    """
-
     ignore = """
     credo_sonarqube.json
     sobelow.json

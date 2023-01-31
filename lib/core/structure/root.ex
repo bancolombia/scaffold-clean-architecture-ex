@@ -18,7 +18,9 @@ defmodule Structure.Root do
         "{app_snake}/lib/utils/data_type_utils.ex" => @base <> "data_type_utils.ex",
         "{app_snake}/lib/application.ex" => @base <> "application.ex",
         "{app_snake}/.gitignore" => @base <> "gitignore.txt",
-        "{app_snake}/.formatter.exs" => @base <> "formatter.exs"
+        "{app_snake}/.formatter.exs" => @base <> "formatter.exs",
+        "{app_snake}/.dockerignore" => @base <> "dockerignore.txt",
+        "{app_snake}/resources/docker/Dockerfile" => @base <> "dockerfile.txt",
       },
       folders: [
         "{app_snake}/lib/infrastructure/driven_adapters/",

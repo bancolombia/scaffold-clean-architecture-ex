@@ -59,8 +59,11 @@ defmodule ElixirStructureManager.Utils.FileGenerator do
     |> tl()
     |> Enum.reverse()
     |> Enum.join("/")
-    |> File.mkdir_p!()
+    |> mkdir_p()
   end
+
+  defp mkdir_p(""), do: :ok
+  defp mkdir_p(path), do: File.mkdir_p!(path)
 
   defp resolve_content(content, tokens) do
     content

@@ -1,6 +1,6 @@
 defmodule Config.Metrics do
   @moduledoc false
-  @base "/priv/templates/config/"
+  @base "/priv/templates/config/metrics/"
   @custom_telemetry "lib/utils/custom_telemetry.ex"
 
   def actions() do
@@ -30,9 +30,9 @@ defmodule Config.Metrics do
            "\n  plug OpentelemetryPlug.Propagation", regex: ~r|plug\(\:match\)|},
           {:insert_after, "mix.exs", ", :opentelemetry_exporter, :opentelemetry",
            regex: ~r|\[\:logger|},
-          {:append_end, "config/dev.exs", @base <> "metrics/dev.ex"},
-          {:append_end, "config/test.exs", @base <> "metrics/dev.ex"},
-          {:append_end, "config/prod.exs", @base <> "metrics/prod.ex"},
+          {:append_end, "config/dev.exs", @base <> "dev.ex"},
+          {:append_end, "config/test.exs", @base <> "dev.ex"},
+          {:append_end, "config/prod.exs", @base <> "prod.ex"},
           {:replace, "mix.exs", "metrics: true", regex: ~r|metrics\: false|}
         ] ++
           with_check(:redix) ++

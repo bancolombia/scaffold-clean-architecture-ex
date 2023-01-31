@@ -30,6 +30,7 @@ defmodule ElixirStructureManager.Core.ApplyTemplate do
 
   defp resolve_behaviour(:metrics), do: Config.Metrics
   defp resolve_behaviour(:distillery), do: Config.Distillery
+  defp resolve_behaviour(:sonar), do: Config.Sonar
 
   defp resolve_behaviour(_other) do
     Mix.raise(

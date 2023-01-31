@@ -209,6 +209,7 @@ Type param options:
 
 - metrics
 - distillery
+- sonar
 
 #### Metrics
 
@@ -247,6 +248,13 @@ It also injects the *rel/config.exs* file with the next config_providers for pro
 ```elixir
 set config_providers: [{Distillery.Releases.Config.Providers.Elixir, ["${RELEASE_ROOT_DIR}/etc/config.exs"]}] # Use config file at runtime
 ```
+
+### Sonar
+
+If you are using sonar, you can autogenerate the configuration files, these files will help you to:
+- generate sobelow report through `mix sobelow -f json --out sobelow.json`
+- generate test execution for sonarqube through `mix coveralls.xml`
+- generate credo report for sonarqube through `mix credo --sonarqube-base-folder ./ --sonarqube-file credo_sonarqube.json`
 
 ---
 

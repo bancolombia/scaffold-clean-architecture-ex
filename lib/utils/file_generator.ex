@@ -1,6 +1,7 @@
 defmodule ElixirStructureManager.Utils.FileGenerator do
   alias ElixirStructureManager.Utils.StringContent
   alias ElixirStructureManager.Utils.Injector
+  alias ElixirStructureManager.Utils.CommonCommands
 
   def execute_actions(%{} = args, tokens) do
     Enum.each(Map.get(args, :folders, []), &create_dir(&1, tokens))
@@ -26,6 +27,10 @@ defmodule ElixirStructureManager.Utils.FileGenerator do
     else
       err -> IO.inspect(err)
     end
+  end
+
+  defp transformation({:run_task, task}, _tokens) do
+    apply(CommonCommands, task, [])
   end
 
   defp transformation({:inject_dependency = operation, dependency}, tokens) do

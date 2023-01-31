@@ -21,6 +21,9 @@ defmodule Structure.Root do
         "{app_snake}/.formatter.exs" => @base <> "formatter.exs",
         "{app_snake}/.dockerignore" => @base <> "dockerignore.txt",
         "{app_snake}/resources/docker/Dockerfile" => @base <> "dockerfile.txt",
+        "{app_snake}/test/{app_snake}_application_test.exs" => @base <> "test_application.exs",
+        "{app_snake}/test/test_helper.exs" => @base <> "test_helper.exs",
+        "{app_snake}/coveralls.json" => @base <> "coveralls.json"
       },
       folders: [
         "{app_snake}/lib/infrastructure/driven_adapters/",

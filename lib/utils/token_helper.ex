@@ -2,20 +2,14 @@ defmodule ElixirStructureManager.Utils.TokenHelper do
   alias ElixirStructureManager.Utils.StringContent
   @moduledoc false
 
+  def add(token) when is_tuple(token) do
+    add(default_tokens(), token)
+  end
+
   def add(key, value) when is_binary(key) and is_binary(value) do
     StringContent.format_name(value)
     |> to_token_list(key)
     |> add(default_tokens())
-  end
-
-  def add(tokens, key, value) when is_binary(key) and is_binary(value) and is_list(tokens) do
-    StringContent.format_name(value)
-    |> to_token_list(key)
-    |> add(tokens)
-  end
-
-  def add(token) when is_tuple(token) do
-    add(default_tokens(), token)
   end
 
   def add(tokens, token) when is_list(token) and is_list(tokens) do
@@ -24,6 +18,16 @@ defmodule ElixirStructureManager.Utils.TokenHelper do
 
   def add(tokens, token) when is_tuple(token) and is_list(tokens) do
     [token | tokens]
+  end
+
+  def add(tokens, key, value) when is_binary(key) and is_binary(value) and is_list(tokens) do
+    StringContent.format_name(value)
+    |> to_token_list(key)
+    |> add(tokens)
+  end
+
+  def add_boolean(tokens, key, value) when is_binary(key) do
+    add(tokens, {key, to_string(value || false)})
   end
 
   def default_tokens() do

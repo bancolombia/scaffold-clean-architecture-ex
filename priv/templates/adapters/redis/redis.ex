@@ -1,7 +1,5 @@
 defmodule {app}.Infrastructure.Adapters.Redis.RedisAdapter do
-
   alias {app}.Config.ConfigHolder
-
   use Supervisor
 
   def start_link(args) do

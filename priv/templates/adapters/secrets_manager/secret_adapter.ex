@@ -34,8 +34,7 @@ defmodule {app}.Infrastructure.Adapters.Secrets.SecretManagerAdapter do
   defp get_initial_secret() do
     if Mix.env() == :prod do
       secret_name = ConfigHolder.conf.secret_name
-      region = ConfigHolder.conf.region
-      secret = get_secret_value(secret_name, region)
+      secret = get_secret_value(secret_name)
                |> Poison.decode!
                |> DataTypeUtils.normalize
       :ets.insert(:secret_manager_adapter, {:secret, secret})
@@ -58,7 +57,9 @@ defmodule {app}.Infrastructure.Adapters.Secrets.SecretManagerAdapter do
     {:reply, state, state}
   end
 
-  defp get_secret_value(secret_name, region) do
+  defp get_secret_value(secret_name) do
+    cfg = ExAws.Config.build_base(:secretsmanager)
+    region = ExAws.Config.retrieve_runtime_value(cfg.region, cfg)
     ExAws.SecretsManager.get_secret_value(secret_name)
     |> ExAws.request(region: region)
     |> case do

@@ -5,7 +5,8 @@ defmodule DA.SecretsManager do
   def actions() do
     %{
       create: %{
-        "lib/infrastructure/driven_adapters/secrets/secrets_manager.ex" => @base <> "secret_adapter.ex"
+        "lib/infrastructure/driven_adapters/secrets/secrets_manager.ex" =>
+          @base <> "secret_adapter.ex"
       },
       transformations: [
         {:inject_dependency, ~s|{:ex_aws_secretsmanager, "~> 2.0"}|},
@@ -32,10 +33,10 @@ defmodule DA.SecretsManager do
           "lib/application.ex",
           "\n\t\t\t{SecretManagerAdapter, []},",
           regex: ~r/_other_env\)(\s)+do(\s)+\[/
-        },
-
+        }
       ]
     }
+    |> Config.Aws.join_with()
   end
 
   def tokens(_opts) do

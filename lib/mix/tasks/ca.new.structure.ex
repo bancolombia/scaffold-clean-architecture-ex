@@ -27,7 +27,9 @@ defmodule Mix.Tasks.Ca.New.Structure do
   @shortdoc "Creates a new clean architecture application."
   def run(argv) do
     with {opts, [application_name]} <- DataTypeUtils.parse_opts(argv, @switches, @aliases) do
-      tokens = TokenHelper.initial_tokens(application_name)
+      tokens =
+        TokenHelper.initial_tokens(application_name)
+        |> TokenHelper.add_boolean("{metrics}", opts[:metrics])
 
       Structure.Root.actions()
       |> FileGenerator.execute_actions(tokens)

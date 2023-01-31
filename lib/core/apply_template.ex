@@ -1,5 +1,6 @@
 defmodule ElixirStructureManager.Core.ApplyTemplate do
   alias ElixirStructureManager.Utils.{FileGenerator, TokenHelper}
+  alias Config.Metrics
 
   def apply(type, name, opts \\ nil) do
     module = resolve_behaviour(type)
@@ -9,6 +10,7 @@ defmodule ElixirStructureManager.Core.ApplyTemplate do
       |> TokenHelper.add(module.tokens(opts))
 
     module.actions()
+    |> Metrics.inject(type)
     |> FileGenerator.execute_actions(tokens)
   end
 

@@ -17,6 +17,10 @@ defmodule ElixirStructureManager.Utils.Injector do
     transform_content(content, appendable, &{:ok, &1 <> appendable})
   end
 
+  def replace(content, insertable, opts) do
+    transform_content(content, insertable, &insert_on_match(&1, opts[:regex], insertable, :replace))
+  end
+
   defp transform_content(content, insertable, transformation) do
     with false <- String.contains?(content, insertable),
          {:ok, new_content} <- transformation.(content) do
@@ -41,5 +45,9 @@ defmodule ElixirStructureManager.Utils.Injector do
 
   defp concat_match([left, match, right], insertable, :after) do
     "#{left}#{match}#{insertable}#{right}"
+  end
+
+  defp concat_match([left, _match, right], insertable, :replace) do
+    "#{left}#{insertable}#{right}"
   end
 end

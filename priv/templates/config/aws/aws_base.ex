@@ -1,3 +1,4 @@
+
 # aws
 config :ex_aws,
   region: "us-east-1",
@@ -8,3 +9,9 @@ config :ex_aws,
     :instance_role
   ],
   awscli_auth_adapter: ExAws.STS.AuthCache.AssumeRoleCredentialsAdapter
+
+# to override aws endpoint for localstack
+#config :ex_aws, :secretsmanager, # change for specific service
+#  scheme: "http://",
+#  host: "localhost",
+#  port: 4566

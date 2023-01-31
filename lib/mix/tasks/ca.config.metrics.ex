@@ -1,6 +1,6 @@
 defmodule Mix.Tasks.Ca.Config.Metrics do
   @moduledoc """
-  Creates distillery configuration for the clean architecture project
+  Creates metrics and traces configuration for the clean architecture project
       $ mix ca.config.metrics
   """
 
@@ -10,7 +10,7 @@ defmodule Mix.Tasks.Ca.Config.Metrics do
 
   use BaseTask,
     name: "ca.config.metrics",
-    description: "Adds telemetry configuration"
+    description: "Adds telemetry (metrics and traces) configuration"
 
   def execute({[], []}) do
     ApplyTemplate.apply(:metrics, "non_required")

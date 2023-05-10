@@ -10,12 +10,12 @@ defmodule {app}.Application do
   use Application
   require Logger
 
-  def start(_type, _args) do
+  def start(_type, [env]) do
     config = AppConfig.load_config()
 
     CertificatesAdmin.setup()
 
-    children = with_plug_server(config) ++ all_env_children() ++ env_children(:env)
+    children = with_plug_server(config) ++ all_env_children() ++ env_children(env)
 
     opts = [strategy: :one_for_one, name: {app}.Supervisor]
     Supervisor.start_link(children, opts)

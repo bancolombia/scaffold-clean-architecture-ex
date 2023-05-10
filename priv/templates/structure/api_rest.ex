@@ -22,12 +22,12 @@ defmodule {app}.Infrastructure.EntryPoint.ApiRest do
   plug(:dispatch)
 
   forward(
-    "/{app_snake}/api/health",
+    "/api/health",
     to: PlugCheckup,
     init_opts: PlugCheckup.Options.new(json_encoder: Jason, checks: {app}.Infrastructure.EntryPoint.HealthCheck.checks)
   )
 
-  get "/{app_snake}/api/hello/" do
+  get "/api/hello" do
     build_response("Hello World", conn)
   end
 

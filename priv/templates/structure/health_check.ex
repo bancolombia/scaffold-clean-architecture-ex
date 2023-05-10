@@ -1,4 +1,7 @@
 defmodule {app}.Infrastructure.EntryPoint.HealthCheck do
+  @moduledoc """
+  {app} health check
+  """
 
   def checks do
     [

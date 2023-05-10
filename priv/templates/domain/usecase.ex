@@ -1,9 +1,8 @@
 defmodule {app}.Domain.UseCase.{name} do
-
   @moduledoc """
-  TODO Updates usecase description
+  {name}
   """
-   
+
   ## TODO Add functions to business logic app
 
 end

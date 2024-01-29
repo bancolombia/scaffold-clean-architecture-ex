@@ -144,13 +144,15 @@ mix ca.new.da --type <driven_adapter_name>
 
 Type param options:
 
-- asynceventbus
-- dynamo
-- generic
-- redis
-- repository
-- restconsumer
-- secrestsmanager
+| Name            | Description                    |
+|-----------------|--------------------------------|
+| asynceventbus   | RabbitMQ message sender        |
+| dynamo          | AWS Dynamo DB client           |
+| generic         | Empty structure for an adapter |
+| redis           | Redis client                   |
+| repository      | Ecto repository setup          |
+| restconsumer    | HTTP(S) Client                 |
+| secrestsmanager | AWS Secrets Manager client     |
 
 
 ```bash
@@ -182,7 +184,9 @@ mix ca.new.ep --type <entry_point_name>
 
 Type param options:
 
-- asynceventhandler
+| Name              | Description               |
+|-------------------|---------------------------|
+| asynceventhandler | RabbitMQ message listener |
 
 ```bash
 mix ca.new.ep --type <entry_point_name> --name <my_entry_point>
@@ -209,9 +213,11 @@ Applies a configuration for the clean architecture project
 
 Type param options:
 
-- metrics
-- distillery
-- sonar
+| Name       | Description                                                 |
+|------------|-------------------------------------------------------------|
+| metrics    | Add metrics setup for adapters and exporter                 |
+| distillery | Configures releases with distillery (will be deprecated)    |
+| sonar      | Configures some snoar dependencies for analysis and reports |
 
 #### Metrics
 

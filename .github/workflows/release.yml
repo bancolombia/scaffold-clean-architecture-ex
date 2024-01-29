@@ -1,5 +1,9 @@
 name: release-actions
 on:
+  push:
+    branches:
+      - main
+      - feature/*
   release:
     types:
       - released

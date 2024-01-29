@@ -1,6 +1,5 @@
 defmodule FileGeneratorTest do
   use ExUnit.Case
-  import ExUnit.CaptureIO
   alias ElixirStructureManager.Utils.FileGenerator
   alias ElixirStructureManager.Utils.Injector
 

@@ -20,7 +20,9 @@ jobs:
           key: ${{ runner.os }}-mix-${{ hashFiles('**/mix.lock') }}
           restore-keys: ${{ runner.os }}-mix-
       - name: Install dependencies
-        run: mix deps.get
+        run: mix deps.get && mix deps.compile
+        env:
+          SKIP_GIT_HOOKS: 'true'
       - name: Set release env
         run: echo "RELEASE_VERSION=${GITHUB_REF#refs/*/v}" >> $GITHUB_ENV
       - name: Upgrade mix.exs

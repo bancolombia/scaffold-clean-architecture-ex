@@ -4,6 +4,7 @@ Code.require_file("hooks.exs", __DIR__)
 
 config :git_hooks,
   verbose: true,
+  auto_install: System.get_env("SKIP_GIT_HOOKS") != "true",
   hooks: [
     pre_commit: [
       tasks: [

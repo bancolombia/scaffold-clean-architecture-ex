@@ -1,0 +1,54 @@
+name: ci
+on:
+  push:
+    branches:
+      - main
+      - feature/*
+      - fix/*
+  pull_request:
+    branches:
+      - main
+jobs:
+  build:
+    permissions:
+      contents: write
+      issues: write
+      pull-requests: write
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify Conventional Commits
+        uses: amannn/action-semantic-pull-request@v5
+        if: github.event_name == 'pull_request' || github.event_name == 'pull_request_target'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Set up NodeJS
+        if: github.ref == 'refs/heads/main'
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: ".nvmrc"
+      - name: Set up Semantic Release
+        if: github.ref == 'refs/heads/main'
+        run: npm -g install @semantic-release/git semantic-release@23.0.0
+      - name: Semantic Release
+        if: github.ref == 'refs/heads/main'
+        run: npx semantic-release@23.0.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.RELEASE_P_A_TOKEN }}
+      - name: Set up Elixir
+        uses: erlef/setup-beam@v1
+        with:
+          version-type: strict
+          version-file: ".tool-versions"
+      - name: Restore dependencies cache
+        uses: actions/cache@v4
+        with:
+          path: deps
+          key: ${{ runner.os }}-mix-${{ hashFiles('**/mix.lock') }}
+          restore-keys: ${{ runner.os }}-mix-
+      - name: Install dependencies
+        run: mix deps.get
+      - name: Validate code formatting
+        run: mix format --check-formatted
+      - name: Run tests
+        run: mix test && mix credo --strict && mix dialyzer

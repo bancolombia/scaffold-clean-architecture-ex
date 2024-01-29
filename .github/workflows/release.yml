@@ -1,9 +1,5 @@
 name: release-actions
 on:
-  push:
-    branches:
-      - main
-      - feature/*
   release:
     types:
       - released
@@ -15,6 +11,7 @@ jobs:
       - name: Set up Elixir
         uses: erlef/setup-beam@v1
         with:
+          version-type: strict
           version-file: ".tool-versions"
       - name: Restore dependencies cache
         uses: actions/cache@v4

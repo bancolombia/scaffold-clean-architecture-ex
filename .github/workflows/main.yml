@@ -52,7 +52,11 @@ jobs:
         run: mix format --check-formatted
       - name: Code analysis
         run: mix credo --strict && mix dialyzer
+      - name: Tests
+        if: github.event_name == 'push'
+        run: mix coveralls
       - name: Tests & Coverage
+        if: github.event_name == 'pull_request' || github.event_name == 'pull_request_target'
         uses: josecfreittas/elixir-coverage-feedback-action@v0.5
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}

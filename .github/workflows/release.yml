@@ -1,4 +1,4 @@
-name: release-actions
+name: release
 on:
   release:
     types:

@@ -16,7 +16,7 @@ defmodule DA.Dynamo do
         {:append_end, "config/dev.exs", @base <> "config_to_append.ex"}
       ]
     }
-    |> Config.Aws.join_with()
+    |> Util.join_with(Config.Aws.actions())
   end
 
   def tokens(_opts) do

@@ -16,9 +16,4 @@ defmodule Config.Aws do
       ]
     }
   end
-
-  def join_with(%{} = config), do: Map.merge(actions(), config, &merge/3)
-
-  defp merge(_k, v1, v2) when is_map(v1), do: Map.merge(v1, v2, &merge/3)
-  defp merge(_k, v1, v2) when is_list(v1), do: v1 ++ v2
 end

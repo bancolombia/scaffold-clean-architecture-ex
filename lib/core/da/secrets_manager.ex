@@ -36,7 +36,7 @@ defmodule DA.SecretsManager do
         }
       ]
     }
-    |> Config.Aws.join_with()
+    |> Util.join_with(Config.Aws.actions())
   end
 
   def tokens(_opts) do

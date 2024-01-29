@@ -12,7 +12,8 @@ defmodule ElixirStructureManager.MixProject do
       start_permanent: Mix.env() == :prod,
       description: description(),
       package: package(),
-      deps: deps()
+      deps: deps(),
+      dialyzer: [plt_add_apps: [:mix]]
     ]
   end
 
@@ -43,7 +44,10 @@ defmodule ElixirStructureManager.MixProject do
     [
       {:poison, "~> 5.0"},
       {:ex_doc, ">= 0.0.0", only: :dev, runtime: false},
-      {:mock, "~> 0.3.7", only: :test}
+      {:mock, "~> 0.3.7", only: :test},
+      {:git_hooks, "~> 0.7", only: [:dev], runtime: false},
+      {:credo, "~> 1.7", only: [:dev, :test], runtime: false},
+      {:dialyxir, "~> 1.4", only: [:dev, :test], runtime: false}
     ]
   end
 end

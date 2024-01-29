@@ -3,7 +3,7 @@ defmodule Config.Metrics do
   @base "/priv/templates/config/metrics/"
   @custom_telemetry "lib/utils/custom_telemetry.ex"
 
-  def actions() do
+  def actions do
     %{
       create: %{
         @custom_telemetry => @base <> "custom_telemetry.ex"

@@ -2,7 +2,7 @@ defmodule Config.Aws do
   @moduledoc false
   @base "/priv/templates/config/aws/"
 
-  def actions() do
+  def actions do
     %{
       transformations: [
         {:inject_dependency, ~s|{:ex_aws_sts, "~> 2.0"}|},

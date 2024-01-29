@@ -1,4 +1,7 @@
 defmodule ElixirStructureManager.Utils.DataTypeUtils do
+  @moduledoc """
+  Normalize data types to be used in the application.
+  """
   def normalize(%{__struct__: _} = value), do: value
 
   def normalize(%{} = map) do

@@ -1,15 +1,18 @@
 defmodule ElixirStructureManager.Utils.FileGenerator do
-  alias ElixirStructureManager.Utils.StringContent
-  alias ElixirStructureManager.Utils.Injector
   alias ElixirStructureManager.Utils.CommonCommands
+  alias ElixirStructureManager.Utils.Injector
+  alias ElixirStructureManager.Utils.StringContent
+  require Logger
+
+  @moduledoc """
+  Execute al parameterized actions to generate or modify files.
+  """
 
   def execute_actions(%{} = args, tokens) do
     Enum.each(Map.get(args, :folders, []), &create_dir(&1, tokens))
     Enum.each(Map.get(args, :create, %{}), &create_file(&1, tokens))
     Enum.each(Map.get(args, :transformations, []), &transformation(&1, tokens))
   end
-
-  defp create_dirs(_, _), do: :nothing
 
   defp create_dir(folder, tokens) do
     resolved = resolve_content(folder, tokens)
@@ -25,7 +28,7 @@ defmodule ElixirStructureManager.Utils.FileGenerator do
       File.write!(resolved_file, content)
       Mix.shell().info([:green, "File ", :reset, resolved_file, :green, " created"])
     else
-      err -> IO.inspect(err)
+      err -> Logger.error("Error creating file #{inspect(file)} #{inspect(err)}")
     end
   end
 

@@ -2,13 +2,15 @@ defmodule DA.RestConsumer do
   @moduledoc false
   @base "/priv/templates/adapters/rest_consumer/"
 
-  def actions() do
-
+  def actions do
     %{
       create: %{
-        "lib/infrastructure/driven_adapters/rest_consumer/{name_snake}/{name_snake}_adapter.ex" => @base <> "rest_consumer.ex",
-        "lib/infrastructure/driven_adapters/rest_consumer/{name_snake}/data/{name_snake}_request.ex" => @base <> "data_request.ex",
-        "lib/infrastructure/driven_adapters/rest_consumer/{name_snake}/data/{name_snake}_response.ex" => @base <> "data_response.ex"
+        "lib/infrastructure/driven_adapters/rest_consumer/{name_snake}/{name_snake}_adapter.ex" =>
+          @base <> "rest_consumer.ex",
+        "lib/infrastructure/driven_adapters/rest_consumer/{name_snake}/data/{name_snake}_request.ex" =>
+          @base <> "data_request.ex",
+        "lib/infrastructure/driven_adapters/rest_consumer/{name_snake}/data/{name_snake}_response.ex" =>
+          @base <> "data_response.ex"
       },
       transformations: [
         {:inject_dependency, ~s|{:finch, "~> 0.14"}|},

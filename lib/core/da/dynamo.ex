@@ -2,11 +2,13 @@ defmodule DA.Dynamo do
   @moduledoc false
   @base "/priv/templates/adapters/dynamo/"
 
-  def actions() do
+  def actions do
     %{
       create: %{
-        "lib/infrastructure/driven_adapters/dynamo/dynamo_adapter.ex" => @base <> "dynamo_adapter.ex",
-        "lib/infrastructure/driven_adapters/dynamo/user_repository.ex" => @base <> "user_repository.ex",
+        "lib/infrastructure/driven_adapters/dynamo/dynamo_adapter.ex" =>
+          @base <> "dynamo_adapter.ex",
+        "lib/infrastructure/driven_adapters/dynamo/user_repository.ex" =>
+          @base <> "user_repository.ex",
         "lib/domain/model/user.ex" => @base <> "user.ex"
       },
       transformations: [

@@ -2,11 +2,9 @@ defmodule DataTypeUtilsTest do
   use ExUnit.Case
   alias ElixirStructureManager.Utils.DataTypeUtils
 
-  defstruct [
-    name: "",
-    last_name: "",
-    company: ""
-  ]
+  defstruct name: "",
+            last_name: "",
+            company: ""
 
   def new(name, last_name, company) do
     %__MODULE__{
@@ -38,26 +36,30 @@ defmodule DataTypeUtilsTest do
   end
 
   test "should return arguments values" do
-
     switches = [type: :string, name: :string]
 
-    values = DataTypeUtils.parse_opts(
-      ["--type", "secrets", "--name", "test"], switches)  
+    values =
+      DataTypeUtils.parse_opts(
+        ["--type", "secrets", "--name", "test"],
+        switches
+      )
+
     assert values == {[type: "secrets", name: "test"], []}
-    
-    values_without_flag = DataTypeUtils.parse_opts(
-      ["username", "--name", "test"], switches)
-    
+
+    values_without_flag =
+      DataTypeUtils.parse_opts(
+        ["username", "--name", "test"],
+        switches
+      )
+
     assert values_without_flag == {[name: "test"], ["username"]}
   end
-  
-  test "should raise a message when args are invalid" do
 
+  test "should raise a message when args are invalid" do
     switches = [type: :string, name: :string]
 
-    assert_raise Mix.Error, ~r/Invalid option:\s+/,
-      fn -> DataTypeUtils.parse_opts(["--types", "secrets"], switches) 
-      end
-    
+    assert_raise Mix.Error, ~r/Invalid option:\s+/, fn ->
+      DataTypeUtils.parse_opts(["--types", "secrets"], switches)
+    end
   end
 end

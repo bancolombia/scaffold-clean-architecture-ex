@@ -1,6 +1,10 @@
 defmodule ElixirStructureManager.Core.ApplyTemplate do
-  alias ElixirStructureManager.Utils.{FileGenerator, TokenHelper}
   alias Config.Metrics
+  alias ElixirStructureManager.Utils.{FileGenerator, TokenHelper}
+
+  @moduledoc """
+  This module is responsible for applying the templates to the project.
+  """
 
   def apply(type, name, opts \\ nil) do
     module = resolve_behaviour(type)
@@ -25,6 +29,7 @@ defmodule ElixirStructureManager.Core.ApplyTemplate do
   defp resolve_behaviour(:dynamo), do: DA.Dynamo
   defp resolve_behaviour(:repository), do: DA.Repository
   defp resolve_behaviour(:restconsumer), do: DA.RestConsumer
+  defp resolve_behaviour(:cognitotokenprovider), do: DA.CognitoTokenProvider
 
   defp resolve_behaviour(:asynceventhandler), do: EP.AsyncEventHandlers
 

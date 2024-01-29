@@ -1,8 +1,8 @@
 defmodule Ca.New.EpTest do
   use ExUnit.Case
   import Mock
-  alias Mix.Tasks.Ca.New.Ep, as: Task
   alias ElixirStructureManager.Core.ApplyTemplate
+  alias Mix.Tasks.Ca.New.Ep, as: Task
 
   test "should shows helper information when invalid args" do
     assert :ok === Task.run(["invalid", "args"])

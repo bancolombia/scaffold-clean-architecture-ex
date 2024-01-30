@@ -54,15 +54,19 @@ jobs:
         run: mix format --check-formatted
       - name: Code analysis
         run: mix credo --strict && mix dialyzer
+      - name: Install as archive
+        run: mix do archive.build, archive.install --force
       - name: Tests & Coverage (main)
         if: github.ref == 'refs/heads/main'
         run: mix coveralls.github
         env:
+          CI_ENV: 'true'
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Tests & Coverage (pull requests)
         if: github.event_name == 'pull_request' || github.event_name == 'pull_request_target'
         run: mix coveralls.lcov
         env:
+          CI_ENV: 'true'
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Setup PR Report tool
         if: github.event_name == 'pull_request' || github.event_name == 'pull_request_target'

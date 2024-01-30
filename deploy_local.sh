@@ -1,2 +1,2 @@
 #!/bin/zsh
-mix do archive.build, archive.install
+mix do archive.build, archive.install --force

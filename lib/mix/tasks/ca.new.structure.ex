@@ -8,6 +8,7 @@ defmodule Mix.Tasks.Ca.New.Structure do
 
   alias ElixirStructureManager.Utils.{CommonCommands, DataTypeUtils, FileGenerator, TokenHelper}
   alias Mix.Tasks.Help
+  alias Structure.Root
   use Mix.Task
 
   @version Mix.Project.config()[:version]
@@ -29,9 +30,9 @@ defmodule Mix.Tasks.Ca.New.Structure do
     with {opts, [application_name]} <- DataTypeUtils.parse_opts(argv, @switches, @aliases) do
       tokens =
         TokenHelper.initial_tokens(application_name)
-        |> TokenHelper.add_boolean("{metrics}", opts[:metrics])
+        |> TokenHelper.add(Root.tokens(opts))
 
-      Structure.Root.actions()
+      Root.actions()
       |> FileGenerator.execute_actions(tokens)
 
       root_dir = project_dir(application_name)

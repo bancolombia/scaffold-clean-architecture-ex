@@ -38,7 +38,7 @@ defmodule Structure.Root do
     }
   end
 
-  def tokens(_opts) do
-    []
+  def tokens(opts) do
+    [{"{metrics}", to_string(opts[:metrics] || false)}]
   end
 end

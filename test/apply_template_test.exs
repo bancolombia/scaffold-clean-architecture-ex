@@ -19,7 +19,11 @@ defmodule ApplyTemplatesTest do
           :repository,
           :restconsumer,
           :asynceventhandler,
-          :cognitotokenprovider
+          :cognitotokenprovider,
+          :dynamo,
+          :metrics,
+          :distillery,
+          :sonar,
         ],
         fn template ->
           res = ApplyTemplate.apply(template, "sample_name")

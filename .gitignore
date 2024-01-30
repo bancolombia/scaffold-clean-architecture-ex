@@ -30,3 +30,4 @@ elixir_structure_manager-*.tar
 *.swp
 *.coverdata
 .DS_Store
+generated*

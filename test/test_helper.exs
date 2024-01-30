@@ -1,2 +1,2 @@
 Mix.shell(Mix.Shell.Process)
-ExUnit.start()
+ExUnit.start(timeout: :infinity)

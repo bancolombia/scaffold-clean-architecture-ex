@@ -13,6 +13,7 @@ defmodule ElixirStructureManager.Utils.CommonCommands do
   defp run_no_env(cmd, args, cwd, ignore_env \\ ["test"]) do
     env = System.get_env("MIX_ENV", "prod")
     Logger.info("Resolved env #{env}")
+
     if Enum.member?(ignore_env, env) do
       Logger.info("Skiping action because env #{env}")
     else

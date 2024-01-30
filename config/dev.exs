@@ -9,6 +9,7 @@ config :git_hooks,
     pre_commit: [
       tasks: [
         {:cmd, "mix format"},
+        {:cmd, "git add ."},
         {:cmd, "mix credo --strict"},
         {:cmd, "mix dialyzer"},
         {:mix_task, :test}

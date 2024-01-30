@@ -23,7 +23,7 @@ defmodule ApplyTemplatesTest do
           :dynamo,
           :metrics,
           :distillery,
-          :sonar,
+          :sonar
         ],
         fn template ->
           res = ApplyTemplate.apply(template, "sample_name")

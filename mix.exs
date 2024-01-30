@@ -52,6 +52,7 @@ defmodule ElixirStructureManager.MixProject do
   defp deps do
     [
       {:poison, "~> 5.0"},
+      {:castore, "~> 1.0"},
       {:mock, "~> 0.3.7", only: :test},
       {:excoveralls, "~> 0.18", only: :test},
       {:ex_doc, ">= 0.0.0", only: :dev, runtime: false},

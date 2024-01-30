@@ -2,11 +2,13 @@ defmodule DA.Dynamo do
   @moduledoc false
   @base "/priv/templates/adapters/dynamo/"
 
-  def actions() do
+  def actions do
     %{
       create: %{
-        "lib/infrastructure/driven_adapters/dynamo/dynamo_adapter.ex" => @base <> "dynamo_adapter.ex",
-        "lib/infrastructure/driven_adapters/dynamo/user_repository.ex" => @base <> "user_repository.ex",
+        "lib/infrastructure/driven_adapters/dynamo/dynamo_adapter.ex" =>
+          @base <> "dynamo_adapter.ex",
+        "lib/infrastructure/driven_adapters/dynamo/user_repository.ex" =>
+          @base <> "user_repository.ex",
         "lib/domain/model/user.ex" => @base <> "user.ex"
       },
       transformations: [
@@ -14,7 +16,7 @@ defmodule DA.Dynamo do
         {:append_end, "config/dev.exs", @base <> "config_to_append.ex"}
       ]
     }
-    |> Config.Aws.join_with()
+    |> Util.join_with(Config.Aws.actions())
   end
 
   def tokens(_opts) do

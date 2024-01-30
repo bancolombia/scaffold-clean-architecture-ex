@@ -3,7 +3,7 @@ defmodule InjectorTest do
   alias ElixirStructureManager.Utils.Injector
   import ExUnit.Assertions
 
-  defp file_content() do
+  defp file_content do
     """
     defmodule HelloWorld.MixProject do
       defp deps do
@@ -17,7 +17,7 @@ defmodule InjectorTest do
     """
   end
 
-  defp file_content_injected() do
+  defp file_content_injected do
     """
     defmodule HelloWorld.MixProject do
       defp deps do
@@ -32,7 +32,7 @@ defmodule InjectorTest do
     """
   end
 
-  defp file_corrupt_content() do
+  defp file_corrupt_content do
     """
     defmodule HelloWorld.MixProject do
     defp notfound do

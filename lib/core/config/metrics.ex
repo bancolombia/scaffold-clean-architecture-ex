@@ -3,7 +3,7 @@ defmodule Config.Metrics do
   @base "/priv/templates/config/metrics/"
   @custom_telemetry "lib/utils/custom_telemetry.ex"
 
-  def actions() do
+  def actions do
     %{
       create: %{
         @custom_telemetry => @base <> "custom_telemetry.ex"
@@ -70,6 +70,7 @@ defmodule Config.Metrics do
   defp resolve(:restconsumer), do: :finch
   defp resolve(:secretsmanager), do: :ex_aws
   defp resolve(:dynamo), do: :ex_aws
+  defp resolve(:cognitotokenprovider), do: :ex_aws
   defp resolve(_other), do: nil
 
   defp with_check(key) do

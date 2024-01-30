@@ -2,7 +2,7 @@ defmodule DA.CognitoTokenProvider do
   @moduledoc false
   @base "/priv/templates/adapters/cognito_token_provider/"
 
-  def actions() do
+  def actions do
     %{
       create: %{
         "lib/infrastructure/driven_adapters/cognito/cognito_token_provider.ex" =>
@@ -15,8 +15,7 @@ defmodule DA.CognitoTokenProvider do
           @base <> "cognito_settings.ex",
         "lib/infrastructure/driven_adapters/cognito/data/token_response.ex" =>
           @base <> "token_response.ex",
-        "lib/domain/behaviours/token_provider.ex" =>
-          @base <> "token_provider.ex"
+        "lib/domain/behaviours/token_provider.ex" => @base <> "token_provider.ex"
       },
       transformations: [
         {:inject_dependency, ~s|{:finch, "~> 0.17"}|},
@@ -54,9 +53,12 @@ defmodule DA.CognitoTokenProvider do
           """,
           regex: ~r{end}
         },
-        {:append_end, "config/dev.exs", @base <> "config_to_append.ex", check: "cognito_endpoint"},
-        {:append_end, "config/test.exs", @base <> "config_to_append.ex", check: "cognito_endpoint"},
-        {:append_end, "config/prod.exs", @base <> "config_to_append.ex", check: "cognito_endpoint"},
+        {:append_end, "config/dev.exs", @base <> "config_to_append.ex",
+         check: "cognito_endpoint"},
+        {:append_end, "config/test.exs", @base <> "config_to_append.ex",
+         check: "cognito_endpoint"},
+        {:append_end, "config/prod.exs", @base <> "config_to_append.ex",
+         check: "cognito_endpoint"},
         {
           :insert_after,
           "lib/config/app_config.ex",

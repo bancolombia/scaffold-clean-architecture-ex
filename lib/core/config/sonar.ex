@@ -2,7 +2,7 @@ defmodule Config.Sonar do
   @moduledoc false
   @base "/priv/templates/config/sonar/"
 
-  def actions() do
+  def actions do
     ignore = """
     credo_sonarqube.json
     sobelow.json

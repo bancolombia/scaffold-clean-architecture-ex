@@ -28,3 +28,6 @@ elixir_structure_manager-*.tar
 /.idea/*
 /elixir_structure_manager.iml
 *.swp
+*.coverdata
+.DS_Store
+generated*

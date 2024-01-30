@@ -2,7 +2,7 @@ defmodule Domain.Model do
   @moduledoc false
   @base "/priv/templates/domain/"
 
-  def actions() do
+  def actions do
     %{
       create: %{
         "lib/domain/model/{name_snake}.ex" => @base <> "model.ex"

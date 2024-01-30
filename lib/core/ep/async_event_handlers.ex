@@ -2,7 +2,7 @@ defmodule EP.AsyncEventHandlers do
   @moduledoc false
   @base "/priv/templates/entries/async_event_handlers/"
 
-  def actions() do
+  def actions do
     %{
       create: %{
         "lib/infrastructure/entry_points/async_messages/async_message_handlers.ex" =>

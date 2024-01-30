@@ -1,13 +1,14 @@
 defmodule Mix.Tasks.Ca.New.Structure do
   @moduledoc """
   Creates a new Clean architecture scaffold
-
       $ mix ca.new.structure [application_name]
       $ mix ca.new.structure [application_name] --metrics --distillery
       $ mix ca.new.structure [application_name] -m -d
   """
 
-  alias ElixirStructureManager.Utils.{CommonCommands, FileGenerator, TokenHelper, DataTypeUtils}
+  alias ElixirStructureManager.Utils.{CommonCommands, DataTypeUtils, FileGenerator, TokenHelper}
+  alias Mix.Tasks.Help
+  alias Structure.Root
   use Mix.Task
 
   @version Mix.Project.config()[:version]
@@ -17,7 +18,7 @@ defmodule Mix.Tasks.Ca.New.Structure do
   def run([]), do: run(["-h"])
 
   def run([help]) when help in ~w(-h --help) do
-    Mix.Tasks.Help.run(["ca.new.structure"])
+    Help.run(["ca.new.structure"])
   end
 
   def run([version]) when version in ~w(-v --version) do
@@ -29,20 +30,20 @@ defmodule Mix.Tasks.Ca.New.Structure do
     with {opts, [application_name]} <- DataTypeUtils.parse_opts(argv, @switches, @aliases) do
       tokens =
         TokenHelper.initial_tokens(application_name)
-        |> TokenHelper.add_boolean("{metrics}", opts[:metrics])
+        |> TokenHelper.add(Root.tokens(opts))
 
-      Structure.Root.actions()
+      Root.actions()
       |> FileGenerator.execute_actions(tokens)
 
       root_dir = project_dir(application_name)
 
       CommonCommands.install_deps(root_dir)
 
-      if(opts[:distillery]) do
+      if opts[:distillery] do
         CommonCommands.config_distillery(root_dir)
       end
 
-      if(opts[:metrics]) do
+      if opts[:metrics] do
         CommonCommands.config_metrics(root_dir)
       end
 

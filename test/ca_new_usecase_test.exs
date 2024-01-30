@@ -2,8 +2,8 @@ defmodule Ca.New.UsecaseTest do
   use ExUnit.Case
 
   import Mock
-  alias Mix.Tasks.Ca.New.Usecase, as: Task
   alias ElixirStructureManager.Core.ApplyTemplate
+  alias Mix.Tasks.Ca.New.Usecase, as: Task
 
   test "should shows helper information when invalid args" do
     assert :ok === Task.run(["invalid", "args"])

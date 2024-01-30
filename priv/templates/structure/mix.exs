@@ -40,7 +40,7 @@ defmodule {app}.MixProject do
       {:poison, "~> 5.0"},
       {:cors_plug, "~> 3.0"},
       {:timex, "~> 3.0"},
-      {:excoveralls, "~> 0.15", only: :test},
+      {:excoveralls, "~> 0.18", only: :test},
     ]
   end
 end

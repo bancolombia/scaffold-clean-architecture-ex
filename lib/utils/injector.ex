@@ -1,12 +1,18 @@
 defmodule ElixirStructureManager.Utils.Injector do
-  @spec inject_dependency(String.t(), String.t(), term) ::
-          {:ok, String.t()} | {:error, reason :: term}
+  @moduledoc """
+  Injects some part of text in file contents using regular expressions.
+  """
+
   def inject_dependency(content, dependency, _opts) do
     insert_after(content, "\n      #{dependency},", regex: ~r{defp deps do(\s)+\[})
   end
 
   def insert_before(content, insertable, opts) do
-    transform_content(content, insertable, &insert_on_match(&1, opts[:regex], insertable, :before))
+    transform_content(
+      content,
+      insertable,
+      &insert_on_match(&1, opts[:regex], insertable, :before)
+    )
   end
 
   def insert_after(content, insertable, opts) do
@@ -18,7 +24,11 @@ defmodule ElixirStructureManager.Utils.Injector do
   end
 
   def replace(content, insertable, opts) do
-    transform_content(content, insertable, &insert_on_match(&1, opts[:regex], insertable, :replace))
+    transform_content(
+      content,
+      insertable,
+      &insert_on_match(&1, opts[:regex], insertable, :replace)
+    )
   end
 
   defp transform_content(content, insertable, transformation) do

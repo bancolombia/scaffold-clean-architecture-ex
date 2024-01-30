@@ -1,3 +1,6 @@
+[![Build Status](https://github.com/bancolombia/scaffold-clean-architecture-ex/actions/workflows/main.yml/badge.svg)](https://github.com/bancolombia/scaffold-clean-architecture-ex/actions/workflows/main.yml) [![Hex.pm](https://img.shields.io/hexpm/v/elixir_structure_manager.svg)](https://hex.pm/packages/elixir_structure_manager) [![Documentation](https://img.shields.io/badge/documentation-gray)](https://hexdocs.pm/elixir_structure_manager/)
+[![Coverage Status](https://coveralls.io/repos/github/bancolombia/scaffold-clean-architecture-ex/badge.svg?branch=main)](https://coveralls.io/bancolombia/scaffold-clean-architecture-ex?branch=main)
+
 # Elixir Structure Manager
 
 Elixir plugin to create an elixir application based on Clean Architecture following our best practices.
@@ -142,13 +145,15 @@ mix ca.new.da --type <driven_adapter_name>
 
 Type param options:
 
-- asynceventbus
-- dynamo
-- generic
-- redis
-- repository
-- restconsumer
-- secrestsmanager
+| Name            | Description                    |
+|-----------------|--------------------------------|
+| asynceventbus   | RabbitMQ message sender        |
+| dynamo          | AWS Dynamo DB client           |
+| generic         | Empty structure for an adapter |
+| redis           | Redis client                   |
+| repository      | Ecto repository setup          |
+| restconsumer    | HTTP(S) Client                 |
+| secrestsmanager | AWS Secrets Manager client     |
 
 
 ```bash
@@ -180,7 +185,9 @@ mix ca.new.ep --type <entry_point_name>
 
 Type param options:
 
-- asynceventhandler
+| Name              | Description               |
+|-------------------|---------------------------|
+| asynceventhandler | RabbitMQ message listener |
 
 ```bash
 mix ca.new.ep --type <entry_point_name> --name <my_entry_point>
@@ -207,9 +214,11 @@ Applies a configuration for the clean architecture project
 
 Type param options:
 
-- metrics
-- distillery
-- sonar
+| Name       | Description                                                 |
+|------------|-------------------------------------------------------------|
+| metrics    | Add metrics setup for adapters and exporter                 |
+| distillery | Configures releases with distillery (will be deprecated)    |
+| sonar      | Configures some snoar dependencies for analysis and reports |
 
 #### Metrics
 

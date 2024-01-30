@@ -2,13 +2,14 @@ defmodule DA.Repository do
   @moduledoc false
   @base "/priv/templates/adapters/repository/"
 
-  def actions() do
-
+  def actions do
     %{
       create: %{
         "lib/infrastructure/driven_adapters/repository/repo.ex" => @base <> "repo.ex",
-        "lib/infrastructure/driven_adapters/repository/{name_snake}/data/{name_snake}_data.ex" => @base <> "data.ex",
-        "lib/infrastructure/driven_adapters/repository/{name_snake}/{name_snake}_data_repository.ex" => @base <> "data_repository.ex",
+        "lib/infrastructure/driven_adapters/repository/{name_snake}/data/{name_snake}_data.ex" =>
+          @base <> "data.ex",
+        "lib/infrastructure/driven_adapters/repository/{name_snake}/{name_snake}_data_repository.ex" =>
+          @base <> "data_repository.ex"
       },
       transformations: [
         {:inject_dependency, ~s|{:ecto_sql, "~> 3.9"}|},

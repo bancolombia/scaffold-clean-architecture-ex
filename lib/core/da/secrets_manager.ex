@@ -2,7 +2,7 @@ defmodule DA.SecretsManager do
   @moduledoc false
   @base "/priv/templates/adapters/secrets_manager/"
 
-  def actions() do
+  def actions do
     %{
       create: %{
         "lib/infrastructure/driven_adapters/secrets/secrets_manager.ex" =>
@@ -36,7 +36,7 @@ defmodule DA.SecretsManager do
         }
       ]
     }
-    |> Config.Aws.join_with()
+    |> Util.join_with(Config.Aws.actions())
   end
 
   def tokens(_opts) do

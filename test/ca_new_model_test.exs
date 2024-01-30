@@ -1,8 +1,8 @@
 defmodule Ca.New.ModelTest do
   use ExUnit.Case
   import Mock
-  alias Mix.Tasks.Ca.New.Model, as: Task
   alias ElixirStructureManager.Core.ApplyTemplate
+  alias Mix.Tasks.Ca.New.Model, as: Task
 
   test "should shows helper information" do
     assert :ok === Task.run([])

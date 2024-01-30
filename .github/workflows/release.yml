@@ -1,0 +1,53 @@
+name: release
+on:
+  release:
+    types:
+      - released
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Elixir
+        uses: erlef/setup-beam@v1.17.1
+        with:
+          version-type: strict
+          version-file: ".tool-versions"
+      - name: Restore dependencies cache
+        uses: actions/cache@v4
+        with:
+          path: deps
+          key: ${{ runner.os }}-mix-${{ hashFiles('**/mix.lock') }}
+          restore-keys: ${{ runner.os }}-mix-
+      - name: Install dependencies
+        run: mix deps.get && mix deps.compile
+        env:
+          SKIP_GIT_HOOKS: 'true'
+      - name: Set release env
+        run: echo "RELEASE_VERSION=${GITHUB_REF#refs/*/v}" >> $GITHUB_ENV
+      - name: Upgrade mix.exs
+        run: sed -i 's/@version \".*\"/@version "${{ env.RELEASE_VERSION }}"/g' mix.exs
+      - name: Generate Changelog
+        uses: heinrichreimer/github-changelog-generator-action@v2.3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          pullRequests: true
+          prWoLabels: true
+          issues: true
+          issuesWoLabels: true
+          stripGeneratorNotice: true
+      - name: Save version
+        uses: github-actions-x/commit@v2.9
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          push-branch: main
+          commit-message: "Upgrade version to ${{ env.RELEASE_VERSION }}"
+          force-add: "true"
+          force-push: "true"
+          files: mix.exs CHANGELOG.md
+          name: Release Bot
+          email: release-bot@bancolombia.com.co
+      - name: Publish
+        run: mix hex.publish --replace --yes
+        env:
+          HEX_API_KEY: ${{ secrets.HEX_API_KEY }}

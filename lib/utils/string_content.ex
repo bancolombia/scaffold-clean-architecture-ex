@@ -1,4 +1,7 @@
 defmodule ElixirStructureManager.Utils.StringContent do
+  @moduledoc """
+  Replace variables in a string content.
+  """
   def replace(content, []), do: content
 
   def replace(content, [{variable_name, value} | tail]) do

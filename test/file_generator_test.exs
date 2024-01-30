@@ -1,13 +1,13 @@
 defmodule FileGeneratorTest do
   use ExUnit.Case
-  import ExUnit.CaptureIO
   alias ElixirStructureManager.Utils.FileGenerator
   alias ElixirStructureManager.Utils.Injector
 
   import Mock
   import ExUnit.Assertions
+  import ExUnit.CaptureLog
 
-  defp deps_content() do
+  defp deps_content do
     """
     defmodule HelloWorld.MixProject do
       defp deps do
@@ -21,7 +21,7 @@ defmodule FileGeneratorTest do
     """
   end
 
-  defp deps_content_injected() do
+  defp deps_content_injected do
     """
     defmodule HelloWorld.MixProject do
       defp deps do
@@ -112,7 +112,7 @@ defmodule FileGeneratorTest do
 
       assert :ok == execute.()
       assert called(File.mkdir_p!("replaced"))
-      assert capture_io(execute) =~ ":error"
+      assert capture_log(execute) =~ "Error creating file \"{placeholder}/sample.ex\" :error"
     end
   end
 
@@ -123,7 +123,7 @@ defmodule FileGeneratorTest do
          read: fn _path -> {:ok, ~s|{:some_dependency, "~> 1.0"}|} end,
          read!: fn _path -> deps_content() end
        ]},
-       {Injector, [], [inject_dependency: fn (_content, _dependency, _opts) -> :other end]}
+      {Injector, [], [inject_dependency: fn _content, _dependency, _opts -> :other end]}
     ]) do
       actions = %{
         create: %{},
@@ -135,5 +135,4 @@ defmodule FileGeneratorTest do
       end
     end
   end
-
 end

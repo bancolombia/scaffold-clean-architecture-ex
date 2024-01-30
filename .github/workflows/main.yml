@@ -64,6 +64,9 @@ jobs:
         run: mix coveralls.lcov
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Setup PR Report tool
+        if: github.event_name == 'pull_request' || github.event_name == 'pull_request_target'
+        uses: hrishikesh-kadam/setup-lcov@v1
       - name: Validate code coverage
         if: github.event_name == 'pull_request' || github.event_name == 'pull_request_target'
         uses: zgosalvez/github-actions-report-lcov@v3

@@ -54,7 +54,22 @@ jobs:
         run: mix format --check-formatted
       - name: Code analysis
         run: mix credo --strict && mix dialyzer
-      - name: Tests & Coverage
+      - name: Tests & Coverage (main)
+        if: github.ref == 'refs/heads/main'
         run: mix coveralls.github
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Tests & Coverage (pull requests)
+        if: github.event_name == 'pull_request' || github.event_name == 'pull_request_target'
+        run: mix coveralls.lcov
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Validate code coverage
+        if: github.event_name == 'pull_request' || github.event_name == 'pull_request_target'
+        uses: zgosalvez/github-actions-report-lcov@v3
+        with:
+          coverage-files: cover/lcov.info
+          minimum-coverage: 70
+          artifact-name: code-coverage-report
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          update-comment: true

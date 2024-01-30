@@ -20,7 +20,8 @@ defmodule ElixirStructureManager.MixProject do
         "coveralls.post": :test,
         "coveralls.html": :test,
         "coveralls.xml": :test,
-        "coveralls.github": :test
+        "coveralls.github": :test,
+        "coveralls.lcov": :test
       ],
       dialyzer: [plt_add_apps: [:mix]]
     ]

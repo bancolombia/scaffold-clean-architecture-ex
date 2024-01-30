@@ -58,13 +58,11 @@ jobs:
         if: github.ref == 'refs/heads/main'
         run: mix coveralls.github
         env:
-          MIX_ENV: test
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Tests & Coverage (pull requests)
         if: github.event_name == 'pull_request' || github.event_name == 'pull_request_target'
         run: mix coveralls.lcov
         env:
-          MIX_ENV: test
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Setup PR Report tool
         if: github.event_name == 'pull_request' || github.event_name == 'pull_request_target'

@@ -10,8 +10,8 @@ defmodule Ca.Apply.ConfigTest do
 
   test "should create a config" do
     with_mocks([{ApplyTemplate, [], [apply: fn _type, _name -> :ok end]}]) do
-      Task.run(["--type", "distillery"])
-      assert called(ApplyTemplate.apply(:distillery, "non_required"))
+      Task.run(["--type", "metrics"])
+      assert called(ApplyTemplate.apply(:metrics, "non_required"))
     end
   end
 end

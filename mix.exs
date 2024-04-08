@@ -54,10 +54,11 @@ defmodule ElixirStructureManager.MixProject do
     [
       {:poison, "~> 5.0"},
       {:castore, "~> 1.0"},
-      {:mock, "~> 0.3.7", only: :test},
-      {:excoveralls, "~> 0.18", only: :test},
-      {:ex_doc, ">= 0.0.0", only: :dev, runtime: false},
-      {:git_hooks, "~> 0.7", only: :dev, runtime: false},
+      {:sobelow, "~> 0.13", only: [:dev, :test]},
+      {:mock, "~> 0.3.7", only: [:dev, :test]},
+      {:excoveralls, "~> 0.18", only: [:dev, :test]},
+      {:ex_doc, ">= 0.0.0", only: [:dev, :test], runtime: false},
+      {:git_hooks, "~> 0.7", only: [:dev, :test], runtime: false},
       {:credo, "~> 1.7", only: [:dev, :test], runtime: false},
       {:dialyxir, "~> 1.4", only: [:dev, :test], runtime: false}
     ]

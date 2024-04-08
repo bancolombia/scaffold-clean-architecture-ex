@@ -36,6 +36,10 @@ jobs:
           issues: true
           issuesWoLabels: true
           stripGeneratorNotice: true
+      - name: Publish
+        run: mix hex.publish --replace --yes
+        env:
+          HEX_API_KEY: ${{ secrets.HEX_API_KEY }}
       - name: Save version
         uses: github-actions-x/commit@v2.9
         with:
@@ -47,7 +51,3 @@ jobs:
           files: mix.exs CHANGELOG.md
           name: Release Bot
           email: release-bot@bancolombia.com.co
-      - name: Publish
-        run: mix hex.publish --replace --yes
-        env:
-          HEX_API_KEY: ${{ secrets.HEX_API_KEY }}

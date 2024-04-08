@@ -36,6 +36,11 @@ defmodule ElixirStructureManager.Utils.FileGenerator do
     apply(CommonCommands, task, [])
   end
 
+  defp transformation({:cmd, cmd}, tokens) do
+    [cmd | args] = String.split(resolve_content(cmd, tokens), " ")
+    CommonCommands.run(cmd, args, nil)
+  end
+
   defp transformation({:inject_dependency = operation, dependency}, tokens) do
     transformation({operation, _dest_file = "mix.exs", dependency}, tokens)
   end

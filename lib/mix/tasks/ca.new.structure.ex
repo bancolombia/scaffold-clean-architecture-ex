@@ -12,8 +12,8 @@ defmodule Mix.Tasks.Ca.New.Structure do
   use Mix.Task
 
   @version Mix.Project.config()[:version]
-  @switches [metrics: :boolean, distillery: :boolean]
-  @aliases [m: :metrics, d: :distillery]
+  @switches [metrics: :boolean, sonar: :boolean]
+  @aliases [m: :metrics, s: :sonar]
 
   def run([]), do: run(["-h"])
 
@@ -39,8 +39,8 @@ defmodule Mix.Tasks.Ca.New.Structure do
 
       CommonCommands.install_deps(root_dir)
 
-      if opts[:distillery] do
-        CommonCommands.config_distillery(root_dir)
+      if opts[:sonar] do
+        CommonCommands.config_sonar(root_dir)
       end
 
       if opts[:metrics] do

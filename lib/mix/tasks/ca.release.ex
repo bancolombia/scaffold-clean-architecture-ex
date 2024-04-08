@@ -9,7 +9,7 @@ defmodule Mix.Tasks.Ca.Release do
   * _build/release/artifact/<app-name>.tar.gz
   """
 
-  alias ElixirStructureManager.Utils.{TokenHelper, FileGenerator}
+  alias ElixirStructureManager.Utils.{FileGenerator, TokenHelper}
   alias Mix.Tasks.Ca.BaseTask
 
   use BaseTask,

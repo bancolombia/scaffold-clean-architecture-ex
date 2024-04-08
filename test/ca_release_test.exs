@@ -2,8 +2,8 @@ defmodule Ca.ReleaseTest do
   use ExUnit.Case
 
   import Mock
-  alias Mix.Tasks.Ca.Release, as: Task
   alias ElixirStructureManager.Utils.FileGenerator
+  alias Mix.Tasks.Ca.Release, as: Task
 
   test "should shows helper information" do
     assert :ok === Task.run(["-h"])

@@ -30,7 +30,8 @@ defmodule Mix.Tasks.Ca.Sobelow.Sonar do
       |> Poison.decode!()
 
     sonar_report = Sobelow.translate(report, sonar_base_folder)
-    File.write!(output, Poison.encode!(sonar_report, pretty: true))
+    json = Poison.encode!(sonar_report, %{pretty: true})
+    File.write!(output, json)
 
     Mix.shell().info([:green, "* Sonarqube report generated"])
   end

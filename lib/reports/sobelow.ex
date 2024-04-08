@@ -23,15 +23,15 @@ defmodule ElixirStructureManager.Reports.Sobelow do
   end
 
   defp format(
-         finding = %{"type" => type, "file" => file, "line" => line},
+         %{"type" => type, "file" => file, "line" => line} = finding,
          confidence,
          vsn,
          prefix
        ) do
     variable = Map.get(finding, "variable", "")
-    [modId, _] = String.split(type, ":", parts: 2)
+    [mod_id, _] = String.split(type, ":", parts: 2)
     # Code.ensure_loaded(Sobelow)
-    rule = Sobelow.get_mod(modId)
+    rule = Sobelow.get_mod(mod_id)
 
     location = %{
       filePath: "#{prefix}#{file}",

@@ -14,7 +14,7 @@ defmodule Mix.Tasks.Ca.Test do
   * _build/release/test-junit-report.xml
   """
 
-  alias ElixirStructureManager.Utils.{TokenHelper, FileGenerator}
+  alias ElixirStructureManager.Utils.{FileGenerator, TokenHelper}
   alias Mix.Tasks.Ca.BaseTask
 
   use BaseTask,

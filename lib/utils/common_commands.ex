@@ -23,6 +23,7 @@ defmodule ElixirStructureManager.Utils.CommonCommands do
     log_cms = "#{cmd} #{Enum.join(args, " ")}"
     Mix.shell().info([:green, "Running '#{log_cms}'"])
     {_, exit_code} = System.cmd(cmd, args, into: IO.stream(), cd: resolve_dir(cwd))
+
     if exit_code != 0 do
       Mix.shell().error([:red, "Command '#{log_cms}' failed with exit code #{exit_code}"])
       exit(exit_code)

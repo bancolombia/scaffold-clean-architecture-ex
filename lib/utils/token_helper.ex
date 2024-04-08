@@ -19,7 +19,7 @@ defmodule ElixirStructureManager.Utils.TokenHelper do
   end
 
   def add(tokens, key, value) when is_list(tokens) and is_binary(key) and is_binary(value) do
-    [{key, value} | tokens ]
+    [{key, value} | tokens]
   end
 
   def add_boolean(tokens, key, value) when is_binary(key) do
@@ -28,6 +28,7 @@ defmodule ElixirStructureManager.Utils.TokenHelper do
 
   def default_tokens do
     config = Mix.Project.config()
+
     case Keyword.fetch(config, :app) do
       :error ->
         Mix.shell().error("It is not an elixir project")

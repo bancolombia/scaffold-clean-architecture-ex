@@ -15,5 +15,4 @@ defmodule Ca.ReleaseTest do
       assert called(FileGenerator.execute_actions(:_, :_))
     end
   end
-
 end

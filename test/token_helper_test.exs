@@ -16,6 +16,7 @@ defmodule TokenHelperTest do
   test "should add tuple with defaults" do
     expected = [
       {"{app}", "Sample"},
+      {"{version}", "0.1.8"},
       {"{app}", "ElixirStructureManager"},
       {"{app_snake}", "elixir_structure_manager"}
     ]
@@ -27,15 +28,15 @@ defmodule TokenHelperTest do
 
   test "should add tokens to existing lis" do
     expected = [
+      {"{key}", "value"},
+      {"{version}", "0.1.8"},
       {"{app}", "ElixirStructureManager"},
-      {"{app_snake}", "elixir_structure_manager"},
-      {"{key_snake}", "value"},
-      {"{key}", "Value"}
+      {"{app_snake}", "elixir_structure_manager"}
     ]
 
     res =
       TokenHelper.default_tokens()
-      |> TokenHelper.add("key", "value")
+      |> TokenHelper.add("{key}", "value")
 
     assert expected === res
   end

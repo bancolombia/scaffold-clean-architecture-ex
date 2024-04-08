@@ -5,12 +5,12 @@ defmodule Mix.Tasks.Ca.Apply.Config do
 
   Type param options:
 
-  * distillery
+  * sonar
   * metrics
 
   Examples:
-      $ mix ca.apply.config --type distillery
-      $ mix ca.apply.config -t distillery
+      $ mix ca.apply.config --type sonar
+      $ mix ca.apply.config -t metrics
   """
 
   alias ElixirStructureManager.Core.ApplyTemplate

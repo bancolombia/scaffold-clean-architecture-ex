@@ -22,7 +22,6 @@ defmodule ApplyTemplatesTest do
           :cognitotokenprovider,
           :dynamo,
           :metrics,
-          :distillery,
           :sonar
         ],
         fn template ->

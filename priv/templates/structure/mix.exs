@@ -10,11 +10,24 @@ defmodule {app}.MixProject do
       deps: deps(),
       test_coverage: [tool: ExCoveralls],
       preferred_cli_env: [
+        "ca.release": :test,
+        "ca.container.release": :test,
+        "ca.test": :test,
+        "ca.sobelow.sonar": :test,
         coveralls: :test,
         "coveralls.detail": :test,
         "coveralls.post": :test,
         "coveralls.html": :test,
-        "coveralls.xml": :test
+        "coveralls.xml": :test,
+        credo: :test,
+        release: :prod,
+        sobelow: :test,
+      ],
+      releases: [
+        {app_snake}: [
+          include_executables_for: [:unix],
+          steps: [:assemble, :tar]
+        ]
       ],
       metrics: {metrics}
     ]
@@ -41,6 +54,7 @@ defmodule {app}.MixProject do
       {:cors_plug, "~> 3.0"},
       {:timex, "~> 3.0"},
       {:excoveralls, "~> 0.18", only: :test},
+      {:elixir_structure_manager, ">= 0.0.0", only: [:dev, :test]},
     ]
   end
 end

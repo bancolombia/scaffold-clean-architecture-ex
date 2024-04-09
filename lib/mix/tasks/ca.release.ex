@@ -16,8 +16,8 @@ defmodule Mix.Tasks.Ca.Release do
   * _build/release/artifact/<app-name>.tar.gz
 
   You can skip some task with --skip-test or --skip-release options:
-      $ mix ca.release --skip-test
-      $ mix ca.release --skip-release
+      $ mix ca.release --skiptest
+      $ mix ca.release --skiprelease
 
   You can run the tasks inside a container with --container option:
       $ mix ca.release --container

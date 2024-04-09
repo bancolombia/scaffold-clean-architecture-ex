@@ -1,6 +1,4 @@
 ARG IMAGE=elixir:1.16.2-otp-26-alpine
-ARG SKIP_RELEASE=false
-ARG SKIP_TEST=false
 
 FROM $IMAGE
 RUN apk add build-base git
@@ -16,7 +14,7 @@ RUN mix deps.get \
 # Ensure use of .dockerignore file to avoid copying unnecessary files
 COPY . .
 # To generate compiled application and run static code analysis
-RUN mix ca.release --skip-release=$SKIP_RELEASE --skip-test=$SKIP_TEST
+RUN mix ca.release
 
 CMD while true; do \
         echo "This is an infinite loop until files are copied and container destroyed."; \

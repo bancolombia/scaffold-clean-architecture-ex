@@ -16,8 +16,8 @@ defmodule Mix.Tasks.Ca.Release do
   * _build/release/artifact/<app-name>.tar.gz
 
   You can skip some task with --skip-test or --skip-release options:
-      $ mix ca.release --no-test
-      $ mix ca.release --no-release
+      $ mix ca.release --skip-test
+      $ mix ca.release --skip-release
 
   You can run the tasks inside a container with --container option:
       $ mix ca.release --container
@@ -41,13 +41,18 @@ defmodule Mix.Tasks.Ca.Release do
   use BaseTask,
     name: "ca.release",
     description: "Mix ca tasks runner for release and tests",
-    switches: ["skip-test": :boolean, "skip-release": :boolean, container: :boolean],
-    aliases: []
+    switches: [skiptest: :boolean, skiprelease: :boolean, container: :boolean],
+    aliases: [t: :skiptest, r: :skiprelease, c: :container]
 
   def execute({opts, []}) do
     in_container = Keyword.get(opts, :container, false)
-    skip_release = Keyword.get(opts, :"skip-release", false)
-    skip_test = Keyword.get(opts, :"skip-test", false)
+    skip_release = Keyword.get(opts, :skiprelease, false)
+    skip_test = Keyword.get(opts, :skiptest, false)
+
+    Mix.shell().info([
+      :green,
+      "* Running release tasks with args: skip_release=#{skip_release}, skip_test=#{skip_test} and in_container=#{in_container}"
+    ])
 
     if in_container do
       run_in_container(skip_release, skip_test)
@@ -124,7 +129,7 @@ defmodule Mix.Tasks.Ca.Release do
       Application.get_env(
         :elixir_structure_manager,
         :container_base_image,
-        "1.16.2-otp-26-alpine"
+        "elixir:1.16.2-otp-26-alpine"
       )
 
     args = %{

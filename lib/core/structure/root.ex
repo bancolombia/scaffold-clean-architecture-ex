@@ -7,6 +7,7 @@ defmodule Structure.Root do
       create: %{
         "{app_snake}/mix.exs" => @base <> "mix.exs",
         "{app_snake}/Dockerfile-build" => @base <> "Dockerfile-build",
+        "{app_snake}/sh_build.sh" => @base <> "sh_build.sh",
         "{app_snake}/config/config.exs" => @base <> "config.exs",
         "{app_snake}/config/dev.exs" => @base <> "dev.exs",
         "{app_snake}/config/test.exs" => @base <> "test.exs",

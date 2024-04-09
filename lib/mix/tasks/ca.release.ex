@@ -15,7 +15,7 @@ defmodule Mix.Tasks.Ca.Release do
   * _build/release/test-junit-report.xml
   * _build/release/artifact/<app-name>.tar.gz
 
-  You can skip some task with --skip-test or --skip-release options:
+  You can skip some task with --skiptest or --skipreleasee options:
       $ mix ca.release --skiptest
       $ mix ca.release --skiprelease
 
@@ -139,7 +139,7 @@ defmodule Mix.Tasks.Ca.Release do
       transformations: [
         {:cmd, "rm -rf _build/release"},
         {:cmd,
-         "#{container_tool} build --build-arg IMAGE=#{container_base_image} --build-arg SKIP_RELEASE=#{skip_release} --build-arg SKIP_TEST=#{skip_test} -t {app_snake} -f #{container_file} ."},
+         "#{container_tool} build --build-arg IMAGE=#{container_base_image} -t {app_snake} -f #{container_file} ."},
         {:cmd, "#{container_tool} stop {app_snake} || true"},
         {:cmd, "#{container_tool} rm {app_snake} || true"},
         {:cmd, "#{container_tool} run -d --name {app_snake} {app_snake}"},

@@ -17,7 +17,7 @@ defmodule Config.Metrics do
           {:inject_dependency, ~s|{:opentelemetry_exporter, "~> 1.0"}|},
           {:inject_dependency, ~s|{:opentelemetry_api, "~> 1.0"}|},
           {:inject_dependency,
-           ~s|{:opentelemetry_plug, git: "https://github.com/juancgalvis/opentelemetry_plug.git", tag: "master"}|},
+           ~s|{:opentelemetry_plug, git: "https://github.com/bancolombia/opentelemetry_plug.git", tag: "master"}|},
           {:insert_after, "lib/application.ex", "\n  alias {app}.Utils.CustomTelemetry",
            regex: ~r{Utils\.CertificatesAdmin}},
           {:insert_before, "lib/application.ex",

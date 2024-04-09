@@ -26,7 +26,7 @@ defmodule ElixirStructureManager.Utils.CommonCommands do
 
     if exit_code != 0 do
       Mix.shell().error([:red, "Command '#{log_cms}' failed with exit code #{exit_code}"])
-      exit(exit_code)
+      # exit(exit_code)
     end
   end
 

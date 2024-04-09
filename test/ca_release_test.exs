@@ -11,7 +11,14 @@ defmodule Ca.ReleaseTest do
 
   test "should execute actions on project" do
     with_mocks([{FileGenerator, [], [execute_actions: fn _actions, _tokens -> :ok end]}]) do
-      Task.execute({nil, []})
+      Task.execute({["skip-test": false, "skip-release": false], []})
+      assert called(FileGenerator.execute_actions(:_, :_))
+    end
+  end
+
+  test "should execute actions inside container project" do
+    with_mocks([{FileGenerator, [], [execute_actions: fn _actions, _tokens -> :ok end]}]) do
+      Task.execute({[container: true], []})
       assert called(FileGenerator.execute_actions(:_, :_))
     end
   end

@@ -24,15 +24,15 @@ defmodule Mix.Tasks.Ca.Release do
 
       this uses the following configuration:
       * container_tool: docker
-      * container_file: Dockerfile-build
+      * container_file: resources/cloud/Dockerfile-build
       * container_base_image: 1.16.2-otp-26-alpine
 
       You can change the configuration in config/config.exs with:
 
       config :elixir_structure_manager,
-        container_file: "Dockerfile-build",
-        container_base_image: "1.16.2-otp-26-alpine",
-        container_tool: "docker"
+        container_tool: "docker",
+        container_file: "resources/cloud/Dockerfile-build",
+        container_base_image: "1.16.2-otp-26-alpine"
   """
 
   alias ElixirStructureManager.Utils.{FileGenerator, TokenHelper}
@@ -118,12 +118,16 @@ defmodule Mix.Tasks.Ca.Release do
     Mix.shell().info([:green, "* Artifact generated"])
   end
 
-  defp run_in_container(skip_release, skip_test) do
+  defp run_in_container(_skip_release, _skip_test) do
     Mix.shell().info([:green, "* Generating release artifact inside a container"])
     container_tool = Application.get_env(:elixir_structure_manager, :container_tool, "docker")
 
     container_file =
-      Application.get_env(:elixir_structure_manager, :container_file, "Dockerfile-build")
+      Application.get_env(
+        :elixir_structure_manager,
+        :container_file,
+        "resources/cloud/Dockerfile-build"
+      )
 
     container_base_image =
       Application.get_env(

@@ -52,7 +52,7 @@ defmodule {app}.Utils.DataTypeUtils do
     {number, ""} = Float.parse(value)
     number
   rescue
-    _err -> Logger.warn("Error parsing #{value} to float")
+    _err -> Logger.warning("Error parsing #{value} to float")
            nil
   end
 

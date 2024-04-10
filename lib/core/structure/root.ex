@@ -6,8 +6,6 @@ defmodule Structure.Root do
     %{
       create: %{
         "{app_snake}/mix.exs" => @base <> "mix.exs",
-        "{app_snake}/Dockerfile-build" => @base <> "Dockerfile-build",
-        "{app_snake}/sh_build.sh" => @base <> "sh_build.sh",
         "{app_snake}/config/config.exs" => @base <> "config.exs",
         "{app_snake}/config/dev.exs" => @base <> "dev.exs",
         "{app_snake}/config/test.exs" => @base <> "test.exs",
@@ -23,7 +21,9 @@ defmodule Structure.Root do
         "{app_snake}/.gitignore" => @base <> "gitignore.txt",
         "{app_snake}/.formatter.exs" => @base <> "formatter.exs",
         "{app_snake}/.dockerignore" => @base <> "dockerignore.txt",
-        "{app_snake}/resources/docker/Dockerfile" => @base <> "dockerfile.txt",
+        "{app_snake}/resources/cloud/Dockerfile" => @base <> "dockerfile.txt",
+        "{app_snake}/resources/cloud/Dockerfile-build" => @base <> "Dockerfile-build.txt",
+        "{app_snake}/sh_build.sh" => @base <> "sh_build.sh",
         "{app_snake}/test/infrastructure/entry_points/api_rest_test.exs" =>
           @base <> "api_rest_test.exs",
         "{app_snake}/test/{app_snake}_application_test.exs" => @base <> "test_application.exs",

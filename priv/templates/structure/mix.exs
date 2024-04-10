@@ -11,8 +11,6 @@ defmodule {app}.MixProject do
       test_coverage: [tool: ExCoveralls],
       preferred_cli_env: [
         "ca.release": :test,
-        "ca.container.release": :test,
-        "ca.test": :test,
         "ca.sobelow.sonar": :test,
         coveralls: :test,
         "coveralls.detail": :test,

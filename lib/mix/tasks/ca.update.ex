@@ -5,8 +5,8 @@ defmodule Mix.Tasks.Ca.Update do
   Examples:
       $ mix ca.update
   """
-  alias Mix.Tasks.Ca.BaseTask
   alias ElixirStructureManager.Utils.Hex.Packages
+  alias Mix.Tasks.Ca.BaseTask
 
   use BaseTask,
     name: "ca.update",
@@ -45,7 +45,7 @@ defmodule Mix.Tasks.Ca.Update do
     dep
   end
 
-  defp fetch_latest_version(dep = {package, _version, opts}) do
+  defp fetch_latest_version({package, _version, opts} = dep) do
     case Packages.get_stable_version(Atom.to_string(package)) do
       {:ok, {version, _config}} -> {package, "~> #{version}", opts}
       _ -> dep

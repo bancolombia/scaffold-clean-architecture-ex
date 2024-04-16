@@ -39,7 +39,7 @@ defmodule ElixirStructureManager.Utils.Hex.Packages do
     end
   end
 
-  defp ssl_options() do
+  defp ssl_options do
     if System.get_env("HEX_UNSAFE_HTTPS") == "1" || System.get_env("HEX_UNSAFE_REGISTRY") == "1" do
       [{:verify, :verify_none}]
     else

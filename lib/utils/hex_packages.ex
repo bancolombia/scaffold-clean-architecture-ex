@@ -43,8 +43,10 @@ defmodule ElixirStructureManager.Utils.Hex.Packages do
     if System.get_env("HEX_UNSAFE_HTTPS") == "1" || System.get_env("HEX_UNSAFE_REGISTRY") == "1" do
       [{:verify, :verify_none}]
     else
-      if File.exists?(System.get_env("HEX_CACERTS_PATH")) do
-        [{:cacertfile, System.get_env("HEX_CACERTS_PATH")}]
+      file = System.get_env("HEX_CACERTS_PATH")
+
+      if file != nil && File.exists?(file) do
+        [{:cacertfile, file}]
       else
         []
       end

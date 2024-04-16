@@ -24,8 +24,8 @@ defmodule ElixirStructureManager.Utils.Hex.PackagesTest do
   end
 
   test "fail making request" do
-    with_mock :httpc, request: fn _, _, _, _ -> {:error, :bad_request} end do
-      assert {:error, "Request failed with error :bad_request"} =
+    with_mock :httpc, request: fn _, _, _, _ -> {:error, "Bad Request"} end do
+      assert {:error, "Request failed with error \"Bad Request\""} =
                Packages.get_stable_version("package_name")
     end
   end

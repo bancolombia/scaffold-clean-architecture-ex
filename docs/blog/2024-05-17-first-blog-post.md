@@ -5,4 +5,4 @@ authors: [juancgalvis]
 tags: [elixir, new task]
 ---
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elementum dignissim ultricies. Fusce rhoncus ipsum tempor eros aliquam consequat. Lorem ipsum dolor sit amet
+TODO: Make a blog entry

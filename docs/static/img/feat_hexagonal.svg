@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="1129"
+   height="663"
+   viewBox="0 0 1129 663"
+   version="1.1"
+   id="svg29"
+   sodipodi:docname="feat_hexagonal.svg"
+   inkscape:version="1.3.2 (091e20e, 2023-11-25)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <defs
+     id="defs29" />
+  <sodipodi:namedview
+     id="namedview29"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:zoom="0.68114566"
+     inkscape:cx="386.11418"
+     inkscape:cy="450.71123"
+     inkscape:window-width="1680"
+     inkscape:window-height="997"
+     inkscape:window-x="378"
+     inkscape:window-y="1105"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg29" />
+  <title
+     id="title1">Focus on What Matters</title>
+  <g
+     id="g29"
+     transform="matrix(1.1695906,0,0,1.1695906,-79.944421,-105.92688)">
+    <rect
+       x="131"
+       y="152.5"
+       width="840"
+       height="50"
+       fill="#3f3d56"
+       id="rect2" />
+    <path
+       d="M 166.5,727.3299 A 21.67009,21.67009 0 0 0 188.1701,749 H 984.8299 A 21.67009,21.67009 0 0 0 1006.5,727.3299 V 296 h -840 z"
+       transform="translate(-35.5,-118.5)"
+       fill="#3f3d56"
+       id="path2" />
+    <path
+       d="M 984.8299,236 H 188.1701 A 21.67009,21.67009 0 0 0 166.5,257.6701 V 296 h 840 V 257.6701 A 21.67009,21.67009 0 0 0 984.8299,236 Z"
+       transform="translate(-35.5,-118.5)"
+       fill="#3f3d56"
+       id="path3" />
+    <path
+       d="M 984.8299,236 H 188.1701 A 21.67009,21.67009 0 0 0 166.5,257.6701 V 296 h 840 V 257.6701 A 21.67009,21.67009 0 0 0 984.8299,236 Z"
+       transform="translate(-35.5,-118.5)"
+       opacity="0.2"
+       id="path4" />
+    <circle
+       cx="181"
+       cy="147.5"
+       r="13"
+       fill="#3f3d56"
+       id="circle4" />
+    <circle
+       cx="217"
+       cy="147.5"
+       r="13"
+       fill="#3f3d56"
+       id="circle5" />
+    <circle
+       cx="253"
+       cy="147.5"
+       r="13"
+       fill="#3f3d56"
+       id="circle6" />
+  </g>
+  <rect
+     style="fill:#f2f2f2;fill-opacity:1;stroke:none;stroke-opacity:1"
+     id="rect31"
+     width="165.83327"
+     height="56.492653"
+     x="200.58336"
+     y="225.5" />
+  <rect
+     style="fill:#f2f2f2;fill-opacity:1;stroke:none;stroke-opacity:1"
+     id="rect31-9"
+     width="165.83327"
+     height="56.492653"
+     x="762.58337"
+     y="225.5" />
+  <rect
+     style="fill:#f2f2f2;fill-opacity:1;stroke:none;stroke-opacity:1"
+     id="rect31-9-1"
+     width="165.83327"
+     height="56.492653"
+     x="760.58337"
+     y="390.5" />
+  <rect
+     style="fill:#f2f2f2;fill-opacity:1;stroke:none;stroke-opacity:1"
+     id="rect31-9-7"
+     width="165.83327"
+     height="56.492653"
+     x="200.58336"
+     y="390.5" />
+  <path
+     sodipodi:type="star"
+     style="fill:#f2f2f2;fill-opacity:1;stroke:none;stroke-opacity:1"
+     id="path29"
+     inkscape:flatsided="true"
+     sodipodi:sides="6"
+     sodipodi:cx="346.49347"
+     sodipodi:cy="256.16824"
+     sodipodi:r1="135.97849"
+     sodipodi:r2="67.98925"
+     sodipodi:arg1="0.90115738"
+     sodipodi:arg2="1.4247562"
+     inkscape:rounded="0"
+     inkscape:randomized="0"
+     d="m 430.89572,362.78161 -134.53101,19.7878 -84.40224,-106.61336 50.12875,-126.40117 134.53101,-19.78781 84.40224,106.61337 z"
+     inkscape:transform-center-x="-9.8395187"
+     inkscape:transform-center-y="-5.8655471"
+     transform="rotate(67.915396,399.56574,455.69576)" />
+  <text
+     xml:space="preserve"
+     style="font-size:48px;fill:#591170;fill-opacity:1;stroke:none;stroke-opacity:1"
+     x="455.86719"
+     y="348.57422"
+     id="text31"><tspan
+       sodipodi:role="line"
+       id="tspan31"
+       x="455.86719"
+       y="348.57422"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:48px;font-family:'Comic Sans MS';-inkscape-font-specification:'Comic Sans MS Bold';fill:#591170;fill-opacity:1;stroke:none">DOMAIN</tspan></text>
+  <text
+     xml:space="preserve"
+     style="font-size:29.3333px;fill:#591170;fill-opacity:1;stroke:none;stroke-opacity:1"
+     x="787.66412"
+     y="261.00089"
+     id="text31-5"><tspan
+       sodipodi:role="line"
+       id="tspan31-8"
+       x="787.66412"
+       y="261.00089"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:29.3333px;font-family:'Comic Sans MS';-inkscape-font-specification:'Comic Sans MS Bold';fill:#591170;fill-opacity:1;stroke:none">Adapter</tspan></text>
+  <text
+     xml:space="preserve"
+     style="font-size:29.3333px;fill:#591170;fill-opacity:1;stroke:none;stroke-opacity:1"
+     x="785.66412"
+     y="426.00089"
+     id="text31-5-1"><tspan
+       sodipodi:role="line"
+       id="tspan31-8-5"
+       x="785.66412"
+       y="426.00089"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:29.3333px;font-family:'Comic Sans MS';-inkscape-font-specification:'Comic Sans MS Bold';fill:#591170;fill-opacity:1;stroke:none">Adapter</tspan></text>
+  <text
+     xml:space="preserve"
+     style="font-size:29.3333px;fill:#591170;fill-opacity:1;stroke:none;stroke-opacity:1"
+     x="203.47795"
+     y="261.09396"
+     id="text31-5-1-2"><tspan
+       sodipodi:role="line"
+       id="tspan31-8-5-1"
+       x="203.47795"
+       y="261.09396"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:29.3333px;font-family:'Comic Sans MS';-inkscape-font-specification:'Comic Sans MS Bold';fill:#591170;fill-opacity:1;stroke:none">Entry Point</tspan></text>
+  <text
+     xml:space="preserve"
+     style="font-size:29.3333px;fill:#591170;fill-opacity:1;stroke:none;stroke-opacity:1"
+     x="203.47795"
+     y="426.09396"
+     id="text31-5-1-2-4"><tspan
+       sodipodi:role="line"
+       id="tspan31-8-5-1-6"
+       x="203.47795"
+       y="426.09396"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:29.3333px;font-family:'Comic Sans MS';-inkscape-font-specification:'Comic Sans MS Bold';fill:#591170;fill-opacity:1;stroke:none">Entry Point</tspan></text>
+  <metadata
+     id="metadata31">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:title>Focus on What Matters</dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <path
+     style="fill:#ffffff;fill-rule:evenodd;stroke:#ffffff;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     d="m 366.41663,276.68965 81.07145,22.43275"
+     id="path33"
+     inkscape:connector-type="polyline"
+     inkscape:connector-curvature="0"
+     inkscape:connection-start="#rect31"
+     inkscape:connection-end="#path29" />
+  <path
+     style="fill:#ffffff;fill-rule:evenodd;stroke:#ffffff;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     d="m 366.41663,393.00194 82.56506,-25.63522"
+     id="path34"
+     inkscape:connector-type="polyline"
+     inkscape:connector-curvature="0"
+     inkscape:connection-start="#rect31-9-7"
+     inkscape:connection-end="#path29" />
+  <path
+     style="fill:#ffffff;fill-rule:evenodd;stroke:#ffffff;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     d="M 760.58337,392.8174 679.48313,367.45647"
+     id="path35"
+     inkscape:connector-type="polyline"
+     inkscape:connector-curvature="0"
+     inkscape:connection-start="#rect31-9-1"
+     inkscape:connection-end="#path29" />
+  <path
+     style="fill:#ffffff;fill-rule:evenodd;stroke:#ffffff;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     d="m 762.58337,276.68965 -80.59178,22.30002"
+     id="path36"
+     inkscape:connector-type="polyline"
+     inkscape:connector-curvature="0"
+     inkscape:connection-start="#rect31-9"
+     inkscape:connection-end="#path29" />
+</svg>

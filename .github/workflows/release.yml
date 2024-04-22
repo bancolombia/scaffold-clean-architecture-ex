@@ -7,7 +7,15 @@ jobs:
   release:
     runs-on: ubuntu-latest
     steps:
+      - name: Generate a token
+        id: generate_token
+        uses: tibdex/github-app-token@v1
+        with:
+          app_id: ${{ secrets.APP_ID_ADMIN_GITHUB }}
+          private_key: ${{ secrets.APP_PRIVATE_KEY_ADMIN_GITHUB }}
       - uses: actions/checkout@v4
+        with:
+          token: ${{ steps.generate_token.outputs.token }}
       - name: Set up Elixir
         uses: erlef/setup-beam@v1.17.1
         with:
@@ -40,12 +48,6 @@ jobs:
         run: mix hex.publish --replace --yes
         env:
           HEX_API_KEY: ${{ secrets.HEX_API_KEY }}
-      - name: Generate a token
-        id: generate_token
-        uses: tibdex/github-app-token@v1
-        with:
-          app_id: ${{ secrets.APP_ID_ADMIN_GITHUB }}
-          private_key: ${{ secrets.APP_PRIVATE_KEY_ADMIN_GITHUB }}
       - name: Save version
         uses: github-actions-x/commit@v2.9
         with:

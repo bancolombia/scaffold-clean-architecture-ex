@@ -19,7 +19,7 @@ defmodule Config.Metrics do
           {:inject_dependency,
            ~s|{:opentelemetry_plug, git: "https://github.com/bancolombia/opentelemetry_plug.git", tag: "master"}|},
           {:insert_after, "lib/application.ex", "\n  alias {app}.Utils.CustomTelemetry",
-           regex: ~r{Utils\.CertificatesAdmin}},
+           regex: ~r/ConfigHolder}/},
           {:insert_before, "lib/application.ex",
            "CustomTelemetry.custom_telemetry_events()\n    OpentelemetryPlug.setup()\n    ",
            regex: ~r{opts = \[}},

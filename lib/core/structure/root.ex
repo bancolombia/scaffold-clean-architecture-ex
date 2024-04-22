@@ -15,7 +15,6 @@ defmodule Structure.Root do
           @base <> "health_check.ex",
         "{app_snake}/lib/config/config_holder.ex" => @base <> "config_holder.ex",
         "{app_snake}/lib/config/app_config.ex" => @base <> "app_config.ex",
-        "{app_snake}/lib/utils/certificates_admin.ex" => @base <> "certificates_admin.ex",
         "{app_snake}/lib/utils/data_type_utils.ex" => @base <> "data_type_utils.ex",
         "{app_snake}/lib/application.ex" => @base <> "application.ex",
         "{app_snake}/.gitignore" => @base <> "gitignore.txt",

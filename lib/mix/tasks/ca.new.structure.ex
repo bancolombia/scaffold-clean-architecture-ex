@@ -2,8 +2,8 @@ defmodule Mix.Tasks.Ca.New.Structure do
   @moduledoc """
   Creates a new Clean architecture scaffold
       $ mix ca.new.structure [application_name]
-      $ mix ca.new.structure [application_name] --metrics --distillery
-      $ mix ca.new.structure [application_name] -m -d
+      $ mix ca.new.structure [application_name] --metrics --sonar
+      $ mix ca.new.structure [application_name] -m -s
   """
 
   alias ElixirStructureManager.Utils.{CommonCommands, DataTypeUtils, FileGenerator, TokenHelper}

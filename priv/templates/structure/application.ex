@@ -5,15 +5,12 @@ defmodule {app}.Application do
 
   alias {app}.Infrastructure.EntryPoint.ApiRest
   alias {app}.Config.{AppConfig, ConfigHolder}
-  alias {app}.Utils.CertificatesAdmin
 
   use Application
   require Logger
 
   def start(_type, [env]) do
     config = AppConfig.load_config()
-
-    CertificatesAdmin.setup()
 
     children = with_plug_server(config) ++ all_env_children() ++ env_children(env)
 

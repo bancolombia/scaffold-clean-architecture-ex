@@ -1,7 +1,7 @@
 defmodule ElixirStructureManager.MixProject do
   use Mix.Project
 
-  @version "0.1.8"
+  @version "1.3.2"
 
   def project do
     [

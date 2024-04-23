@@ -1,5 +1,13 @@
 # Changelog
 
+## [v1.3.3](https://github.com/bancolombia/scaffold-clean-architecture-ex/tree/v1.3.3) (2024-04-23)
+
+[Full Changelog](https://github.com/bancolombia/scaffold-clean-architecture-ex/compare/v1.3.2...v1.3.3)
+
+**Merged pull requests:**
+
+- fix\(deps\): Fix template name with {name} [\#44](https://github.com/bancolombia/scaffold-clean-architecture-ex/pull/44) ([juancgalvis](https://github.com/juancgalvis))
+
 ## [v1.3.2](https://github.com/bancolombia/scaffold-clean-architecture-ex/tree/v1.3.2) (2024-04-22)
 
 [Full Changelog](https://github.com/bancolombia/scaffold-clean-architecture-ex/compare/v1.3.1...v1.3.2)

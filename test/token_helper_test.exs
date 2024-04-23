@@ -14,9 +14,11 @@ defmodule TokenHelperTest do
   end
 
   test "should add tuple with defaults" do
+    config = Mix.Project.config()
+
     expected = [
       {"{app}", "Sample"},
-      {"{version}", "0.1.8"},
+      {"{version}", config[:version]},
       {"{app}", "ElixirStructureManager"},
       {"{app_snake}", "elixir_structure_manager"}
     ]
@@ -27,9 +29,11 @@ defmodule TokenHelperTest do
   end
 
   test "should add tokens to existing lis" do
+    config = Mix.Project.config()
+
     expected = [
       {"{key}", "value"},
-      {"{version}", "0.1.8"},
+      {"{version}", config[:version]},
       {"{app}", "ElixirStructureManager"},
       {"{app_snake}", "elixir_structure_manager"}
     ]

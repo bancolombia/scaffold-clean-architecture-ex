@@ -10,7 +10,7 @@ defmodule ElixirStructureManager.Core.ApplyTemplate do
     module = resolve_behaviour(type)
 
     tokens =
-      TokenHelper.add("name", name)
+      TokenHelper.add("{name}", name)
       |> TokenHelper.add(module.tokens(opts))
 
     module.actions()

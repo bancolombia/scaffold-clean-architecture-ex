@@ -10,7 +10,7 @@ defmodule ElixirStructureManager.Utils.StringContent do
 
   def format_name(name) do
     case String.match?(name, ~r/^([a-zA-Z0-9]+)(_[a-zA-Z0-9]+)*$/) do
-      true -> {:ok, String.downcase(name), Macro.camelize(name)}
+      true -> {:ok, Macro.underscore(name), Macro.camelize(name)}
       _ -> {:error, :invalid_name, name}
     end
   end

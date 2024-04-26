@@ -5,9 +5,15 @@
 
 Elixir plugin to create an elixir application based on Clean Architecture following our best practices.
 
-## Install
+## Documentation
 
-[HexDocs](https://hex.pm/packages/elixir_structure_manager)
+[Documentation](https://bancolombia.github.io/scaffold-clean-architecture-ex/)
+
+Default Elixir documentation generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
+and published on [HexDocs](https://hexdocs.pm). This docs can
+be found at [https://hexdocs.pm/elixir_structure_manager](https://hexdocs.pm/elixir_structure_manager).
+
+## Install
 
 ```bash
 mix archive.install hex elixir_structure_manager <version>
@@ -24,12 +30,4 @@ mix archive
 ```shell
 mix archive.uninstall elixir_structure_manager-<version>
 ```
-
-## Documentation
-
-[Documentation](https://bancolombia.github.io/scaffold-clean-architecture-ex/)
-
-Default Elixir documentation generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
-and published on [HexDocs](https://hexdocs.pm). This docs can
-be found at [https://hexdocs.pm/elixir_structure_manager](https://hexdocs.pm/elixir_structure_manager).
 

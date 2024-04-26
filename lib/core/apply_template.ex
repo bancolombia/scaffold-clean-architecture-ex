@@ -1,6 +1,6 @@
 defmodule ElixirStructureManager.Core.ApplyTemplate do
   alias Config.Metrics
-  alias ElixirStructureManager.Utils.{FileGenerator, TokenHelper}
+  alias ElixirStructureManager.Utils.{FileGenerator, StringContent, TokenHelper}
 
   @moduledoc """
   This module is responsible for applying the templates to the project.
@@ -9,13 +9,20 @@ defmodule ElixirStructureManager.Core.ApplyTemplate do
   def apply(type, name, opts \\ nil) do
     module = resolve_behaviour(type)
 
-    tokens =
-      TokenHelper.add("{name}", name)
-      |> TokenHelper.add(module.tokens(opts))
+    case StringContent.format_name(name) do
+      {:ok, name_snake, name_camel} ->
+        tokens =
+          TokenHelper.add("{name}", name_camel)
+          |> TokenHelper.add("{name_snake}", name_snake)
+          |> TokenHelper.add(module.tokens(opts))
 
-    module.actions()
-    |> Metrics.inject(type)
-    |> FileGenerator.execute_actions(tokens)
+        module.actions()
+        |> Metrics.inject(type)
+        |> FileGenerator.execute_actions(tokens)
+
+      {:error, _, name} ->
+        Mix.raise("Invalid name: #{name}")
+    end
   end
 
   defp resolve_behaviour(:model), do: Domain.Model

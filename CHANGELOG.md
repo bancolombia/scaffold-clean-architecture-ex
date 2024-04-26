@@ -1,5 +1,15 @@
 # Changelog
 
+## [v1.3.4](https://github.com/bancolombia/scaffold-clean-architecture-ex/tree/v1.3.4) (2024-04-26)
+
+[Full Changelog](https://github.com/bancolombia/scaffold-clean-architecture-ex/compare/v1.3.3...v1.3.4)
+
+**Merged pull requests:**
+
+- fix\(release\): include semantic message to release [\#49](https://github.com/bancolombia/scaffold-clean-architecture-ex/pull/49) ([juancgalvis](https://github.com/juancgalvis))
+- fix\(name\): Fix adapter name [\#48](https://github.com/bancolombia/scaffold-clean-architecture-ex/pull/48) ([juancgalvis](https://github.com/juancgalvis))
+- test\(version\): Fix test version reading it dynamically [\#45](https://github.com/bancolombia/scaffold-clean-architecture-ex/pull/45) ([juancgalvis](https://github.com/juancgalvis))
+
 ## [v1.3.3](https://github.com/bancolombia/scaffold-clean-architecture-ex/tree/v1.3.3) (2024-04-23)
 
 [Full Changelog](https://github.com/bancolombia/scaffold-clean-architecture-ex/compare/v1.3.2...v1.3.3)

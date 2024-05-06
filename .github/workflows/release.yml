@@ -53,7 +53,7 @@ jobs:
         with:
           github-token: ${{ steps.generate_token.outputs.token }}
           push-branch: main
-          commit-message: "Upgrade version to ${{ env.RELEASE_VERSION }}"
+          commit-message: "Upgrade version to ${{ env.RELEASE_VERSION }} [skip ci]"
           force-add: "true"
           force-push: "true"
           files: mix.exs CHANGELOG.md

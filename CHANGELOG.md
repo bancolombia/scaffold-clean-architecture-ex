@@ -1,5 +1,14 @@
 # Changelog
 
+## [v1.3.5](https://github.com/bancolombia/scaffold-clean-architecture-ex/tree/v1.3.5) (2024-05-27)
+
+[Full Changelog](https://github.com/bancolombia/scaffold-clean-architecture-ex/compare/v1.3.4...v1.3.5)
+
+**Merged pull requests:**
+
+- fix\(sobelow\): Fix sobelow sonar prefix [\#51](https://github.com/bancolombia/scaffold-clean-architecture-ex/pull/51) ([juancgalvis](https://github.com/juancgalvis))
+- ci\(conditions\): Add commit with github app and skip condition when automatic release [\#50](https://github.com/bancolombia/scaffold-clean-architecture-ex/pull/50) ([juancgalvis](https://github.com/juancgalvis))
+
 ## [v1.3.4](https://github.com/bancolombia/scaffold-clean-architecture-ex/tree/v1.3.4) (2024-04-26)
 
 [Full Changelog](https://github.com/bancolombia/scaffold-clean-architecture-ex/compare/v1.3.3...v1.3.4)

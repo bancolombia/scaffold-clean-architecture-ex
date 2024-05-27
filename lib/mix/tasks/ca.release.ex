@@ -92,7 +92,7 @@ defmodule Mix.Tasks.Ca.Release do
       ]
     }
 
-    FileGenerator.execute_actions(args, TokenHelper.add("sonar_base_folder", sonar_base_folder))
+    FileGenerator.execute_actions(args, TokenHelper.add("{sonar_base_folder}", sonar_base_folder))
 
     Mix.shell().info([:green, "* Analysis executed"])
   end

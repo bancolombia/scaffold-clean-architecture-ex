@@ -52,15 +52,15 @@ defmodule ElixirStructureManager.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:poison, "~> 5.0.0"},
-      {:castore, "~> 1.0.6"},
-      {:sobelow, "~> 0.13.0", [only: [:dev, :test]]},
+      {:poison, "~> 5.0 or ~> 6.0"},
+      {:castore, "~> 1.0"},
+      {:sobelow, "~> 0.13", [only: [:dev, :test]]},
       {:mock, "~> 0.3.8", [only: [:dev, :test]]},
-      {:excoveralls, "~> 0.18.1", [only: [:dev, :test]]},
-      {:ex_doc, "~> 0.32.1", [only: [:dev, :test], runtime: false]},
-      {:git_hooks, "~> 0.7.3", [only: [:dev, :test], runtime: false]},
-      {:credo, "~> 1.7.5", [only: [:dev, :test], runtime: false]},
-      {:dialyxir, "~> 1.4.3", [only: [:dev, :test], runtime: false]}
+      {:excoveralls, "~> 0.18", [only: [:dev, :test]]},
+      {:ex_doc, "~> 0.34", [only: [:dev, :test], runtime: false]},
+      {:git_hooks, "~> 0.7", [only: [:dev, :test], runtime: false]},
+      {:credo, "~> 1.7", [only: [:dev, :test], runtime: false]},
+      {:dialyxir, "~> 1.4", [only: [:dev, :test], runtime: false]}
     ]
   end
 end

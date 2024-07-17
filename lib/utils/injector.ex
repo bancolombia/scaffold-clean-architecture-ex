@@ -38,7 +38,6 @@ defmodule ElixirStructureManager.Utils.Injector do
     else
       true -> {:ok, content}
       {:error, reason} -> {:error, reason}
-      other -> {:error, other}
     end
   end
 

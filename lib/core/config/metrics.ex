@@ -25,7 +25,7 @@ defmodule Config.Metrics do
            regex: ~r{opts = \[}},
           {:insert_after, "lib/application.ex",
            ",\n      {TelemetryMetricsPrometheus, [metrics: CustomTelemetry.metrics()]}",
-           regex: ~r|{ConfigHolder, AppConfig\.load_config\(\)}|},
+           regex: ~r|{ConfigHolder, config}|},
           {:insert_after, "lib/infrastructure/entry_points/api_rest.ex",
            "\n  plug OpentelemetryPlug.Propagation", regex: ~r|plug\(\:match\)|},
           {:insert_after, "mix.exs", ", :opentelemetry_exporter, :opentelemetry",

@@ -42,16 +42,17 @@ defmodule {app}.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      # {:dep_from_hexpm, "~> 0.3.0"},
-      # {:dep_from_git, git: "https://github.com/elixir-lang/my_dep.git", tag: "0.1.0"}
-      {:castore, "~> 1.0", override: true},
+      {:castore, "~> 1.0"},
       {:plug_cowboy, "~> 2.0"},
       {:jason, "~> 1.4"},
       {:plug_checkup, "~> 0.6"},
-      {:poison, "~> 5.0"},
+      {:poison, "~> 6.0"},
       {:cors_plug, "~> 3.0"},
       {:timex, "~> 3.0"},
+      # Test
+      {:mock, "~> 0.3", only: :test},
       {:excoveralls, "~> 0.18", only: :test},
+      # Release
       {:elixir_structure_manager, ">= 0.0.0", only: [:dev, :test]},
     ]
   end

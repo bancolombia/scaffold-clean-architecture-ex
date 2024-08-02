@@ -3,11 +3,10 @@ import Config
 config :{app_snake}, timezone: "America/Bogota"
 
 config :{app_snake},
+  env: :test,
   http_port: 8083,
   enable_server: true,
-  secret_name: "",
   version: "0.0.1",
-  in_test: true,
   custom_metrics_prefix_name: "{app_snake}_test"
 
 config :logger,
@@ -15,9 +14,8 @@ config :logger,
 
 config :junit_formatter,
   report_dir: "_build/release",
+  automatic_create_dir?: true,
   report_file: "test-junit-report.xml"
 
-config :elixir_structure_manager, # used with mix ca.release --container
-  container_tool: "docker",
-  container_file: "resources/cloud/Dockerfile-build",
-  container_base_image: "1.16.2-otp-26-alpine" # change by your preferred image
+config :elixir_structure_manager,
+  sonar_base_folder: "{base_dir_sonar}"

@@ -34,7 +34,7 @@ defmodule DA.RestConsumer do
           :insert_after,
           "lib/application.ex",
           "\n\t\t\t{Finch, name: HttpFinch, pools: %{:default => [size: 500]}},",
-          regex: ~r/_other_env\)(\s)+do(\s)+\[/
+          regex: ~r/_other_env, _config\)(\s)+do(\s)+\[/
         }
       ]
     }

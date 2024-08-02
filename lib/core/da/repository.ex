@@ -20,7 +20,7 @@ defmodule DA.Repository do
           :insert_after,
           "lib/application.ex",
           "\n\t\t\t{{app}.Infrastructure.Adapters.Repository.Repo, []},",
-          regex: ~r/_other_env\)(\s)+do(\s)+\[/
+          regex: ~r/_other_env, _config\)(\s)+do(\s)+\[/
         }
       ]
     }

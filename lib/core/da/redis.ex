@@ -1,6 +1,6 @@
 defmodule DA.Redis do
   @moduledoc false
-  @regex ~r/_other_env\)(\s)+do(\s)+\[/
+  @regex ~r/_other_env, _config\)(\s)+do(\s)+\[/
   @secrets_manager_file "lib/infrastructure/driven_adapters/secrets/secrets_manager.ex"
   @base "/priv/templates/adapters/"
 

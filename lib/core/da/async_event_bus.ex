@@ -30,7 +30,7 @@ defmodule DA.AsyncEventBus do
           :insert_after,
           "lib/application.ex",
           "\n\t\t\tMessageRuntimeConfig,",
-          regex: ~r/_other_env\)(\s)+do(\s)+\[/
+          regex: ~r/_other_env, _config\)(\s)+do(\s)+\[/
         },
         {
           :insert_after,

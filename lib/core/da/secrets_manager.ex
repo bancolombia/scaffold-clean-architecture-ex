@@ -3,13 +3,13 @@ defmodule DA.SecretsManager do
   @base "/priv/templates/adapters/secrets_manager/"
 
   @props """
-
-    secret_name: "",
+    \n  secret_name: "",
     secret: nil,
     config_loaders: [
       {app}.Infrastructure.Adapters.Secrets.SecretManagerAdapter
     ],
-    """
+  """
+
   @props_after ~r/enable_server:(\s)+(true|false),/
 
   def actions do

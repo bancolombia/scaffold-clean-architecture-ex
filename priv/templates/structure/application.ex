@@ -27,7 +27,7 @@ defmodule {app}.Application do
 
   def all_env_children(%AppConfig{} = config) do
     [
-      {ConfigHolder, config},
+      {ConfigHolder, config}
     ]
   end
 

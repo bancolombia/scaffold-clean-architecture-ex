@@ -1,8 +1,7 @@
 import Config
 
-config :{app_snake}, timezone: "America/Bogota"
-
 config :{app_snake},
+  timezone: "America/Bogota",
   env: :dev,
   http_port: 8083,
   enable_server: true,

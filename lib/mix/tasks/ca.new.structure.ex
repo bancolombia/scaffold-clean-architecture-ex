@@ -50,6 +50,8 @@ defmodule Mix.Tasks.Ca.New.Structure do
         CommonCommands.config_metrics(root_dir)
       end
 
+      CommonCommands.format(root_dir)
+
       Mix.shell().info([:blue, "To Execute the application run:"])
       Mix.shell().info([:green, "cd #{snake_name}"])
       Mix.shell().info([:green, "iex -S mix"])

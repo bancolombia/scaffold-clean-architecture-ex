@@ -20,5 +20,5 @@ defmodule {app}.Config.AppConfig do
      }
    end
 
-   defp load(property_name), do: Application.fetch_env!(:{app_skane}, property_name)
+   defp load(property_name), do: Application.fetch_env!(:{app_snake}, property_name)
  end

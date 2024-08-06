@@ -1,5 +1,13 @@
 # Changelog
 
+## [v1.4.1](https://github.com/bancolombia/scaffold-clean-architecture-ex/tree/v1.4.1) (2024-08-06)
+
+[Full Changelog](https://github.com/bancolombia/scaffold-clean-architecture-ex/compare/v1.4.0...v1.4.1)
+
+**Merged pull requests:**
+
+- fix\(secret\): remove secret process from application [\#54](https://github.com/bancolombia/scaffold-clean-architecture-ex/pull/54) ([juancgalvis](https://github.com/juancgalvis))
+
 ## [v1.4.0](https://github.com/bancolombia/scaffold-clean-architecture-ex/tree/v1.4.0) (2024-08-06)
 
 [Full Changelog](https://github.com/bancolombia/scaffold-clean-architecture-ex/compare/v1.3.6...v1.4.0)

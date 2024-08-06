@@ -6,8 +6,8 @@ defmodule Mix.Tasks.Ca.BaseTask do
 
   defmacro __using__(opts) do
     quote do
-      alias ElixirStructureManager.Utils.DataTypeUtils
       alias ElixirStructureManager.Utils.CommonCommands
+      alias ElixirStructureManager.Utils.DataTypeUtils
       alias Mix.Tasks.Help
       use Mix.Task
 

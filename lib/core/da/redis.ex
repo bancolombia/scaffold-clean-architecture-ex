@@ -32,7 +32,7 @@ defmodule DA.Redis do
             "lib/infrastructure/entry_points/health_check.ex",
             "\n\s\s\s\s\s\s%PlugCheckup.Check{name: \"redis\", module: {app}.Infrastructure.Adapters.Redis.RedisAdapter, function: :health},",
             regex: ~r{def checks do(\s)+\[}
-          },
+          }
         ] ++ redis_child
     }
   end

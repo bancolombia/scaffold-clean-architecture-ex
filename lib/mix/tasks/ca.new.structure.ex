@@ -12,7 +12,7 @@ defmodule Mix.Tasks.Ca.New.Structure do
   use Mix.Task
 
   @version Mix.Project.config()[:version]
-  @switches [metrics: :boolean, sonar: :boolean, mono_repo: :boolean]
+  @switches [metrics: :boolean, sonar: :boolean, mono_repo: :boolean, acceptance: :boolean]
   @aliases [m: :metrics, s: :sonar, r: :mono_repo]
 
   def run([]), do: run(["-h"])
@@ -34,6 +34,7 @@ defmodule Mix.Tasks.Ca.New.Structure do
         TokenHelper.initial_tokens(application_name)
         |> TokenHelper.add(Root.tokens(opts))
         |> TokenHelper.add(base_dir(opts, snake_name))
+        |> TokenHelper.add(acceptance(opts))
 
       Root.actions()
       |> FileGenerator.execute_actions(tokens)
@@ -68,6 +69,14 @@ defmodule Mix.Tasks.Ca.New.Structure do
       [{"{base_dir}", "#{application_name}/"}, {"{base_dir_sonar}", "#{application_name}/"}]
     else
       [{"{base_dir}", "./"}, {"{base_dir_sonar}", ""}]
+    end
+  end
+
+  defp acceptance(opts) do
+    if opts[:acceptance] do
+      [{"{plugin-dependency}", ""}]
+    else
+      [{"{plugin-version}", ~s/{:elixir_structure_manager, ">= 0.0.0", only: [:dev, :test]}/}]
     end
   end
 end

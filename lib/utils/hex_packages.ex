@@ -32,11 +32,18 @@ defmodule ElixirStructureManager.Utils.Hex.Packages do
   defp process_response_body(body) do
     case Poison.decode(body) do
       {:ok, %{"latest_stable_version" => version, "configs" => %{"mix.exs" => config}}} ->
-        {:ok, {version, config}}
+        {:ok, {short(version), config}}
 
       _ ->
         log_error("Failed to parse response #{inspect(body)}")
     end
+  end
+
+  defp short(version) do
+    version
+    |> String.split(".")
+    |> Enum.take(2)
+    |> Enum.join(".")
   end
 
   defp ssl_options do

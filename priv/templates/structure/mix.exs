@@ -53,7 +53,7 @@ defmodule {app}.MixProject do
       {:mock, "~> 0.3", only: :test},
       {:excoveralls, "~> 0.18", only: :test},
       # Release
-      {:elixir_structure_manager, ">= 0.0.0", only: [:dev, :test]},
+      {plugin-dependency}
     ]
   end
 end

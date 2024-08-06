@@ -1,5 +1,13 @@
 # Changelog
 
+## [v1.4.0](https://github.com/bancolombia/scaffold-clean-architecture-ex/tree/v1.4.0) (2024-08-06)
+
+[Full Changelog](https://github.com/bancolombia/scaffold-clean-architecture-ex/compare/v1.3.6...v1.4.0)
+
+**Merged pull requests:**
+
+- feat\(config\): Update some templates related to runtime configuration [\#53](https://github.com/bancolombia/scaffold-clean-architecture-ex/pull/53) ([juancgalvis](https://github.com/juancgalvis))
+
 ## [v1.3.6](https://github.com/bancolombia/scaffold-clean-architecture-ex/tree/v1.3.6) (2024-07-17)
 
 [Full Changelog](https://github.com/bancolombia/scaffold-clean-architecture-ex/compare/v1.3.5...v1.3.6)

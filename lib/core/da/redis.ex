@@ -14,18 +14,7 @@ defmodule DA.Redis do
       transformations:
         [
           {:inject_dependency, ~s|{:redix, "~> 1.5"}|},
-          {
-            :insert_after,
-            "lib/config/app_config.ex",
-            "\n\s\s\s\s\s:redis_props,",
-            regex: ~r{defstruct(\s)+\[}
-          },
-          {
-            :insert_after,
-            "lib/config/app_config.ex",
-            "\n\s\s\s\s\s\s\sredis_props: load(:redis_props),",
-            regex: ~r{%__MODULE__{}
-          },
+          {:add_config_attribute, "redis_props", ~s/%{port: "6379", host: "localhost"}/},
           {
             :insert_after,
             "lib/application.ex",
@@ -44,21 +33,6 @@ defmodule DA.Redis do
             "\n\s\s\s\s\s\s%PlugCheckup.Check{name: \"redis\", module: {app}.Infrastructure.Adapters.Redis.RedisAdapter, function: :health},",
             regex: ~r{def checks do(\s)+\[}
           },
-          {
-            :append_end,
-            "config/dev.exs",
-            @base <> "redis/config_to_append_dev.ex"
-          },
-          {
-            :append_end,
-            "config/test.exs",
-            @base <> "redis/config_to_append.ex"
-          },
-          {
-            :append_end,
-            "config/prod.exs",
-            @base <> "redis/config_to_append.ex"
-          }
         ] ++ redis_child
     }
   end
@@ -69,31 +43,29 @@ defmodule DA.Redis do
 
   defp get_redis_child_configuration do
     with_secrets? = File.exists?(@secrets_manager_file)
-
-    regex =
-      if with_secrets? &&
-           String.contains?(File.read!("lib/application.ex"), "SecretManagerAdapter, []") do
-        ~r/(\s)+{SecretManagerAdapter, \[\]}/
-      else
-        @regex
-      end
-
-    resolve_actions(with_secrets?, regex)
+    resolve_actions(with_secrets?, @regex)
   end
 
   defp resolve_actions(true = _with_secrets?, regex) do
     [
+      {:add_config_attribute, "redis_secret_name", ~s/"redis-secret-name"/},
       {
         :insert_after,
         @secrets_manager_file,
-        "\n\t\t\t## TODO: Uncomment to use redis with secrets\n\t\t\t# handle_redis_secrets(secret)",
-        regex: ~r/, \{:secret, secret\}\)/
+        ", redis_secret_name: redis_secret_name",
+        regex: ~r/secret_name: secret_name/
       },
       {
-        :insert_before,
+        :insert_after,
         @secrets_manager_file,
-        @base <> "secrets_manager/handle_redis_secrets.ex",
-        regex: ~r/  defp get_secret_value/
+        ", redis_props: redis_props",
+        regex: ~r/secret: secret/
+      },
+      {
+        :insert_after,
+        @secrets_manager_file,
+        "\n\t\t\tredis_props = get_secret(redis_secret_name)",
+        regex: ~r/get_secret\(secret_name\)/
       },
       {
         :insert_after,

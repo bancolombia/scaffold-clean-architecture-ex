@@ -17,7 +17,7 @@ defmodule Config.Sonar do
       },
       transformations: [
         {:inject_dependency, ~s|{:sobelow, "~> 0.13", only: :test}|},
-        {:inject_dependency, ~s|{:junit_formatter, "~> 3.3", only: :test}|},
+        {:inject_dependency, ~s|{:junit_formatter, "~> 3.4", only: :test}|},
         {:inject_dependency, ~s|{:credo_sonarqube, "~> 0.1", only: :test}|},
         {:inject_dependency, ~s|{:ex_unit_sonarqube, "~> 0.1", only: :test}|},
         {:append_end, ".gitignore", ignore},

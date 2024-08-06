@@ -11,11 +11,11 @@ defmodule Config.Metrics do
       folders: [],
       transformations:
         [
-          {:inject_dependency, ~s|{:telemetry_metrics_prometheus, "~> 1.0"}|},
-          {:inject_dependency, ~s|{:telemetry_poller, "~> 1.0"}|},
-          {:inject_dependency, ~s|{:telemetry, "~> 1.0"}|},
-          {:inject_dependency, ~s|{:opentelemetry_exporter, "~> 1.0"}|},
-          {:inject_dependency, ~s|{:opentelemetry_api, "~> 1.0"}|},
+          {:inject_dependency, ~s|{:telemetry_metrics_prometheus, "~> 1.1"}|},
+          {:inject_dependency, ~s|{:telemetry_poller, "~> 1.1"}|},
+          {:inject_dependency, ~s|{:telemetry, "~> 1.2"}|},
+          {:inject_dependency, ~s|{:opentelemetry_exporter, "~> 1.7"}|},
+          {:inject_dependency, ~s|{:opentelemetry_api, "~> 1.3"}|},
           {:inject_dependency,
            ~s|{:opentelemetry_plug, git: "https://github.com/bancolombia/opentelemetry_plug.git", tag: "master"}|},
           {:insert_after, "lib/application.ex", "\n  alias {app}.Utils.CustomTelemetry",

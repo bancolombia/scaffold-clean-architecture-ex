@@ -12,7 +12,7 @@ defmodule DA.Dynamo do
         "lib/domain/model/user.ex" => @base <> "user.ex"
       },
       transformations: [
-        {:inject_dependency, ~s|{:ex_aws_dynamo, "~> 4.0"}|},
+        {:inject_dependency, ~s|{:ex_aws_dynamo, "~> 4.2"}|},
         {:append_end, "config/dev.exs", @base <> "config_to_append.ex"}
       ]
     }

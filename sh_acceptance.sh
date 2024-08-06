@@ -9,18 +9,18 @@ cd acceptance
 
 mix ca.new.model User -b
 
-adapters=(asynceventbus dynamo generic redis repository restconsumer secrestsmanager)
+adapters=("asynceventbus" "dynamo" "generic" "redis" "repository" "restconsumer" "secrestsmanager")
 
 for adapter in $adapters
 do
-  mix ca.new.da $adapter
+  mix ca.new.da --type $adapter --name $adapter
 done
 
-entries=(asynceventhandler)
+entries=("asynceventhandler")
 
 for entry in $entries
 do
-  mix ca.new.ep $entry
+  mix ca.new.ep --type $entry --name $entry
 done
 
 mix test

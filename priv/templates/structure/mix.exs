@@ -43,12 +43,12 @@ defmodule {app}.MixProject do
   defp deps do
     [
       {:castore, "~> 1.0"},
-      {:plug_cowboy, "~> 2.0"},
+      {:plug_cowboy, "~> 2.7"},
       {:jason, "~> 1.4"},
       {:plug_checkup, "~> 0.6"},
       {:poison, "~> 6.0"},
       {:cors_plug, "~> 3.0"},
-      {:timex, "~> 3.0"},
+      {:timex, "~> 3.7"},
       # Test
       {:mock, "~> 0.3", only: :test},
       {:excoveralls, "~> 0.18", only: :test},

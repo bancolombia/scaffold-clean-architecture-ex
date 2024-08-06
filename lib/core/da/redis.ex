@@ -13,7 +13,7 @@ defmodule DA.Redis do
       },
       transformations:
         [
-          {:inject_dependency, ~s|{:redix, "~> 1.0"}|},
+          {:inject_dependency, ~s|{:redix, "~> 1.5"}|},
           {
             :insert_after,
             "lib/config/app_config.ex",

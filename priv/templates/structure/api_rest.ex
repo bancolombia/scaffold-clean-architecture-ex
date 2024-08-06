@@ -3,8 +3,7 @@ defmodule {app}.Infrastructure.EntryPoint.ApiRest do
   @moduledoc """
   Access point to the rest exposed services
   """
-  alias {app}.Utils.DataTypeUtils
-  alias {app}.Infrastructure.EntryPoint.ErrorHandler
+  # alias {app}.Utils.DataTypeUtils
   require Logger
   use Plug.Router
   use Timex
@@ -45,21 +44,9 @@ defmodule {app}.Infrastructure.EntryPoint.ApiRest do
     |> handle_not_found(Logger.level())
   end
 
-  defp handle_error(error, conn) do
-    error
-    |> ErrorHandler.build_error_response()
-    |> build_response(conn)
-  end
-
-  defp handle_bad_request(error, conn) do
-    error
-    |> ErrorHandler.build_error_response()
-    |> build_bad_request_response(conn)
-  end
-
-  defp build_bad_request_response(response, conn) do
-    build_response(%{status: 400, body: response}, conn)
-  end
+  # defp build_bad_request_error_response(response, conn) do
+  #   build_response(%{status: 400, body: response}, conn)
+  # end
 
   defp handle_not_found(conn, :debug) do
     %{request_path: path} = conn

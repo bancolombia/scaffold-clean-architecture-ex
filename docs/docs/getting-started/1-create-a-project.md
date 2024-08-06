@@ -4,46 +4,24 @@ sidebar_position: 1
 
 # Create a Project
 
-## Available Mix Tasks
-
-```shell
-mix help | grep "mix ca."
-```
-
-| Task                  | Description                                               |
-|-----------------------|-----------------------------------------------------------|
-| mix ca.new.structure  | Creates a new clean architecture application.             |
-| mix ca.new.model      | Creates a new model with empty properties                 |
-| mix ca.new.usecase    | Creates a new usecase                                     |
-| mix ca.new.da         | Creates a new driven adapter                              |
-| mix ca.new.ep         | Creates a new entry point                                 |
-| mix ca.apply.config   | Applies some project configuration                        |
-| mix ca.update         | Updates dependencies to latest stable version from hex.pm |
-
-### Task detail
-
-```bash
-mix <task> -h
-```
-
-Example
-
-```bash
-mix ca.new.structure -h
-```
-
 ```
 Creates a new Clean architecture scaffold
 
     $ mix ca.new.structure [application_name]
-    $ mix ca.new.structure [application_name] --metrics --sonar
-    $ mix ca.new.structure [application_name] -m -s
+    $ mix ca.new.structure [application_name] --metrics --sonar --monorepo
+    $ mix ca.new.structure [application_name] -m -s -r
 ```
 
 ## Creating a new project
 
 
 The `ca.new.structure` task will generate a clean architecture structure in your project.
+
+### Options
+
+- `--metrics` or `-m`: this option will create a basic setup for metrics, this can be done after project creation too, by executing `mix ca.apply.config -t metrics`
+- `--sonar` or `-s`: this option will create a basic setup for sonar reports, this can be done after project creation too, by executing `mix ca.apply.config -t sonar`
+- `--monorepo` or `-r`: this option will create a basic set some paths relative to project name.
 
 ```bash
 mix ca.new.structure <project-name>
@@ -84,7 +62,7 @@ app
 │   │       ├── api_rest.ex
 │   │       └── health_check.ex
 │   └── utils
-│       ├── custom_telemetry.ex
+│       ├── custom_telemetry.ex # if --metrics enabled
 │       └── data_type_utils.ex
 ├── mix.exs
 ├── mix.lock

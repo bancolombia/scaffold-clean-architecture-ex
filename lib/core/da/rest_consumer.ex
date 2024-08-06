@@ -13,8 +13,8 @@ defmodule DA.RestConsumer do
           @base <> "data_response.ex"
       },
       transformations: [
-        {:inject_dependency, ~s|{:finch, "~> 0.14"}|},
-        {:inject_dependency, ~s|{:poison, "~> 5.0"}|},
+        {:inject_dependency, ~s|{:finch, "~> 0.18"}|},
+        {:inject_dependency, ~s|{:poison, "~> 6.0"}|},
         {:append_end, "config/dev.exs", @base <> "config_to_append.ex"},
         {:append_end, "config/test.exs", @base <> "config_to_append.ex"},
         {:append_end, "config/prod.exs", @base <> "config_to_append.ex"},
@@ -34,7 +34,7 @@ defmodule DA.RestConsumer do
           :insert_after,
           "lib/application.ex",
           "\n\t\t\t{Finch, name: HttpFinch, pools: %{:default => [size: 500]}},",
-          regex: ~r/_other_env\)(\s)+do(\s)+\[/
+          regex: ~r/_other_env, _config\)(\s)+do(\s)+\[/
         }
       ]
     }

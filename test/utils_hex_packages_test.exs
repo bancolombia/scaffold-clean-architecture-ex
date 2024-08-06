@@ -11,7 +11,7 @@ defmodule ElixirStructureManager.Utils.Hex.PackagesTest do
       })
 
     with_mock :httpc, request: fn _, _, _, _ -> {nil, {{nil, 200, "OK"}, [], body}} end do
-      assert {:ok, {"1.0.0", "config_data"}} = Packages.get_stable_version("package_name")
+      assert {:ok, {"1.0", "config_data"}} = Packages.get_stable_version("package_name")
     end
   end
 

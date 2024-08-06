@@ -12,15 +12,15 @@ defmodule DA.Repository do
           @base <> "data_repository.ex"
       },
       transformations: [
-        {:inject_dependency, ~s|{:ecto_sql, "~> 3.9"}|},
-        {:inject_dependency, ~s|{:postgrex, "~> 0.16"}|},
+        {:inject_dependency, ~s|{:ecto_sql, "~> 3.11"}|},
+        {:inject_dependency, ~s|{:postgrex, "~> 0.19"}|},
         {:append_end, "config/dev.exs", @base <> "config_to_append_dev.ex"},
         {:append_end, "config/prod.exs", @base <> "config_to_append_prod.ex"},
         {
           :insert_after,
           "lib/application.ex",
           "\n\t\t\t{{app}.Infrastructure.Adapters.Repository.Repo, []},",
-          regex: ~r/_other_env\)(\s)+do(\s)+\[/
+          regex: ~r/_other_env, _config\)(\s)+do(\s)+\[/
         }
       ]
     }

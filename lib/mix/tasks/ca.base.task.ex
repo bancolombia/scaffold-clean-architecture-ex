@@ -6,6 +6,7 @@ defmodule Mix.Tasks.Ca.BaseTask do
 
   defmacro __using__(opts) do
     quote do
+      alias ElixirStructureManager.Utils.CommonCommands
       alias ElixirStructureManager.Utils.DataTypeUtils
       alias Mix.Tasks.Help
       use Mix.Task
@@ -28,8 +29,12 @@ defmodule Mix.Tasks.Ca.BaseTask do
       @impl Mix.Task
       @shortdoc unquote(opts[:description])
       def run(argv) do
-        DataTypeUtils.parse_opts(argv, @switches, @aliases)
-        |> execute()
+        res =
+          DataTypeUtils.parse_opts(argv, @switches, @aliases)
+          |> execute()
+
+        CommonCommands.format()
+        res
       end
     end
   end

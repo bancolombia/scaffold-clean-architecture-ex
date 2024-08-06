@@ -23,7 +23,8 @@ defmodule ElixirStructureManager.MixProject do
         "coveralls.github": :test,
         "coveralls.lcov": :test
       ],
-      dialyzer: [plt_add_apps: [:mix]]
+      dialyzer: [plt_add_apps: [:mix]],
+      aliases: aliases()
     ]
   end
 
@@ -39,6 +40,12 @@ defmodule ElixirStructureManager.MixProject do
       maintainers: ["Juan Esteban", "Santiago Calle", "Juan Carlos Galvis"],
       licenses: ["MIT"],
       links: %{"GitHub" => "https://github.com/bancolombia/scaffold-clean-architecture-ex"}
+    ]
+  end
+
+  defp aliases() do
+    [
+      test: ["cmd ./sh_install.sh", "test", "cmd ./sh_remove.sh"]
     ]
   end
 

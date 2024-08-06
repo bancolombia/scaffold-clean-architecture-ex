@@ -45,6 +45,28 @@ defmodule ElixirStructureManager.Utils.FileGenerator do
     transformation({operation, _dest_file = "mix.exs", dependency}, tokens)
   end
 
+  defp transformation({:add_config_attribute, attribute}, tokens) do
+    transformation(
+      {
+        :insert_after,
+        "lib/config/app_config.ex",
+        "\n\s\s\s\s\s:#{attribute},",
+        regex: ~r{defstruct(\s)+\[}
+      },
+      tokens
+    )
+
+    transformation(
+      {
+        :insert_after,
+        "lib/config/app_config.ex",
+        "\n\s\s\s\s\s\s\s#{attribute}: load(:#{attribute}),",
+        regex: ~r{%__MODULE__{}
+      },
+      tokens
+    )
+  end
+
   defp transformation({operation, dest_file, content_or_file}, tokens) do
     transformation({operation, dest_file, content_or_file, _no_opts = nil}, tokens)
   end

@@ -12,7 +12,7 @@ defmodule {app}.Application do
   def start(_type, [env]) do
     config = AppConfig.load_config()
 
-    children = with_plug_server(config) ++ all_env_children() ++ env_children(env)
+    children = with_plug_server(config) ++ all_env_children(config) ++ env_children(env, config)
 
     opts = [strategy: :one_for_one, name: {app}.Supervisor]
     Supervisor.start_link(children, opts)
@@ -25,17 +25,17 @@ defmodule {app}.Application do
 
   defp with_plug_server(%AppConfig{enable_server: false}), do: []
 
-  def all_env_children() do
+  def all_env_children(%AppConfig{} = config) do
     [
-      {ConfigHolder, AppConfig.load_config()}
+      {ConfigHolder, config}
     ]
   end
 
-  def env_children(:test) do
+  def env_children(:test, %AppConfig{}) do
     []
   end
 
-  def env_children(_other_env) do
+  def env_children(_other_env, _config) do
     []
   end
 end

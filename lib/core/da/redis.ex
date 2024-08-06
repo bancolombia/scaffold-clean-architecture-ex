@@ -1,6 +1,6 @@
 defmodule DA.Redis do
   @moduledoc false
-  @regex ~r/_other_env\)(\s)+do(\s)+\[/
+  @regex ~r/_other_env, _config\)(\s)+do(\s)+\[/
   @secrets_manager_file "lib/infrastructure/driven_adapters/secrets/secrets_manager.ex"
   @base "/priv/templates/adapters/"
 
@@ -13,7 +13,7 @@ defmodule DA.Redis do
       },
       transformations:
         [
-          {:inject_dependency, ~s|{:redix, "~> 1.0"}|},
+          {:inject_dependency, ~s|{:redix, "~> 1.5"}|},
           {
             :insert_after,
             "lib/config/app_config.ex",

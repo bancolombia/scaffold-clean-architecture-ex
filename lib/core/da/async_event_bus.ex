@@ -10,7 +10,7 @@ defmodule DA.AsyncEventBus do
         "lib/config/message_runtime_config.ex" => @base <> "message_runtime_config.ex"
       },
       transformations: [
-        {:inject_dependency, ~s|{:reactive_commons, "~> 0.8"}|},
+        {:inject_dependency, ~s|{:reactive_commons, "~> 1.0"}|},
         {:append_end, "config/dev.exs", @base <> "config_to_append.ex"},
         {:append_end, "config/test.exs", @base <> "config_to_append.ex"},
         {:append_end, "config/prod.exs", @base <> "config_to_append.ex"},
@@ -30,7 +30,7 @@ defmodule DA.AsyncEventBus do
           :insert_after,
           "lib/application.ex",
           "\n\t\t\tMessageRuntimeConfig,",
-          regex: ~r/_other_env\)(\s)+do(\s)+\[/
+          regex: ~r/_other_env, _config\)(\s)+do(\s)+\[/
         },
         {
           :insert_after,

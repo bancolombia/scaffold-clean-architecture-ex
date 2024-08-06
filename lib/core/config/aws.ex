@@ -5,8 +5,8 @@ defmodule Config.Aws do
   def actions do
     %{
       transformations: [
-        {:inject_dependency, ~s|{:ex_aws_sts, "~> 2.0"}|},
-        {:inject_dependency, ~s|{:hackney, "~> 1.0"}|},
+        {:inject_dependency, ~s|{:ex_aws_sts, "~> 2.3"}|},
+        {:inject_dependency, ~s|{:hackney, "~> 1.20"}|},
         {:inject_dependency, ~s|{:sweet_xml, "~> 0.7"}|},
         {:inject_dependency, ~s|{:jason, "~> 1.4"}|},
         {:inject_dependency, ~s|{:configparser_ex, "~> 4.0"}|},

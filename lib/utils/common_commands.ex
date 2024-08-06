@@ -4,6 +4,8 @@ defmodule ElixirStructureManager.Utils.CommonCommands do
 
   def install_deps(cwd \\ nil), do: run_no_ci("mix", ["deps.get"], cwd)
 
+  def format(cwd \\ nil), do: run_no_ci("mix", ["format"], cwd)
+
   def config_sonar(cwd \\ nil), do: run("mix", ["ca.apply.config", "-t", "sonar"], cwd)
 
   def config_metrics(cwd \\ nil), do: run("mix", ["ca.apply.config", "-t", "metrics"], cwd)

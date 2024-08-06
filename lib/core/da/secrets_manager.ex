@@ -3,9 +3,7 @@ defmodule DA.SecretsManager do
   @base "/priv/templates/adapters/secrets_manager/"
 
   @props """
-    \n  secret_name: "",
-    secret: nil,
-    config_loaders: [
+    \n  config_loaders: [
       {app}.Infrastructure.Adapters.Secrets.SecretManagerAdapter
     ],
   """
@@ -20,20 +18,8 @@ defmodule DA.SecretsManager do
       },
       transformations: [
         {:inject_dependency, ~s|{:ex_aws_secretsmanager, "~> 2.0"}|},
-        {:add_config_attribute, "secret_name"},
-        {:add_config_attribute, "secret"},
-        {
-          :insert_after,
-          "lib/application.ex",
-          "alias {app}.Infrastructure.Adapters.Secrets.SecretManagerAdapter\n  ",
-          regex: ~r{Application(\s)+do(\s)+}
-        },
-        {
-          :insert_after,
-          "lib/application.ex",
-          "\n\t\t\t{SecretManagerAdapter, []},",
-          regex: ~r/_other_env,(\s)*_config\)(\s)+do(\s)+\[/
-        },
+        {:add_config_attribute, "secret_name", ~s/"secret-name"/},
+        {:add_config_attribute, "secret", "nil"},
         {
           :insert_after,
           "config/dev.exs",

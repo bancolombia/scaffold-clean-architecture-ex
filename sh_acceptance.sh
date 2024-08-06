@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 bash sh_install.sh
 mkdir -p _build
 cd _build
@@ -9,16 +10,16 @@ cd acceptance
 
 mix ca.new.model User -b
 
-adapters=("asynceventbus" "dynamo" "generic" "redis" "repository" "restconsumer" "secrestsmanager")
+adapters=("secretsmanager" "asynceventbus" "dynamo" "generic" "redis" "repository" "restconsumer")
 
-for adapter in $adapters
+for adapter in "${adapters[@]}"
 do
   mix ca.new.da --type $adapter --name $adapter
 done
 
 entries=("asynceventhandler")
 
-for entry in $entries
+for entry in "${entries[@]}"
 do
   mix ca.new.ep --type $entry --name $entry
 done

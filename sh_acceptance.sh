@@ -1,5 +1,5 @@
 #!/bin/bash
-mix do archive.build, archive.install --force
+bash sh_install.sh
 mkdir -p _build
 cd _build
 rm -rf acceptance

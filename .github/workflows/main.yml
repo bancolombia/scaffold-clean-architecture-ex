@@ -70,8 +70,6 @@ jobs:
         run: mix format --check-formatted
       - name: Code analysis
         run: mix credo --strict && mix dialyzer
-      # - name: Install as archive
-      #   run: mix do archive.build, archive.install --force
       - name: Test generated code
         run: ./sh_acceptance.sh
       - name: Tests & Coverage (main)

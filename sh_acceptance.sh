@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 mix do archive.build, archive.install --force
 mkdir -p _build
 cd _build

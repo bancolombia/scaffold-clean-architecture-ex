@@ -18,3 +18,31 @@ Elixir plugin to create an elixir application based on Clean Architecture follow
 ```bash
 mix archive.install hex elixir_structure_manager <version>
 ```
+
+## Available Mix Tasks
+
+```shell
+mix help | grep "mix ca."
+```
+
+| Task                  | Description                                               |
+|-----------------------|-----------------------------------------------------------|
+| mix ca.new.structure  | Creates a new clean architecture application.             |
+| mix ca.new.model      | Creates a new model with empty properties                 |
+| mix ca.new.usecase    | Creates a new usecase                                     |
+| mix ca.new.da         | Creates a new driven adapter                              |
+| mix ca.new.ep         | Creates a new entry point                                 |
+| mix ca.apply.config   | Applies some project configuration                        |
+| mix ca.update         | Updates dependencies to latest stable version from hex.pm |
+
+### Task detail
+
+```bash
+mix <task> -h
+```
+
+Example
+
+```bash
+mix ca.new.structure -h
+```

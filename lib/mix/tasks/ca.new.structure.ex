@@ -2,7 +2,7 @@ defmodule Mix.Tasks.Ca.New.Structure do
   @moduledoc """
   Creates a new Clean architecture scaffold
       $ mix ca.new.structure [application_name]
-      $ mix ca.new.structure [application_name] --metrics --sonar --mono_repo
+      $ mix ca.new.structure [application_name] --metrics --sonar --monorepo
       $ mix ca.new.structure [application_name] -m -s -r
   """
 
@@ -12,8 +12,8 @@ defmodule Mix.Tasks.Ca.New.Structure do
   use Mix.Task
 
   @version Mix.Project.config()[:version]
-  @switches [metrics: :boolean, sonar: :boolean, mono_repo: :boolean, acceptance: :boolean]
-  @aliases [m: :metrics, s: :sonar, r: :mono_repo]
+  @switches [metrics: :boolean, sonar: :boolean, monorepo: :boolean, acceptance: :boolean]
+  @aliases [m: :metrics, s: :sonar, r: :monorepo]
 
   def run([]), do: run(["-h"])
 
@@ -65,7 +65,7 @@ defmodule Mix.Tasks.Ca.New.Structure do
   end
 
   defp base_dir(opts, application_name) do
-    if opts[:mono_repo] do
+    if opts[:monorepo] do
       [{"{base_dir}", "#{application_name}/"}, {"{base_dir_sonar}", "#{application_name}/"}]
     else
       [{"{base_dir}", "./"}, {"{base_dir_sonar}", ""}]

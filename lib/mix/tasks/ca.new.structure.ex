@@ -76,7 +76,7 @@ defmodule Mix.Tasks.Ca.New.Structure do
     if opts[:acceptance] do
       [{"{plugin-dependency}", ""}]
     else
-      [{"{plugin-version}", ~s/{:elixir_structure_manager, ">= 0.0.0", only: [:dev, :test]}/}]
+      [{"{plugin-dependency}", ~s/{:elixir_structure_manager, ">= 0.0.0", only: [:dev, :test]}/}]
     end
   end
 end

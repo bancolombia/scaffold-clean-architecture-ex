@@ -1,5 +1,13 @@
 # Changelog
 
+## [v1.4.4](https://github.com/bancolombia/scaffold-clean-architecture-ex/tree/v1.4.4) (2024-08-14)
+
+[Full Changelog](https://github.com/bancolombia/scaffold-clean-architecture-ex/compare/v1.4.3...v1.4.4)
+
+**Merged pull requests:**
+
+- fix\(format\): Avoid mix format task of non generative tasks [\#57](https://github.com/bancolombia/scaffold-clean-architecture-ex/pull/57) ([juancgalvis](https://github.com/juancgalvis))
+
 ## [v1.4.3](https://github.com/bancolombia/scaffold-clean-architecture-ex/tree/v1.4.3) (2024-08-14)
 
 [Full Changelog](https://github.com/bancolombia/scaffold-clean-architecture-ex/compare/v1.4.2...v1.4.3)

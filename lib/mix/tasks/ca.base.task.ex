@@ -15,7 +15,7 @@ defmodule Mix.Tasks.Ca.BaseTask do
       @switches unquote(opts[:switches] || [])
       @aliases unquote(opts[:aliases] || [])
       @name unquote(opts[:name])
-      @format unquote(opts[:format] || true)
+      @format unquote(if opts[:format] == false, do: false, else: true)
 
       @impl Mix.Task
       def run([help]) when help in ~w(-h --help) do

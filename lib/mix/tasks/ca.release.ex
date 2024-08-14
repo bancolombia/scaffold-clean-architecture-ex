@@ -42,7 +42,8 @@ defmodule Mix.Tasks.Ca.Release do
     name: "ca.release",
     description: "Mix ca tasks runner for release and tests",
     switches: [skiptest: :boolean, skiprelease: :boolean, container: :boolean],
-    aliases: [t: :skiptest, r: :skiprelease, c: :container]
+    aliases: [t: :skiptest, r: :skiprelease, c: :container],
+    format: false
 
   def execute({opts, []}) do
     in_container = Keyword.get(opts, :container, false)

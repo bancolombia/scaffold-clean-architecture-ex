@@ -13,7 +13,8 @@ defmodule Mix.Tasks.Ca.Sobelow.Sonar do
     name: "ca.sobelow.sonar",
     description: "Translates the sobelow json report to sonar issues",
     switches: [input: :string, output: :string],
-    aliases: [i: :input, o: :output]
+    aliases: [i: :input, o: :output],
+    format: false
 
   def execute({opts, []}) do
     Mix.shell().info([:green, "* Translating sobelow report"])

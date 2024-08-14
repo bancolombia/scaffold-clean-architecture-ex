@@ -34,7 +34,9 @@ defmodule Mix.Tasks.Ca.BaseTask do
           DataTypeUtils.parse_opts(argv, @switches, @aliases)
           |> execute()
 
-        CommonCommands.format()
+          if @format do
+            CommonCommands.format()
+          end
         res
       end
     end

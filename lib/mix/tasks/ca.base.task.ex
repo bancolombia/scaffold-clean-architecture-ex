@@ -11,7 +11,6 @@ defmodule Mix.Tasks.Ca.BaseTask do
       alias ElixirStructureManager.Utils.DataTypeUtils
       alias Mix.Tasks.Help
       use Mix.Task
-      require Logger
 
       @version Mix.Project.config()[:version]
       @switches unquote(opts[:switches] || [])

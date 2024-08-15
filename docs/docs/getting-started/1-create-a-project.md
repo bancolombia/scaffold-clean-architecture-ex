@@ -70,7 +70,6 @@ app
 │   └── cloud
 │       ├── Dockerfile
 │       └── Dockerfile-build
-├── sh_build.sh
 └── test
     ├── infrastructure
     │   └── entry_points

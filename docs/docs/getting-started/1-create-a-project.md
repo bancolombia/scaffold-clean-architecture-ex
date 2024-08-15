@@ -100,3 +100,29 @@ Enter to [http://localohst:8083/api/health](http://localohst:8083/api/health) an
   }
 ]
 ```
+
+At local you can use the next script to build and analize your project inside docker using deps caching
+
+sh_build.sh
+```shell
+set -e
+BASE_IMAGE=$1
+# Change it
+APP_NAME=name_project
+mkdir -p _build
+rm -rf _build/release
+docker build --build-arg IMAGE=$BASE_IMAGE -t $APP_NAME -f resources/cloud/Dockerfile-build .
+docker stop $APP_NAME || true
+docker rm $APP_NAME || true
+docker run -d --name $APP_NAME $APP_NAME
+docker cp $APP_NAME:/app/_build/release _build/release
+docker stop $APP_NAME || true
+docker rm $APP_NAME || true
+docker rmi $APP_NAME --force
+cp -r deployment _build/release/artifact
+ls -lR _build/release
+```
+
+```shell
+./sh_build.sh elixir:alpine
+```

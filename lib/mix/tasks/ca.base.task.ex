@@ -3,6 +3,7 @@ defmodule Mix.Tasks.Ca.BaseTask do
   @moduledoc """
   Generic base task for all tasks in this project.
   """
+  require Logger
 
   defmacro __using__(opts) do
     quote do
@@ -15,7 +16,6 @@ defmodule Mix.Tasks.Ca.BaseTask do
       @switches unquote(opts[:switches] || [])
       @aliases unquote(opts[:aliases] || [])
       @name unquote(opts[:name])
-      @format unquote(if opts[:format] == false, do: false, else: true)
 
       @impl Mix.Task
       def run([help]) when help in ~w(-h --help) do
@@ -34,9 +34,13 @@ defmodule Mix.Tasks.Ca.BaseTask do
           DataTypeUtils.parse_opts(argv, @switches, @aliases)
           |> execute()
 
-        if @format do
-          CommonCommands.format()
-        end
+        unquote(
+          if opts[:format] != false do
+            quote do
+              CommonCommands.format()
+            end
+          end
+        )
 
         res
       end

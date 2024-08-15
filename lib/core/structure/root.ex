@@ -22,7 +22,6 @@ defmodule Structure.Root do
         "{app_snake}/.dockerignore" => @base <> "dockerignore.txt",
         "{app_snake}/resources/cloud/Dockerfile" => @base <> "dockerfile.txt",
         "{app_snake}/resources/cloud/Dockerfile-build" => @base <> "Dockerfile-build.txt",
-        "{app_snake}/sh_build.sh" => @base <> "sh_build.sh",
         "{app_snake}/test/infrastructure/entry_points/api_rest_test.exs" =>
           @base <> "api_rest_test.exs",
         "{app_snake}/test/{app_snake}_application_test.exs" => @base <> "test_application.exs",

@@ -100,6 +100,11 @@ Enter to [http://localohst:8083/api/health](http://localohst:8083/api/health) an
   }
 ]
 ```
+# Testing and Code Analysis at local
+
+Basically you can run `mix ca.release --skiprelease` all outputs will be generated at `_build/release` folder
+
+Or you can run it with the file `app_name/resources/cloud/Dockerfile-build` and the next script
 
 At local you can use the next script to build and analize your project inside docker using deps caching
 

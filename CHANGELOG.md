@@ -1,5 +1,13 @@
 # Changelog
 
+## [v1.4.5](https://github.com/bancolombia/scaffold-clean-architecture-ex/tree/v1.4.5) (2024-08-15)
+
+[Full Changelog](https://github.com/bancolombia/scaffold-clean-architecture-ex/compare/v1.4.4...v1.4.5)
+
+**Merged pull requests:**
+
+- fix\(cleanup\): Remove script and add it as an option in documentation [\#58](https://github.com/bancolombia/scaffold-clean-architecture-ex/pull/58) ([juancgalvis](https://github.com/juancgalvis))
+
 ## [v1.4.4](https://github.com/bancolombia/scaffold-clean-architecture-ex/tree/v1.4.4) (2024-08-14)
 
 [Full Changelog](https://github.com/bancolombia/scaffold-clean-architecture-ex/compare/v1.4.3...v1.4.4)

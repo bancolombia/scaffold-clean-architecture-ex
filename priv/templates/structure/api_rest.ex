@@ -1,5 +1,5 @@
 defmodule {app}.Infrastructure.EntryPoint.ApiRest do
-
+  @compile if Mix.env() == :test, do: :export_all
   @moduledoc """
   Access point to the rest exposed services
   """

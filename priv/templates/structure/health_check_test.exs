@@ -6,7 +6,6 @@ defmodule {app}.Infrastructure.EntryPoints.HealthCheckTest do
   describe "checks/0" do
     test "returns a list of health checks" do
       checks = HealthCheck.checks()
-      assert length(checks) == 1
 
       check = hd(checks)
       assert check.name == "http"

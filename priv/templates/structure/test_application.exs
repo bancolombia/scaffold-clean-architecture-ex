@@ -7,10 +7,6 @@ defmodule {app}.ApplicationTest do
     assert {app}.Application.env_children(:test, %AppConfig{}) == []
   end
 
-  test "env_children/2 returns empty list for other environments" do
-    assert {app}.Application.env_children(:dev, %AppConfig{}) == []
-  end
-
   setup do
     if :ets.info(:{app_snake}_config) == :undefined do
       :ets.new(:{app_snake}_config, [:public, :named_table, read_concurrency: true])

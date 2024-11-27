@@ -24,9 +24,14 @@ defmodule Structure.Root do
         "{app_snake}/resources/cloud/Dockerfile-build" => @base <> "Dockerfile-build.txt",
         "{app_snake}/test/infrastructure/entry_points/api_rest_test.exs" =>
           @base <> "api_rest_test.exs",
+        "{app_snake}/test/infrastructure/entry_points/health_check_test.exs" =>
+          @base <> "health_check_test.exs",
         "{app_snake}/test/{app_snake}_application_test.exs" => @base <> "test_application.exs",
         "{app_snake}/test/test_helper.exs" => @base <> "test_helper.exs",
-        "{app_snake}/coveralls.json" => @base <> "coveralls.json"
+        "{app_snake}/coveralls.json" => @base <> "coveralls.json",
+        "{app_snake}/test/utils/custom_telemetry_test.exs" =>
+          @base <> "custom_telemetry_test.exs",
+        "{app_snake}/test/utils/data_type_utils_test.exs" => @base <> "data_type_utils_test.exs"
       },
       folders: [
         "{app_snake}/lib/infrastructure/driven_adapters/",

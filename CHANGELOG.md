@@ -1,5 +1,13 @@
 # Changelog
 
+## [v1.4.6](https://github.com/bancolombia/scaffold-clean-architecture-ex/tree/v1.4.6) (2024-11-27)
+
+[Full Changelog](https://github.com/bancolombia/scaffold-clean-architecture-ex/compare/v1.4.5...v1.4.6)
+
+**Merged pull requests:**
+
+- fix\(tests\): increase test coverage [\#60](https://github.com/bancolombia/scaffold-clean-architecture-ex/pull/60) ([jksalazar](https://github.com/jksalazar))
+
 ## [v1.4.5](https://github.com/bancolombia/scaffold-clean-architecture-ex/tree/v1.4.5) (2024-08-15)
 
 [Full Changelog](https://github.com/bancolombia/scaffold-clean-architecture-ex/compare/v1.4.4...v1.4.5)

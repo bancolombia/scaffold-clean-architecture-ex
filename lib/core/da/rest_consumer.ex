@@ -6,7 +6,7 @@ defmodule DA.RestConsumer do
     %{
       create: %{
         "lib/infrastructure/driven_adapters/rest_consumer/{name_snake}/{name_snake}_adapter.ex" =>
-          @base <> "rest_consumer.ex",
+          @base <> "rest_consumer.eex",
         "lib/infrastructure/driven_adapters/rest_consumer/{name_snake}/data/{name_snake}_request.ex" =>
           @base <> "data_request.ex",
         "lib/infrastructure/driven_adapters/rest_consumer/{name_snake}/data/{name_snake}_response.ex" =>

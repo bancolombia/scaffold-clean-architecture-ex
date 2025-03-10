@@ -17,12 +17,9 @@ defmodule Config.Metrics do
           {:inject_dependency, ~s|{:opentelemetry_exporter, "~> 1.7"}|},
           {:inject_dependency, ~s|{:opentelemetry_api, "~> 1.3"}|},
           {:inject_dependency,
-           ~s|{:opentelemetry_plug, git: "https://github.com/bancolombia/opentelemetry_plug.git", tag: "master"}|},
+           ~s|{:opentelemetry_plug, git: "https://github.com/bancolombia/opentelemetry_plug.git", tag: "v1.0.0"}|},
           {:insert_after, "lib/application.ex", "\n  alias {app}.Utils.CustomTelemetry",
            regex: ~r/ConfigHolder}/},
-          {:insert_before, "lib/application.ex",
-           "CustomTelemetry.custom_telemetry_events()\n    OpentelemetryPlug.setup()\n    ",
-           regex: ~r{opts = \[}},
           {:insert_after, "lib/application.ex",
            ",\n      {TelemetryMetricsPrometheus, [metrics: CustomTelemetry.metrics()]}",
            regex: ~r|{ConfigHolder, config}|},
@@ -114,8 +111,6 @@ defmodule Config.Metrics do
       # Traces
       {:inject_dependency, ~s|{:opentelemetry_redix, "~> 0.1"}|},
       {:insert_after, "mix.exs", ", :opentelemetry_redix", regex: ~r|\[\:logger|},
-      {:insert_before, "lib/application.ex", "OpentelemetryRedix.setup()\n    ",
-       regex: ~r{opts = \[}}
     ]
   end
 
@@ -149,9 +144,7 @@ defmodule Config.Metrics do
       {:insert_before, @custom_telemetry, handler, regex: ~r|def metrics do|},
       {:insert_after, @custom_telemetry, metrics, regex: ~r|def metrics do(\s)+\[|},
       # Traces
-      {:inject_dependency, ~s|{:opentelemetry_ecto, "~> 1.0"}|},
-      {:insert_before, "lib/application.ex", "OpentelemetryEcto.setup([:elixir, :repo])\n    ",
-       regex: ~r{opts = \[}}
+      {:inject_dependency, ~s|{:opentelemetry_ecto, "~> 1.0"}|}
     ]
   end
 
@@ -195,8 +188,6 @@ defmodule Config.Metrics do
       {:insert_after, @custom_telemetry, metrics, regex: ~r|def metrics do(\s)+\[|},
       # Traces
       {:inject_dependency, ~s|{:opentelemetry_finch, "~> 0.1"}|},
-      {:insert_before, "lib/application.ex", "OpentelemetryFinch.setup()\n    ",
-       regex: ~r{opts = \[}}
     ]
   end
 

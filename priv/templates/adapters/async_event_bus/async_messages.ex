@@ -7,21 +7,21 @@ defmodule {app}.Infrastructure.Adapters.AsyncMessages do
   @event_name "PersonRegistered"
   @notification_event_name "ConfigurationChanged"
 
-  @impl true
+  # @impl true
   def emit(event_data) do
     # it returns :ok when success
     DomainEvent.new(@event_name, event_data)
     |> DomainEventBus.emit()
   end
 
-  @impl true
+  # @impl true
   def run_remote_task(command_data) do
     # it returns :ok when success
     Command.new(@command_name, command_data)
     |> DirectAsyncGateway.send_command(@target)
   end
 
-  @impl true
+  # @impl true
   def get_remote_information(query_data) do
     # it returns {:ok, response} when success
     AsyncQuery.new(@query_name, query_data)

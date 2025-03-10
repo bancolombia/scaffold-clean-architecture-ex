@@ -2,6 +2,7 @@ defmodule {app}.Utils.CustomTelemetry do
   alias {app}.Utils.DataTypeUtils
   alias {app}.Utils.CustomTelemetry
   import Telemetry.Metrics
+  require Logger
 
   @service_name Application.compile_env!(:{app_snake}, :custom_metrics_prefix_name)
 
@@ -10,6 +11,13 @@ defmodule {app}.Utils.CustomTelemetry do
   """
 
   def custom_telemetry_events() do
+    # Events for tracing
+    setup_if_present(OpentelemetryPlug)
+    setup_if_present(OpentelemetryFinch)
+    setup_if_present(OpentelemetryRedix)
+    setup_if_present(OpentelemetryEcto)
+    setup_if_present(OpentelemetryReactiveCommons)
+    # Events for metrics
     :telemetry.attach("{app_snake}-plug-stop", [:{app_snake}, :plug, :stop], &CustomTelemetry.handle_custom_event/4, nil)
     :telemetry.attach("{app_snake}-vm-memory", [:vm, :memory], &CustomTelemetry.handle_custom_event/4, nil)
     :telemetry.attach("vm-total_run_queue_lengths", [:vm, :total_run_queue_lengths], &CustomTelemetry.handle_custom_event/4, nil)
@@ -49,6 +57,22 @@ defmodule {app}.Utils.CustomTelemetry do
       sum("elixir.vm.total_run_queue_lengths.cpu", tags: [:service]),
       sum("elixir.vm.total_run_queue_lengths.io", tags: [:service]),
     ]
+  end
+
+  defp setup_if_present(module) when is_atom(module) do
+    if is_module_present?(module) do
+      Logger.info("Setting up custom telemetry for #{inspect(module)}")
+      apply(module, :setup, [])
+    else
+      Logger.info("No setup function found for #{inspect(module)}")
+    end
+  end
+
+  defp is_module_present?(module) do
+    case Code.ensure_loaded(module) do
+      {:module, _module} -> true
+      _ -> false
+    end
   end
 
 end

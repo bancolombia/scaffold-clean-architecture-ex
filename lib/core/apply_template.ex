@@ -11,10 +11,13 @@ defmodule ElixirStructureManager.Core.ApplyTemplate do
 
     case StringContent.format_name(name) do
       {:ok, name_snake, name_camel} ->
+        metrics = Mix.Project.config()[:metrics] || false
+
         tokens =
           TokenHelper.add("{name}", name_camel)
           |> TokenHelper.add("{name_snake}", name_snake)
           |> TokenHelper.add(module.tokens(opts))
+          |> TokenHelper.add("{metrics}", metrics)
 
         module.actions()
         |> Metrics.inject(type)

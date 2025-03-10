@@ -89,7 +89,7 @@ jobs:
         uses: hrishikesh-kadam/setup-lcov@v1
       - name: Validate code coverage
         if: github.event_name == 'pull_request' || github.event_name == 'pull_request_target'
-        uses: zgosalvez/github-actions-report-lcov@v3
+        uses: zgosalvez/github-actions-report-lcov@v4
         with:
           coverage-files: cover/lcov.info
           minimum-coverage: 70

@@ -42,7 +42,7 @@ defmodule ElixirStructureManager.Utils.FileGenerator do
   end
 
   defp transformation({:inject_dependency = operation, dependency}, tokens) do
-    File.rm("mix.lock")
+    :file.delete("mix.lock")
     transformation({operation, _dest_file = "mix.exs", dependency}, tokens)
   end
 

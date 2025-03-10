@@ -110,7 +110,7 @@ defmodule Config.Metrics do
       {:insert_after, @custom_telemetry, metrics, regex: ~r|def metrics do(\s)+\[|},
       # Traces
       {:inject_dependency, ~s|{:opentelemetry_redix, "~> 0.1"}|},
-      {:insert_after, "mix.exs", ", :opentelemetry_redix", regex: ~r|\[\:logger|},
+      {:insert_after, "mix.exs", ", :opentelemetry_redix", regex: ~r|\[\:logger|}
     ]
   end
 
@@ -187,7 +187,7 @@ defmodule Config.Metrics do
       {:insert_before, @custom_telemetry, handler, regex: ~r|def metrics do|},
       {:insert_after, @custom_telemetry, metrics, regex: ~r|def metrics do(\s)+\[|},
       # Traces
-      {:inject_dependency, ~s|{:opentelemetry_finch, "~> 0.1"}|},
+      {:inject_dependency, ~s|{:opentelemetry_finch, "~> 0.1"}|}
     ]
   end
 

@@ -13,7 +13,7 @@ defmodule DA.RestConsumer do
           @base <> "data_response.ex"
       },
       transformations: [
-        {:inject_dependency, ~s|{:finch, "~> 0.18"}|},
+        {:inject_dependency, ~s|{:finch, "~> 0.20"}|},
         {:inject_dependency, ~s|{:poison, "~> 6.0"}|},
         {:append_end, "config/dev.exs", @base <> "config_to_append.ex"},
         {:append_end, "config/test.exs", @base <> "config_to_append.ex"},

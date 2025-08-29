@@ -12,8 +12,8 @@ defmodule DA.Repository do
           @base <> "data_repository.ex"
       },
       transformations: [
-        {:inject_dependency, ~s|{:ecto_sql, "~> 3.11"}|},
-        {:inject_dependency, ~s|{:postgrex, "~> 0.19"}|},
+        {:inject_dependency, ~s|{:ecto_sql, "~> 3.13"}|},
+        {:inject_dependency, ~s|{:postgrex, "~> 0.21"}|},
         {:append_end, "config/dev.exs", @base <> "config_to_append_dev.ex"},
         {:append_end, "config/prod.exs", @base <> "config_to_append_prod.ex"},
         {

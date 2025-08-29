@@ -9,28 +9,33 @@ defmodule DA.Redis do
 
     %{
       create: %{
-        "lib/infrastructure/driven_adapters/redis/redis_adapter.ex" => @base <> "redis/redis.ex"
+        "lib/infrastructure/driven_adapters/redis/redis_adapter.ex" =>
+          @base <> "redis/redis_adapter.ex",
+        "lib/infrastructure/driven_adapters/redis/redis_setup.ex" =>
+          @base <> "redis/redis_setup.ex"
       },
       transformations:
         [
           {:inject_dependency, ~s|{:redix, "~> 1.5"}|},
-          {:add_config_attribute, "redis_props", ~s/%{port: "6379", host: "localhost"}/},
+          {:inject_dependency, ~s|{:redix_pool, "~> 0.1", [hex: :redix_conn_pool]}|},
+          {:add_config_attribute, "redis_props",
+           ~s/%{port: "6379", host: "localhost", pool_size: 1, ssl: false}/},
           {
             :insert_after,
             "lib/application.ex",
-            "alias {app}.Infrastructure.Adapters.Redis.RedisAdapter\n  ",
+            "alias {app}.Infrastructure.Adapters.Redis.RedisSetup\n  ",
             regex: ~r{Application(\s)+do(\s)+}
           },
           {
             :insert_after,
             "lib/infrastructure/entry_points/health_check.ex",
-            "\n\s\salias {app}.Infrastructure.Adapters.Redis.RedisAdapter",
+            "\n\s\salias {app}.Infrastructure.Adapters.Redis.RedisSetup",
             regex: ~r{EntryPoint.HealthCheck do}
           },
           {
             :insert_after,
             "lib/infrastructure/entry_points/health_check.ex",
-            "\n\s\s\s\s\s\s%PlugCheckup.Check{name: \"redis\", module: RedisAdapter, function: :health},",
+            "\n\s\s\s\s\s\s%PlugCheckup.Check{name: \"redis\", module: RedisSetup, function: :health},",
             regex: ~r{def checks do(\s)+\[}
           }
         ] ++ redis_child
@@ -58,19 +63,19 @@ defmodule DA.Redis do
       {
         :insert_after,
         @secrets_manager_file,
-        ", redis_props: redis_props",
+        ", redis_secret: redis_secret",
         regex: ~r/secret: secret/
       },
       {
         :insert_after,
         @secrets_manager_file,
-        "\n\t\t\tredis_props = get_secret(redis_secret_name)",
+        "\n\t\t\tredis_secret = get_secret(redis_secret_name)",
         regex: ~r/get_secret\(secret_name\)/
       },
       {
         :insert_after,
         "lib/application.ex",
-        "\n\t\t\t{RedisAdapter, []},",
+        "\n\t\t\t{RedisSetup, []},",
         regex: regex
       }
     ]
@@ -81,7 +86,7 @@ defmodule DA.Redis do
       {
         :insert_after,
         "lib/application.ex",
-        "\n\t\t\t{RedisAdapter, []},",
+        "\n\t\t\t{RedisSetup, []},",
         regex: @regex
       }
     ]

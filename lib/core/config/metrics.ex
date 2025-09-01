@@ -12,12 +12,12 @@ defmodule Config.Metrics do
       transformations:
         [
           {:inject_dependency, ~s|{:telemetry_metrics_prometheus, "~> 1.1"}|},
-          {:inject_dependency, ~s|{:telemetry_poller, "~> 1.1"}|},
-          {:inject_dependency, ~s|{:telemetry, "~> 1.2"}|},
-          {:inject_dependency, ~s|{:opentelemetry_exporter, "~> 1.7"}|},
-          {:inject_dependency, ~s|{:opentelemetry_api, "~> 1.3"}|},
+          {:inject_dependency, ~s|{:telemetry_poller, "~> 1.3"}|},
+          {:inject_dependency, ~s|{:telemetry, "~> 1.3"}|},
+          {:inject_dependency, ~s|{:opentelemetry_exporter, "~> 1.8"}|},
+          {:inject_dependency, ~s|{:opentelemetry_api, "~> 1.4"}|},
           {:inject_dependency,
-           ~s|{:opentelemetry_plug, git: "https://github.com/bancolombia/opentelemetry_plug.git", tag: "v1.0.0"}|},
+           ~s|{:opentelemetry_plug, git: "https://github.com/bancolombia/opentelemetry_plug.git", tag: "v1.1.1"}|},
           {:insert_after, "lib/application.ex", "\n  alias {app}.Utils.CustomTelemetry",
            regex: ~r/ConfigHolder}/},
           {:insert_after, "lib/application.ex",
@@ -144,7 +144,7 @@ defmodule Config.Metrics do
       {:insert_before, @custom_telemetry, handler, regex: ~r|def metrics do|},
       {:insert_after, @custom_telemetry, metrics, regex: ~r|def metrics do(\s)+\[|},
       # Traces
-      {:inject_dependency, ~s|{:opentelemetry_ecto, "~> 1.0"}|}
+      {:inject_dependency, ~s|{:opentelemetry_ecto, "~> 1.2"}|}
     ]
   end
 
@@ -187,7 +187,7 @@ defmodule Config.Metrics do
       {:insert_before, @custom_telemetry, handler, regex: ~r|def metrics do|},
       {:insert_after, @custom_telemetry, metrics, regex: ~r|def metrics do(\s)+\[|},
       # Traces
-      {:inject_dependency, ~s|{:opentelemetry_finch, "~> 0.1"}|}
+      {:inject_dependency, ~s|{:opentelemetry_finch, "~> 0.2"}|}
     ]
   end
 

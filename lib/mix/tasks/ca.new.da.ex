@@ -8,7 +8,7 @@ defmodule Mix.Tasks.Ca.New.Da do
   * generic
   * redis
   * asynceventbus
-  * secrestsmanager
+  * secretsmanager
   * dynamo
   * repository
   * restconsumer
@@ -17,8 +17,8 @@ defmodule Mix.Tasks.Ca.New.Da do
       $ mix ca.new.da --type driven_adapter_name --name my_adapter
       $ mix ca.new.da -t driven_adapter_name -n my_adapter
 
-      $ mix ca.new.da --type secrestsmanager
-      $ mix ca.new.da -t secrestsmanager
+      $ mix ca.new.da --type secretsmanager
+      $ mix ca.new.da -t secretsmanager
 
   """
 

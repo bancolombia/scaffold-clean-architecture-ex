@@ -46,9 +46,9 @@ defmodule ElixirStructureManager.Core.ApplyTemplate do
   defp resolve_behaviour(:metrics), do: Config.Metrics
   defp resolve_behaviour(:sonar), do: Config.Sonar
 
-  defp resolve_behaviour(_other) do
+  defp resolve_behaviour(other) do
     Mix.raise(
-      "Invalid driven adapter parameter. Please verify de documentation to see the different domain module types"
+      "Invalid driven adapter parameter #{inspect(other)}. Please verify de documentation to see the different domain module types"
     )
   end
 end

@@ -18,7 +18,7 @@ defmodule DA.CognitoTokenProvider do
         "lib/domain/behaviours/token_provider.ex" => @base <> "token_provider.ex"
       },
       transformations: [
-        {:inject_dependency, ~s|{:finch, "~> 0.18"}|},
+        {:inject_dependency, ~s|{:finch, "~> 0.20"}|},
         {:inject_dependency, ~s|{:poison, "~> 6.0"}|},
         {
           :inject_module,

@@ -22,7 +22,7 @@ defmodule Mix.Tasks.Ca.Apply.Config do
     switches: [type: :string],
     aliases: [t: :type]
 
-  def execute({opts, []}) when opts != nil and length(opts) > 0 do
+  def execute({opts, []}) when opts != nil and opts != [] do
     Mix.shell().info([:green, "* Applying configuration ", :reset, opts[:type]])
 
     ApplyTemplate.apply(String.to_atom(opts[:type]), "non_required")

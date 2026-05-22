@@ -1,8 +1,9 @@
 defmodule {app}.Infrastructure.EntryPoint.ApiRestTets do
   alias {app}.Infrastructure.EntryPoint.ApiRest
 
-  use ExUnit.Case
-  use Plug.Test
+  use ExUnit.Case, async: true
+  import Plug.Test
+  import Plug.Conn
 
   @opts ApiRest.init([])
 
@@ -74,7 +75,7 @@ defmodule {app}.Infrastructure.EntryPoint.ApiRestTets do
       conn = conn(:get, "/test_not_found/info")
       conn = ApiRest.call(conn, @opts)
 
-       assert conn.state == :sent
+      assert conn.state == :sent
       assert conn.status == 404
       assert conn.resp_body == ""
     end

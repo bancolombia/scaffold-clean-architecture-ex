@@ -13,7 +13,7 @@ defmodule DA.Repository do
       },
       transformations: [
         {:inject_dependency, ~s|{:ecto_sql, "~> 3.13"}|},
-        {:inject_dependency, ~s|{:postgrex, "~> 0.21"}|},
+        {:inject_dependency, ~s|{:postgrex, "~> 0.22"}|},
         {:append_end, "config/dev.exs", @base <> "config_to_append_dev.ex"},
         {:append_end, "config/prod.exs", @base <> "config_to_append_prod.ex"},
         {

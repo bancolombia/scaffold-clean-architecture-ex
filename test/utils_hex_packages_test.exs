@@ -31,7 +31,8 @@ defmodule ElixirStructureManager.Utils.Hex.PackagesTest do
   end
 
   test "fail decoding response" do
-    with_mock :httpc, request: fn _, _, _, _ -> {nil, {{nil, 200, "OK"}, [], "\"key\" true"}} end do
+    with_mock :httpc,
+      request: fn _, _, _, _ -> {nil, {{nil, 200, "OK"}, [], "\"key\" true"}} end do
       assert {:error, "Failed to parse response \"\\\"key\\\" true\""} =
                Packages.get_stable_version("package_name")
     end

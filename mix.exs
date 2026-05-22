@@ -1,7 +1,7 @@
 defmodule ElixirStructureManager.MixProject do
   use Mix.Project
 
-  @version "1.4.6"
+  @version "1.6.0"
 
   def project do
     [
@@ -14,7 +14,14 @@ defmodule ElixirStructureManager.MixProject do
       package: package(),
       deps: deps(),
       test_coverage: [tool: ExCoveralls],
-      preferred_cli_env: [
+      dialyzer: [plt_add_apps: [:mix]],
+      aliases: aliases()
+    ]
+  end
+
+  def cli do
+    [
+      preferred_envs: [
         coveralls: :test,
         "coveralls.detail": :test,
         "coveralls.post": :test,
@@ -22,9 +29,7 @@ defmodule ElixirStructureManager.MixProject do
         "coveralls.xml": :test,
         "coveralls.github": :test,
         "coveralls.lcov": :test
-      ],
-      dialyzer: [plt_add_apps: [:mix]],
-      aliases: aliases()
+      ]
     ]
   end
 
@@ -62,9 +67,9 @@ defmodule ElixirStructureManager.MixProject do
       {:poison, "~> 5.0 or ~> 6.0"},
       {:castore, "~> 1.0"},
       {:sobelow, "~> 0.14", [only: [:dev, :test]]},
-      {:mock, "~> 0.3.9", [only: [:dev, :test]]},
+      {:mock, "~> 0.3", [only: [:dev, :test]]},
       {:excoveralls, "~> 0.18", [only: [:dev, :test]]},
-      {:ex_doc, "~> 0.38", [only: [:dev, :test], runtime: false]},
+      {:ex_doc, ">= 0.0.0", [only: [:dev, :test], runtime: false]},
       {:git_hooks, "~> 0.8", [only: [:dev, :test], runtime: false]},
       {:credo, "~> 1.7", [only: [:dev, :test], runtime: false]},
       {:dialyxir, "~> 1.4", [only: [:dev, :test], runtime: false]}

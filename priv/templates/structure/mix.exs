@@ -9,7 +9,19 @@ defmodule {app}.MixProject do
       start_permanent: Mix.env() == :prod,
       deps: deps(),
       test_coverage: [tool: ExCoveralls],
-      preferred_cli_env: [
+      releases: [
+        {app_snake}: [
+          include_executables_for: [:unix],
+          steps: [:assemble, :tar]
+        ]
+      ],
+      metrics: {metrics}
+    ]
+  end
+
+  def cli do
+    [
+      preferred_envs: [
         "ca.release": :test,
         "ca.sobelow.sonar": :test,
         coveralls: :test,
@@ -20,14 +32,7 @@ defmodule {app}.MixProject do
         credo: :test,
         release: :prod,
         sobelow: :test,
-      ],
-      releases: [
-        {app_snake}: [
-          include_executables_for: [:unix],
-          steps: [:assemble, :tar]
-        ]
-      ],
-      metrics: {metrics}
+      ]
     ]
   end
 
@@ -43,7 +48,7 @@ defmodule {app}.MixProject do
   defp deps do
     [
       {:castore, "~> 1.0"},
-      {:plug_cowboy, "~> 2.7"},
+      {:plug_cowboy, "~> 2.8"},
       {:jason, "~> 1.4"},
       {:plug_checkup, "~> 0.6"},
       {:poison, "~> 6.0"},

@@ -9,11 +9,11 @@ jobs:
     steps:
       - name: Generate a token
         id: generate_token
-        uses: tibdex/github-app-token@v1
+        uses: actions/create-github-app-token@v3
         with:
-          app_id: ${{ secrets.APP_ID_ADMIN_GITHUB }}
-          private_key: ${{ secrets.APP_PRIVATE_KEY_ADMIN_GITHUB }}
-      - uses: actions/checkout@v4
+          client-id: ${{ secrets.APP_ID_ADMIN_GITHUB }}
+          private-key: ${{ secrets.APP_PRIVATE_KEY_ADMIN_GITHUB }}
+      - uses: actions/checkout@v6
         with:
           token: ${{ steps.generate_token.outputs.token }}
       - name: Set up Elixir
@@ -22,7 +22,7 @@ jobs:
           version-type: strict
           version-file: ".tool-versions"
       - name: Restore dependencies cache
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: deps
           key: ${{ runner.os }}-mix-${{ hashFiles('**/mix.lock') }}
@@ -36,7 +36,7 @@ jobs:
       - name: Upgrade mix.exs
         run: sed -i 's/@version \".*\"/@version "${{ env.RELEASE_VERSION }}"/g' mix.exs
       - name: Generate Changelog
-        uses: heinrichreimer/github-changelog-generator-action@v2.3
+        uses: heinrichreimer/github-changelog-generator-action@v2.4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           pullRequests: true

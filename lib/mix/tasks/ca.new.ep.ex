@@ -26,7 +26,7 @@ defmodule Mix.Tasks.Ca.New.Ep do
     switches: [type: :string, name: :string],
     aliases: [t: :type, n: :name]
 
-  def execute({opts, []}) when opts != nil and length(opts) > 0 do
+  def execute({opts, []}) when opts != nil and opts != [] do
     Mix.shell().info([:green, "* Creating entry point ", :reset, opts[:type]])
 
     ApplyTemplate.apply(

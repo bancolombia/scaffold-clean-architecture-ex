@@ -2,6 +2,7 @@ defmodule ElixirStructureManager.Reports.Sobelow do
   @moduledoc """
   Sobelow report generator
   """
+  @default_id 100
 
   def translate(
         %{
@@ -35,18 +36,34 @@ defmodule ElixirStructureManager.Reports.Sobelow do
 
     location = %{
       filePath: "#{prefix}#{file}",
-      message: "#{type} #{variable} \n Help: #{rule.details()}"
+      message: "#{type} #{variable} \n Help: #{resolve_rule_details(rule)}"
     }
 
     location = with_text_range(location, line)
 
     %{
-      ruleId: rule.id(),
+      ruleId: resolve_rule_id(rule),
       severity: confidence_to_severity(confidence),
       type: "VULNERABILITY",
       engineId: "sobelow-#{vsn}",
       primaryLocation: location
     }
+  end
+
+  defp resolve_rule_id(rule) do
+    if function_exported?(rule, :id, 0) do
+      rule.id()
+    else
+      @default_id
+    end
+  end
+
+  defp resolve_rule_details(rule) do
+    if function_exported?(rule, :details, 0) do
+      rule.details()
+    else
+      inspect(rule)
+    end
   end
 
   defp with_text_range(%{} = location, line) when line > 0 do

@@ -2,7 +2,7 @@ defmodule {app}.Infrastructure.EntryPoint.ApiRestTets do
   alias {app}.Infrastructure.EntryPoint.ApiRest
 
   use ExUnit.Case
-  use Plug.Test
+  import Plug.Test
 
   @opts ApiRest.init([])
 

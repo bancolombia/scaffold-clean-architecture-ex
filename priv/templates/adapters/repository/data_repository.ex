@@ -16,7 +16,7 @@ defmodule {app}.Infrastructure.Adapters.Repository.{name}.{name}DataRepository d
   end
 
   defp to_entity(nil), do: nil
-  defp to_entity(data) do
+  defp to_entity(_data) do
     ## TODO: Update Entity
     # struct({name}, data |> Map.from_struct)
     %{}

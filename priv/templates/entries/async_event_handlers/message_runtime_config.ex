@@ -3,10 +3,10 @@ defmodule {app}.Config.MessageRuntimeConfig do
   alias {app}.Infrastructure.EntryPoint.AsyncMessageHandlers
   use ReactiveCommonsSetup
 
-  defp config() do
+  def config() do
     %AppConfig{exchange: params} = ConfigHolder.conf()
     params
   end
 
-  defp handlers_config(), do: AsyncMessageHandlers.setup()
+  def handlers_config(), do: AsyncMessageHandlers.setup()
 end
